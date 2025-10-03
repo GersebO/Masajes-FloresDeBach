@@ -155,12 +155,7 @@ public class CustomerController {
     public ResponseEntity<CustomerResponseDTO> authenticateCustomer(
             @RequestParam String email,
             @RequestParam String password) {
-        try {
-            CustomerResponseDTO response = customerService.authenticateCustomer(email, password);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-        }
+        return ResponseEntity.ok(customerService.authenticateCustomer(email, password));
     }
 
     // CHECK - Verificar si existe cliente por email

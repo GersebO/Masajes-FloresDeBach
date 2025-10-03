@@ -167,12 +167,7 @@ public class UserController {
     public ResponseEntity<UserResponseDTO> authenticateUser(
             @RequestParam String email,
             @RequestParam String password) {
-        try {
-            UserResponseDTO response = userService.authenticateUser(email, password);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-        }
+        return ResponseEntity.ok(userService.authenticateUser(email, password));
     }
 
     // CHECK - Verificar si existe usuario por email

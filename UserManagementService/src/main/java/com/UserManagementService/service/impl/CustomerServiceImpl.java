@@ -1,61 +1,54 @@
 package com.UserManagementService.service.impl;
 
-
-
 import com.UserManagementService.dto.request.CustomerRequestDTO;
 import com.UserManagementService.dto.response.CustomerResponseDTO;
 import com.UserManagementService.entity.Customer;
 import com.UserManagementService.entity.CustomerStatus;
+import com.UserManagementService.exception.ResourceNotFoundException;
 import com.UserManagementService.repository.CustomerRepository;
 import com.UserManagementService.service.CustomerService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    private final CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Override
     public CustomerResponseDTO createCustomer(CustomerRequestDTO requestDTO) {
-        if (customerRepository.existsByEmailIgnoreCase(requestDTO.getEmail())) {
-            throw new RuntimeException("Customer with email '" + requestDTO.getEmail() + "' already exists");
+        if (customerRepository.existsByEmail(requestDTO.getEmail())) {
+            throw new IllegalArgumentException("Cliente con email '" + requestDTO.getEmail() + "' ya existe");
         }
 
-        Customer customer = Customer.builder()
-                .run(requestDTO.getRun())
-                .firstName(requestDTO.getFirstName())
-                .lastName(requestDTO.getLastName())
-                .email(requestDTO.getEmail())
-                .password(requestDTO.getPassword())
-                .phone(requestDTO.getPhone())
-                .address(requestDTO.getAddress())
-                .region(requestDTO.getRegion())
-                .commune(requestDTO.getCommune())
-                .birthDate(requestDTO.getBirthDate() != null ? LocalDate.parse(requestDTO.getBirthDate()) : null)
-                .status(CustomerStatus.valueOf(requestDTO.getStatus().toUpperCase()))
-                .isActive(true)
-                .createdAt(LocalDateTime.now())
-                .build();
+        if (customerRepository.existsByRun(requestDTO.getRun())) {
+            throw new IllegalArgumentException("Cliente con RUN '" + requestDTO.getRun() + "' ya existe");
+        }
+
+        Customer customer = new Customer();
+        customer.setRun(requestDTO.getRun());
+        customer.setFirstName(requestDTO.getFirstName());
+        customer.setLastName(requestDTO.getLastName());
+        customer.setEmail(requestDTO.getEmail());
+        customer.setPassword(requestDTO.getPassword());
+        customer.setPhone(requestDTO.getPhone());
+        customer.setAddress(requestDTO.getAddress());
+        customer.setRegion(requestDTO.getRegion());
+        customer.setCommune(requestDTO.getCommune());
+        customer.setBirthDate(requestDTO.getBirthDate());
+        customer.setStatus(CustomerStatus.ACTIVE);
+        customer.setIsActive(true);
+        customer.setCreatedAt(LocalDateTime.now());
 
         Customer savedCustomer = customerRepository.save(customer);
         return mapToResponseDTO(savedCustomer);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public CustomerResponseDTO getCustomerById(Long id) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
-        return mapToResponseDTO(customer);
     }
 
     @Override
@@ -78,9 +71,17 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional(readOnly = true)
+    public CustomerResponseDTO getCustomerById(Long id) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con ID: " + id));
+        return mapToResponseDTO(customer);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public CustomerResponseDTO getCustomerByEmail(String email) {
-        Customer customer = customerRepository.findByEmailIgnoreCase(email)
-                .orElseThrow(() -> new RuntimeException("Customer not found with email: " + email));
+        Customer customer = customerRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con email: " + email));
         return mapToResponseDTO(customer);
     }
 
@@ -97,23 +98,28 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerResponseDTO updateCustomer(Long id, CustomerRequestDTO requestDTO) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con ID: " + id));
 
         if (!customer.getEmail().equalsIgnoreCase(requestDTO.getEmail()) 
-            && customerRepository.existsByEmailIgnoreCase(requestDTO.getEmail())) {
-            throw new RuntimeException("Customer with email '" + requestDTO.getEmail() + "' already exists");
+            && customerRepository.existsByEmail(requestDTO.getEmail())) {
+            throw new IllegalArgumentException("Cliente con email '" + requestDTO.getEmail() + "' ya existe");
+        }
+
+        if (!customer.getRun().equalsIgnoreCase(requestDTO.getRun()) 
+            && customerRepository.existsByRun(requestDTO.getRun())) {
+            throw new IllegalArgumentException("Cliente con RUN '" + requestDTO.getRun() + "' ya existe");
         }
 
         customer.setRun(requestDTO.getRun());
         customer.setFirstName(requestDTO.getFirstName());
         customer.setLastName(requestDTO.getLastName());
         customer.setEmail(requestDTO.getEmail());
+        customer.setPassword(requestDTO.getPassword());
         customer.setPhone(requestDTO.getPhone());
         customer.setAddress(requestDTO.getAddress());
         customer.setRegion(requestDTO.getRegion());
         customer.setCommune(requestDTO.getCommune());
-        customer.setBirthDate(requestDTO.getBirthDate() != null ? LocalDate.parse(requestDTO.getBirthDate()) : null);
-        customer.setStatus(CustomerStatus.valueOf(requestDTO.getStatus().toUpperCase()));
+        customer.setBirthDate(requestDTO.getBirthDate());
         customer.setUpdatedAt(LocalDateTime.now());
 
         Customer updatedCustomer = customerRepository.save(customer);
@@ -123,11 +129,23 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerResponseDTO updatePassword(Long id, String newPassword) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
-        
-        customer.setPassword(newPassword); // TODO: Hash password with BCrypt
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con ID: " + id));
+
+        customer.setPassword(newPassword);
         customer.setUpdatedAt(LocalDateTime.now());
-        
+
+        Customer updatedCustomer = customerRepository.save(customer);
+        return mapToResponseDTO(updatedCustomer);
+    }
+
+    @Override
+    public CustomerResponseDTO changeStatus(Long id, String status) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con ID: " + id));
+
+        customer.setStatus(CustomerStatus.valueOf(status.toUpperCase()));
+        customer.setUpdatedAt(LocalDateTime.now());
+
         Customer updatedCustomer = customerRepository.save(customer);
         return mapToResponseDTO(updatedCustomer);
     }
@@ -135,9 +153,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomer(Long id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
-        
-        // Logical delete
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con ID: " + id));
+
         customer.setIsActive(false);
         customer.setUpdatedAt(LocalDateTime.now());
         customerRepository.save(customer);
@@ -146,11 +163,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerResponseDTO activateCustomer(Long id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
-        
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con ID: " + id));
+
         customer.setIsActive(true);
+        customer.setStatus(CustomerStatus.ACTIVE);
         customer.setUpdatedAt(LocalDateTime.now());
-        
+
         Customer updatedCustomer = customerRepository.save(customer);
         return mapToResponseDTO(updatedCustomer);
     }
@@ -158,23 +176,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerResponseDTO deactivateCustomer(Long id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
-        
-        customer.setIsActive(false);
-        customer.setUpdatedAt(LocalDateTime.now());
-        
-        Customer updatedCustomer = customerRepository.save(customer);
-        return mapToResponseDTO(updatedCustomer);
-    }
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con ID: " + id));
 
-    @Override
-    public CustomerResponseDTO changeStatus(Long id, String status) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
-        
-        customer.setStatus(CustomerStatus.valueOf(status.toUpperCase()));
+        customer.setIsActive(false);
+        customer.setStatus(CustomerStatus.INACTIVE);
         customer.setUpdatedAt(LocalDateTime.now());
-        
+
         Customer updatedCustomer = customerRepository.save(customer);
         return mapToResponseDTO(updatedCustomer);
     }
@@ -182,44 +189,42 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public CustomerResponseDTO authenticateCustomer(String email, String password) {
-        Customer customer = customerRepository.findByEmailIgnoreCase(email)
-                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
-        
-        // TODO: Use BCrypt to compare passwords
-        if (!customer.getPassword().equals(password)) {
-            throw new RuntimeException("Invalid credentials");
-        }
-        
+        Customer customer = customerRepository.findByEmailAndPassword(email, password)
+                .orElseThrow(() -> new IllegalArgumentException("Email o contraseña incorrectos"));
+
         if (!customer.getIsActive()) {
-            throw new RuntimeException("Customer account is inactive");
+            throw new IllegalArgumentException("Cliente inactivo");
         }
-        
+
+        if (customer.getStatus() == CustomerStatus.BLOCKED) {
+            throw new IllegalArgumentException("Cliente bloqueado. Contacte al administrador");
+        }
+
         return mapToResponseDTO(customer);
     }
 
     @Override
     @Transactional(readOnly = true)
     public boolean existsByEmail(String email) {
-        return customerRepository.existsByEmailIgnoreCase(email);
+        return customerRepository.existsByEmail(email);
     }
 
-    // Helper method to map Entity to DTO
     private CustomerResponseDTO mapToResponseDTO(Customer customer) {
-        return CustomerResponseDTO.builder()
-                .id(customer.getId())
-                .run(customer.getRun())
-                .firstName(customer.getFirstName())
-                .lastName(customer.getLastName())
-                .email(customer.getEmail())
-                .phone(customer.getPhone())
-                .address(customer.getAddress())
-                .region(customer.getRegion())
-                .commune(customer.getCommune())
-                .birthDate(customer.getBirthDate())
-                .status(customer.getStatus().name())
-                .isActive(customer.getIsActive())
-                .createdAt(customer.getCreatedAt())
-                .updatedAt(customer.getUpdatedAt())
-                .build();
+        CustomerResponseDTO dto = new CustomerResponseDTO();
+        dto.setId(customer.getId());
+        dto.setRun(customer.getRun());
+        dto.setFirstName(customer.getFirstName());
+        dto.setLastName(customer.getLastName());
+        dto.setEmail(customer.getEmail());
+        dto.setPhone(customer.getPhone());
+        dto.setAddress(customer.getAddress());
+        dto.setRegion(customer.getRegion());
+        dto.setCommune(customer.getCommune());
+        dto.setBirthDate(customer.getBirthDate());
+        dto.setStatus(customer.getStatus().name());
+        dto.setIsActive(customer.getIsActive());
+        dto.setCreatedAt(customer.getCreatedAt());
+        dto.setUpdatedAt(customer.getUpdatedAt());
+        return dto;
     }
 }

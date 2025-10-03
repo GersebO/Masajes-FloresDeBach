@@ -1,9 +1,9 @@
 package com.UserManagementService.service;
 
-import java.util.List;
-
 import com.UserManagementService.dto.request.UserRequestDTO;
 import com.UserManagementService.dto.response.UserResponseDTO;
+
+import java.util.List;
 
 public interface UserService {
     
@@ -11,9 +11,9 @@ public interface UserService {
     UserResponseDTO createUser(UserRequestDTO requestDTO);
     
     // Read
-    UserResponseDTO getUserById(Long id);
     List<UserResponseDTO> getAllUsers();
     List<UserResponseDTO> getActiveUsers();
+    UserResponseDTO getUserById(Long id);
     UserResponseDTO getUserByEmail(String email);
     List<UserResponseDTO> getUsersByRole(String role);
     List<UserResponseDTO> getUsersByStatus(String status);
@@ -21,20 +21,18 @@ public interface UserService {
     // Update
     UserResponseDTO updateUser(Long id, UserRequestDTO requestDTO);
     UserResponseDTO updatePassword(Long id, String newPassword);
+    UserResponseDTO changeStatus(Long id, String status);
     
-    // Delete (logical)
+    // Delete
     void deleteUser(Long id);
     
     // Activate/Deactivate
     UserResponseDTO activateUser(Long id);
     UserResponseDTO deactivateUser(Long id);
     
-    // Status Management
-    UserResponseDTO changeStatus(Long id, String status);
-    
     // Authentication
     UserResponseDTO authenticateUser(String email, String password);
     
-    // Validations
+    // Validation
     boolean existsByEmail(String email);
 }

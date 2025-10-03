@@ -11,29 +11,27 @@ public interface CustomerService {
     CustomerResponseDTO createCustomer(CustomerRequestDTO requestDTO);
     
     // Read
-    CustomerResponseDTO getCustomerById(Long id);
     List<CustomerResponseDTO> getAllCustomers();
     List<CustomerResponseDTO> getActiveCustomers();
+    CustomerResponseDTO getCustomerById(Long id);
     CustomerResponseDTO getCustomerByEmail(String email);
     List<CustomerResponseDTO> getCustomersByStatus(String status);
     
     // Update
-    CustomerResponseDTO updateCustomer(Long id, CustomerRequestDTO requestDTO);  // ← DEBE SER CustomerRequestDTO
+    CustomerResponseDTO updateCustomer(Long id, CustomerRequestDTO requestDTO);
     CustomerResponseDTO updatePassword(Long id, String newPassword);
+    CustomerResponseDTO changeStatus(Long id, String status);
     
-    // Delete (logical)
+    // Delete
     void deleteCustomer(Long id);
     
     // Activate/Deactivate
     CustomerResponseDTO activateCustomer(Long id);
     CustomerResponseDTO deactivateCustomer(Long id);
     
-    // Status Management
-    CustomerResponseDTO changeStatus(Long id, String status);
-    
     // Authentication
     CustomerResponseDTO authenticateCustomer(String email, String password);
     
-    // Validations
+    // Validation
     boolean existsByEmail(String email);
 }

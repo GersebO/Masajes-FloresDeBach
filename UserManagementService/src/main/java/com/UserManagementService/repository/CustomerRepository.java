@@ -11,30 +11,13 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     
-    // Find by email (case insensitive)
-    Optional<Customer> findByEmailIgnoreCase(String email);
-    
-    // Check if exists by email (case insensitive)
-    boolean existsByEmailIgnoreCase(String email);
-    
-    // Find all active customers
+    // Find methods
+    Optional<Customer> findByEmail(String email);
+    Optional<Customer> findByEmailAndPassword(String email, String password);
     List<Customer> findByIsActiveTrue();
-    
-    // Find all inactive customers
-    List<Customer> findByIsActiveFalse();
-    
-    // Find by status
     List<Customer> findByStatus(CustomerStatus status);
     
-    // Find by status and active
-    List<Customer> findByStatusAndIsActiveTrue(CustomerStatus status);
-    
-    // Find by name containing (search)
-    List<Customer> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName);
-    
-    // Find by phone
-    Optional<Customer> findByPhone(String phone);
-    
-    // Find by address containing
-    List<Customer> findByAddressContainingIgnoreCase(String address);
+    // Exists methods
+    boolean existsByEmail(String email);
+    boolean existsByRun(String run);
 }

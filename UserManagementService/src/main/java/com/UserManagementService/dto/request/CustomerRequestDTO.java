@@ -1,5 +1,7 @@
 package com.UserManagementService.dto.request;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +22,6 @@ public class CustomerRequestDTO {
     private String address;
     private String region;
     private String commune;
-    private String birthDate;  // formato: "YYYY-MM-DD"
+    private LocalDate birthDate;  // formato: "YYYY-MM-DD"
     private String status;
 }
