@@ -1,12 +1,12 @@
 package com.UserManagementService.dto.response;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -19,15 +19,13 @@ public class CustomerResponseDTO {
     private String firstName;
     private String lastName;
     private String email;
+    private String phone;
     private String address;
     private String region;
     private String commune;
     private LocalDate birthDate;
     private String status;
+    private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String phone;
-    private boolean isActive;
-    
 }
-

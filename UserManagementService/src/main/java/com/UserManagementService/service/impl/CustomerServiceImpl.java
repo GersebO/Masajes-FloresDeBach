@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,18 +26,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponseDTO createCustomer(CustomerRequestDTO requestDTO) {
-        // Validate if email already exists
         if (customerRepository.existsByEmailIgnoreCase(requestDTO.getEmail())) {
             throw new RuntimeException("Customer with email '" + requestDTO.getEmail() + "' already exists");
         }
 
         Customer customer = Customer.builder()
+                .run(requestDTO.getRun())
                 .firstName(requestDTO.getFirstName())
                 .lastName(requestDTO.getLastName())
                 .email(requestDTO.getEmail())
-                .password(requestDTO.getPassword()) // TODO: Hash password with BCrypt
+                .password(requestDTO.getPassword())
                 .phone(requestDTO.getPhone())
                 .address(requestDTO.getAddress())
+                .region(requestDTO.getRegion())
+                .commune(requestDTO.getCommune())
+                .birthDate(requestDTO.getBirthDate() != null ? LocalDate.parse(requestDTO.getBirthDate()) : null)
                 .status(CustomerStatus.valueOf(requestDTO.getStatus().toUpperCase()))
                 .isActive(true)
                 .createdAt(LocalDateTime.now())
@@ -95,17 +99,20 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
 
-        // Check if new email conflicts with existing customer
         if (!customer.getEmail().equalsIgnoreCase(requestDTO.getEmail()) 
             && customerRepository.existsByEmailIgnoreCase(requestDTO.getEmail())) {
             throw new RuntimeException("Customer with email '" + requestDTO.getEmail() + "' already exists");
         }
 
+        customer.setRun(requestDTO.getRun());
         customer.setFirstName(requestDTO.getFirstName());
         customer.setLastName(requestDTO.getLastName());
         customer.setEmail(requestDTO.getEmail());
         customer.setPhone(requestDTO.getPhone());
         customer.setAddress(requestDTO.getAddress());
+        customer.setRegion(requestDTO.getRegion());
+        customer.setCommune(requestDTO.getCommune());
+        customer.setBirthDate(requestDTO.getBirthDate() != null ? LocalDate.parse(requestDTO.getBirthDate()) : null);
         customer.setStatus(CustomerStatus.valueOf(requestDTO.getStatus().toUpperCase()));
         customer.setUpdatedAt(LocalDateTime.now());
 
@@ -200,11 +207,15 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerResponseDTO mapToResponseDTO(Customer customer) {
         return CustomerResponseDTO.builder()
                 .id(customer.getId())
+                .run(customer.getRun())
                 .firstName(customer.getFirstName())
                 .lastName(customer.getLastName())
                 .email(customer.getEmail())
                 .phone(customer.getPhone())
                 .address(customer.getAddress())
+                .region(customer.getRegion())
+                .commune(customer.getCommune())
+                .birthDate(customer.getBirthDate())
                 .status(customer.getStatus().name())
                 .isActive(customer.getIsActive())
                 .createdAt(customer.getCreatedAt())

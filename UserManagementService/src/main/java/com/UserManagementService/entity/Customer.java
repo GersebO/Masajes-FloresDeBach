@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,6 +20,9 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true, length = 20)
+    private String run;
 
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
@@ -37,6 +41,15 @@ public class Customer {
 
     @Column(length = 500)
     private String address;
+
+    @Column(length = 100)
+    private String region;
+
+    @Column(length = 100)
+    private String commune;
+
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)

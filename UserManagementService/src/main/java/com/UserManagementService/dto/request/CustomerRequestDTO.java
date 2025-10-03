@@ -11,11 +11,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CustomerRequestDTO {
     
+    private String run;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String phone;
-    private String address;  // ← AÑADIR ESTE CAMPO
+    private String address;
+    private String region;
+    private String commune;
+    private String birthDate;  // formato: "YYYY-MM-DD"
     private String status;
 }
