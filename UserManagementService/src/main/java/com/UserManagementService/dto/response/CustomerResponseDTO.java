@@ -26,5 +26,8 @@ public class CustomerResponseDTO {
     private String status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String phone;
+    private boolean isActive;
+    
 }
 

@@ -1,35 +1,40 @@
 package com.UserManagementService.repository;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.UserManagementService.entity.Customer;
+import com.UserManagementService.entity.CustomerStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.UserManagementService.entity.Customer;
-import com.UserManagementService.entity.CustomerStatus;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     
-    // Buscar cliente por email
-    Optional<Customer> findByEmail(String email);
+    // Find by email (case insensitive)
+    Optional<Customer> findByEmailIgnoreCase(String email);
     
-    // Buscar cliente por RUN
-    Optional<Customer> findByRun(String run);
+    // Check if exists by email (case insensitive)
+    boolean existsByEmailIgnoreCase(String email);
     
-    // Verificar si existe un email
-    boolean existsByEmail(String email);
+    // Find all active customers
+    List<Customer> findByIsActiveTrue();
     
-    // Verificar si existe un RUN
-    boolean existsByRun(String run);
+    // Find all inactive customers
+    List<Customer> findByIsActiveFalse();
     
-    // Buscar clientes por estado
+    // Find by status
     List<Customer> findByStatus(CustomerStatus status);
     
-    // Buscar clientes por región
-    List<Customer> findByRegion(String region);
+    // Find by status and active
+    List<Customer> findByStatusAndIsActiveTrue(CustomerStatus status);
     
-    // Buscar clientes por región y comuna
-    List<Customer> findByRegionAndCommune(String region, String commune);
+    // Find by name containing (search)
+    List<Customer> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName);
+    
+    // Find by phone
+    Optional<Customer> findByPhone(String phone);
+    
+    // Find by address containing
+    List<Customer> findByAddressContainingIgnoreCase(String address);
 }

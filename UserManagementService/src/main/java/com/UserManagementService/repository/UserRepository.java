@@ -1,36 +1,44 @@
 package com.UserManagementService.repository;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import com.UserManagementService.entity.User;
 import com.UserManagementService.entity.UserRole;
 import com.UserManagementService.entity.UserStatus;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     
-    // Buscar usuario por email
-    Optional<User> findByEmail(String email);
+    // Find by email (case insensitive)
+    Optional<User> findByEmailIgnoreCase(String email);
     
-    // Buscar usuario por RUN
-    Optional<User> findByRun(String run);
+    // Check if exists by email (case insensitive)
+    boolean existsByEmailIgnoreCase(String email);
     
-    // Verificar si existe un email
-    boolean existsByEmail(String email);
+    // Find all active users
+    List<User> findByIsActiveTrue();
     
-    // Verificar si existe un RUN
-    boolean existsByRun(String run);
+    // Find all inactive users
+    List<User> findByIsActiveFalse();
     
-    // Buscar usuarios por rol
+    // Find by role
     List<User> findByRole(UserRole role);
     
-    // Buscar usuarios por estado
+    // Find by role and active status
+    List<User> findByRoleAndIsActiveTrue(UserRole role);
+    
+    // Find by status
     List<User> findByStatus(UserStatus status);
     
-    // Buscar usuarios por rol y estado
-    List<User> findByRoleAndStatus(UserRole role, UserStatus status);
+    // Find by status and active
+    List<User> findByStatusAndIsActiveTrue(UserStatus status);
+    
+    // Find by name containing (search)
+    List<User> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName);
+    
+    // Find by phone
+    Optional<User> findByPhone(String phone);
 }
