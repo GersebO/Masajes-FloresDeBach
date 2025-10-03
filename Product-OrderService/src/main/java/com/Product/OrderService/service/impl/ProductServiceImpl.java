@@ -7,6 +7,7 @@ import com.Product.OrderService.dto.response.ProductResponseDTO;
 import com.Product.OrderService.entity.Category;
 import com.Product.OrderService.entity.Product;
 import com.Product.OrderService.entity.ProductStatus;
+import com.Product.OrderService.exception.ResourceNotFoundException;
 import com.Product.OrderService.repository.CategoryRepository;
 import com.Product.OrderService.repository.ProductRepository;
 import com.Product.OrderService.service.ProductService;
@@ -30,16 +31,16 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponseDTO createProduct(ProductRequestDTO requestDTO) {
         // Validate if SKU already exists
         if (productRepository.existsBySkuIgnoreCase(requestDTO.getSku())) {
-            throw new RuntimeException("Product with SKU '" + requestDTO.getSku() + "' already exists");
+            throw new IllegalArgumentException("Producto con SKU '" + requestDTO.getSku() + "' ya existe");
         }
 
         // Validate if category exists
         Category category = categoryRepository.findById(requestDTO.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + requestDTO.getCategoryId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + requestDTO.getCategoryId()));
 
         // Validate category is active
         if (!category.getIsActive()) {
-            throw new RuntimeException("Cannot create product with inactive category");
+            throw new IllegalArgumentException("No se puede crear producto con categoría inactiva");
         }
 
         Product product = Product.builder()
@@ -63,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public ProductResponseDTO getProductById(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
         return mapToResponseDTO(product);
     }
 
@@ -107,17 +108,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDTO updateProduct(Long id, ProductRequestDTO requestDTO) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
 
         // Check if new SKU conflicts with existing product
         if (!product.getSku().equalsIgnoreCase(requestDTO.getSku()) 
             && productRepository.existsBySkuIgnoreCase(requestDTO.getSku())) {
-            throw new RuntimeException("Product with SKU '" + requestDTO.getSku() + "' already exists");
+            throw new IllegalArgumentException("Producto con SKU '" + requestDTO.getSku() + "' ya existe");
         }
 
         // Validate if category exists
         Category category = categoryRepository.findById(requestDTO.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + requestDTO.getCategoryId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + requestDTO.getCategoryId()));
 
         product.setName(requestDTO.getName());
         product.setSku(requestDTO.getSku());
@@ -136,7 +137,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDTO updateStock(Long id, Integer stock) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
         
         product.setStock(stock);
         product.setUpdatedAt(LocalDateTime.now());
@@ -148,7 +149,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDTO updatePrice(Long id, java.math.BigDecimal price) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
         
         product.setPrice(price);
         product.setUpdatedAt(LocalDateTime.now());
@@ -160,7 +161,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
         
         // Logical delete
         product.setIsActive(false);
@@ -171,7 +172,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDTO activateProduct(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
         
         product.setIsActive(true);
         product.setUpdatedAt(LocalDateTime.now());
@@ -183,7 +184,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDTO deactivateProduct(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
         
         product.setIsActive(false);
         product.setUpdatedAt(LocalDateTime.now());
@@ -195,7 +196,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDTO changeStatus(Long id, String status) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
         
         product.setStatus(ProductStatus.valueOf(status.toUpperCase()));
         product.setUpdatedAt(LocalDateTime.now());
@@ -214,7 +215,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public boolean hasStock(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
         return product.getStock() > 0;
     }
 

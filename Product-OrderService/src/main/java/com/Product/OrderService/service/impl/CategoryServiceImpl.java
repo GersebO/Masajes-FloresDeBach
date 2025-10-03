@@ -4,6 +4,7 @@ package com.Product.OrderService.service.impl;
 import com.Product.OrderService.dto.request.CategoryRequestDTO;
 import com.Product.OrderService.dto.response.CategoryResponseDTO;
 import com.Product.OrderService.entity.Category;
+import com.Product.OrderService.exception.ResourceNotFoundException;
 import com.Product.OrderService.repository.CategoryRepository;
 import com.Product.OrderService.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
-
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryResponseDTO createCategory(CategoryRequestDTO requestDTO) {
         // Validate if category name already exists
         if (categoryRepository.existsByNameIgnoreCase(requestDTO.getName())) {
-            throw new RuntimeException("Category with name '" + requestDTO.getName() + "' already exists");
+            throw new IllegalArgumentException("Categoría con nombre '" + requestDTO.getName() + "' ya existe");
         }
 
         Category category = Category.builder()
@@ -45,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional(readOnly = true)
     public CategoryResponseDTO getCategoryById(Long id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + id));
         return mapToResponseDTO(category);
     }
 
@@ -70,12 +69,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryResponseDTO updateCategory(Long id, CategoryRequestDTO requestDTO) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + id));
 
         // Check if new name conflicts with existing category
         if (!category.getName().equalsIgnoreCase(requestDTO.getName()) 
             && categoryRepository.existsByNameIgnoreCase(requestDTO.getName())) {
-            throw new RuntimeException("Category with name '" + requestDTO.getName() + "' already exists");
+            throw new IllegalArgumentException("Categoría con nombre '" + requestDTO.getName() + "' ya existe");
         }
 
         category.setName(requestDTO.getName());
@@ -89,7 +88,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(Long id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + id));
         
         // Logical delete
         category.setIsActive(false);
@@ -100,7 +99,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryResponseDTO activateCategory(Long id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + id));
         
         category.setIsActive(true);
         category.setUpdatedAt(LocalDateTime.now());
@@ -112,7 +111,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryResponseDTO deactivateCategory(Long id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + id));
         
         category.setIsActive(false);
         category.setUpdatedAt(LocalDateTime.now());
