@@ -1,6 +1,7 @@
 package com.Product.OrderService.entity;
 
 public enum ProductStatus {
-    ACTIVE,
-    INACTIVE
+    AVAILABLE,
+    OUT_OF_STOCK,
+    DISCONTINUED
 }

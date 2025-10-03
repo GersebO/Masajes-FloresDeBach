@@ -28,4 +28,5 @@ public class ProductResponseDTO {
     private boolean isStockCritical;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Boolean isActive;
 }
