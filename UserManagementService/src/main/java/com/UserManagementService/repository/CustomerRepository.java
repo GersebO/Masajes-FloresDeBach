@@ -13,7 +13,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     
     // Find methods
     Optional<Customer> findByEmail(String email);
-    Optional<Customer> findByEmailAndPassword(String email, String password);
     List<Customer> findByIsActiveTrue();
     List<Customer> findByStatus(CustomerStatus status);
     

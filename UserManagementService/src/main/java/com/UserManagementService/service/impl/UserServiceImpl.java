@@ -9,6 +9,7 @@ import com.UserManagementService.exception.ResourceNotFoundException;
 import com.UserManagementService.repository.UserRepository;
 import com.UserManagementService.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,14 +24,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserResponseDTO createUser(UserRequestDTO requestDTO) {
-        // Validate if email already exists
         if (userRepository.existsByEmail(requestDTO.getEmail())) {
             throw new IllegalArgumentException("Usuario con email '" + requestDTO.getEmail() + "' ya existe");
         }
 
-        // Validate if RUN already exists
         if (userRepository.existsByRun(requestDTO.getRun())) {
             throw new IllegalArgumentException("Usuario con RUN '" + requestDTO.getRun() + "' ya existe");
         }
@@ -40,7 +42,7 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(requestDTO.getFirstName());
         user.setLastName(requestDTO.getLastName());
         user.setEmail(requestDTO.getEmail());
-        user.setPassword(requestDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(requestDTO.getPassword())); // HASH AQUÍ
         user.setPhone(requestDTO.getPhone());
         user.setAddress(requestDTO.getAddress());
         user.setRegion(requestDTO.getRegion());
@@ -54,6 +56,74 @@ public class UserServiceImpl implements UserService {
         User savedUser = userRepository.save(user);
         return mapToResponseDTO(savedUser);
     }
+
+    @Override
+    public UserResponseDTO updateUser(Long id, UserRequestDTO requestDTO) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
+
+        if (!user.getEmail().equalsIgnoreCase(requestDTO.getEmail()) 
+            && userRepository.existsByEmail(requestDTO.getEmail())) {
+            throw new IllegalArgumentException("Usuario con email '" + requestDTO.getEmail() + "' ya existe");
+        }
+
+        if (!user.getRun().equalsIgnoreCase(requestDTO.getRun()) 
+            && userRepository.existsByRun(requestDTO.getRun())) {
+            throw new IllegalArgumentException("Usuario con RUN '" + requestDTO.getRun() + "' ya existe");
+        }
+
+        user.setRun(requestDTO.getRun());
+        user.setFirstName(requestDTO.getFirstName());
+        user.setLastName(requestDTO.getLastName());
+        user.setEmail(requestDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(requestDTO.getPassword())); // HASH AQUÍ
+        user.setPhone(requestDTO.getPhone());
+        user.setAddress(requestDTO.getAddress());
+        user.setRegion(requestDTO.getRegion());
+        user.setCommune(requestDTO.getCommune());
+        user.setBirthDate(requestDTO.getBirthDate());
+        user.setRole(UserRole.valueOf(requestDTO.getRole().toUpperCase()));
+        user.setUpdatedAt(LocalDateTime.now());
+
+        User updatedUser = userRepository.save(user);
+        return mapToResponseDTO(updatedUser);
+    }
+
+    @Override
+    public UserResponseDTO updatePassword(Long id, String newPassword) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
+
+        user.setPassword(passwordEncoder.encode(newPassword)); // HASH AQUÍ
+        user.setUpdatedAt(LocalDateTime.now());
+
+        User updatedUser = userRepository.save(user);
+        return mapToResponseDTO(updatedUser);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserResponseDTO authenticateUser(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Email o contraseña incorrectos"));
+
+        // VERIFICAR HASH
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new IllegalArgumentException("Email o contraseña incorrectos");
+        }
+
+        if (!user.getIsActive()) {
+            throw new IllegalArgumentException("Usuario inactivo");
+        }
+
+        if (user.getStatus() != UserStatus.ACTIVE) {
+            throw new IllegalArgumentException("Usuario no está en estado activo");
+        }
+
+        return mapToResponseDTO(user);
+    }
+
+    // ... resto de métodos sin cambios ...
 
     @Override
     @Transactional(readOnly = true)
@@ -110,52 +180,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDTO updateUser(Long id, UserRequestDTO requestDTO) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
-
-        // Check if new email conflicts with existing user
-        if (!user.getEmail().equalsIgnoreCase(requestDTO.getEmail()) 
-            && userRepository.existsByEmail(requestDTO.getEmail())) {
-            throw new IllegalArgumentException("Usuario con email '" + requestDTO.getEmail() + "' ya existe");
-        }
-
-        // Check if new RUN conflicts with existing user
-        if (!user.getRun().equalsIgnoreCase(requestDTO.getRun()) 
-            && userRepository.existsByRun(requestDTO.getRun())) {
-            throw new IllegalArgumentException("Usuario con RUN '" + requestDTO.getRun() + "' ya existe");
-        }
-
-        user.setRun(requestDTO.getRun());
-        user.setFirstName(requestDTO.getFirstName());
-        user.setLastName(requestDTO.getLastName());
-        user.setEmail(requestDTO.getEmail());
-        user.setPassword(requestDTO.getPassword());
-        user.setPhone(requestDTO.getPhone());
-        user.setAddress(requestDTO.getAddress());
-        user.setRegion(requestDTO.getRegion());
-        user.setCommune(requestDTO.getCommune());
-        user.setBirthDate(requestDTO.getBirthDate());
-        user.setRole(UserRole.valueOf(requestDTO.getRole().toUpperCase()));
-        user.setUpdatedAt(LocalDateTime.now());
-
-        User updatedUser = userRepository.save(user);
-        return mapToResponseDTO(updatedUser);
-    }
-
-    @Override
-    public UserResponseDTO updatePassword(Long id, String newPassword) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
-
-        user.setPassword(newPassword);
-        user.setUpdatedAt(LocalDateTime.now());
-
-        User updatedUser = userRepository.save(user);
-        return mapToResponseDTO(updatedUser);
-    }
-
-    @Override
     public UserResponseDTO changeStatus(Long id, String status) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
@@ -201,23 +225,6 @@ public class UserServiceImpl implements UserService {
 
         User updatedUser = userRepository.save(user);
         return mapToResponseDTO(updatedUser);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public UserResponseDTO authenticateUser(String email, String password) {
-        User user = userRepository.findByEmailAndPassword(email, password)
-                .orElseThrow(() -> new IllegalArgumentException("Email o contraseña incorrectos"));
-
-        if (!user.getIsActive()) {
-            throw new IllegalArgumentException("Usuario inactivo");
-        }
-
-        if (user.getStatus() != UserStatus.ACTIVE) {
-            throw new IllegalArgumentException("Usuario no está en estado activo");
-        }
-
-        return mapToResponseDTO(user);
     }
 
     @Override

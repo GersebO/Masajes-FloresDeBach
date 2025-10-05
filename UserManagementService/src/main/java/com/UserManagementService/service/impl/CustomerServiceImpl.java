@@ -8,6 +8,7 @@ import com.UserManagementService.exception.ResourceNotFoundException;
 import com.UserManagementService.repository.CustomerRepository;
 import com.UserManagementService.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public CustomerResponseDTO createCustomer(CustomerRequestDTO requestDTO) {
@@ -37,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setFirstName(requestDTO.getFirstName());
         customer.setLastName(requestDTO.getLastName());
         customer.setEmail(requestDTO.getEmail());
-        customer.setPassword(requestDTO.getPassword());
+        customer.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         customer.setPhone(requestDTO.getPhone());
         customer.setAddress(requestDTO.getAddress());
         customer.setRegion(requestDTO.getRegion());
@@ -114,7 +118,7 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setFirstName(requestDTO.getFirstName());
         customer.setLastName(requestDTO.getLastName());
         customer.setEmail(requestDTO.getEmail());
-        customer.setPassword(requestDTO.getPassword());
+        customer.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         customer.setPhone(requestDTO.getPhone());
         customer.setAddress(requestDTO.getAddress());
         customer.setRegion(requestDTO.getRegion());
@@ -131,7 +135,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con ID: " + id));
 
-        customer.setPassword(newPassword);
+        customer.setPassword(passwordEncoder.encode(newPassword));
         customer.setUpdatedAt(LocalDateTime.now());
 
         Customer updatedCustomer = customerRepository.save(customer);
@@ -189,8 +193,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public CustomerResponseDTO authenticateCustomer(String email, String password) {
-        Customer customer = customerRepository.findByEmailAndPassword(email, password)
+        Customer customer = customerRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Email o contraseña incorrectos"));
+
+        if (!passwordEncoder.matches(password, customer.getPassword())) {
+            throw new IllegalArgumentException("Email o contraseña incorrectos");
+        }
 
         if (!customer.getIsActive()) {
             throw new IllegalArgumentException("Cliente inactivo");
