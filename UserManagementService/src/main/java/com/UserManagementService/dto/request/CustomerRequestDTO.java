@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 public class CustomerRequestDTO {
     
     @NotBlank(message = "El RUN es obligatorio")
-    @Pattern(regexp = "^[0-9]{7,8}-[0-9Kk]$", message = "Formato de RUN inválido (ej: 12345678-9)")
     private String run;
     
     @NotBlank(message = "El nombre es obligatorio")
