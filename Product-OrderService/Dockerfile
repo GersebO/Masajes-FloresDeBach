@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1
 
-FROM maven:3.9.6-eclipse-temurin-17 AS builder
+FROM maven:3.9.9-eclipse-temurin-21-alpine AS builder
 WORKDIR /workspace
 COPY pom.xml .
 COPY src ./src
 RUN mvn -B -DskipTests clean package
 
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=builder /workspace/target/Product-OrderService-*.jar app.jar
 ENV JAVA_OPTS=""
