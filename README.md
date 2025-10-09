@@ -224,6 +224,28 @@ mvn spring-boot:run
 ```
 Disponible en: [http://localhost:8081](http://localhost:8081)
 
+### Despliegue con Docker Compose
+
+El proyecto incluye un `docker-compose.yml` para levantar toda la plataforma con PostgreSQL y los dos microservicios.
+
+1. Construye y levanta los contenedores:
+   ```bash
+   docker compose up -d --build
+   ```
+2. (Opcional) Personaliza las credenciales y el nombre de la base de datos mediante variables de entorno antes de ejecutar el comando anterior:
+   ```bash
+   export DB_NAME=marafloresdb
+   export DB_USERNAME=postgres
+   export DB_PASSWORD=postgres
+   ```
+
+Los servicios quedarán disponibles en:
+
+- Product-OrderService → [http://localhost:8082](http://localhost:8082)
+- UserManagementService → [http://localhost:8081](http://localhost:8081)
+
+La base de datos PostgreSQL expone el puerto `5432` y persiste la información en el volumen `postgres-data` definido en el `docker-compose.yml`.
+
 ---
 
 ## Testing
