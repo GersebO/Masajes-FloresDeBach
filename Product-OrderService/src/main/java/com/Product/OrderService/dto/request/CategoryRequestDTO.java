@@ -13,4 +13,5 @@ public class CategoryRequestDTO {
     
     private String name;
     private String description;
+    private Boolean isActive;
 }

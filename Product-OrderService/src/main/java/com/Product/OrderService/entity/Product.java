@@ -71,4 +71,7 @@ public class Product {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
+
+    @Column(name = "critical_stock")
+    private Integer criticalStock;
 }
