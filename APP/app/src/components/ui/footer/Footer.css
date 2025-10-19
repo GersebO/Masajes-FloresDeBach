@@ -1,0 +1,110 @@
+/* === ESTRUCTURA BASE === */
+.site-footer {
+  background: linear-gradient(145deg, rgba(248, 240, 255, 0.9), rgba(255, 255, 255, 0.95));
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(190, 150, 255, 0.25);
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 -6px 16px rgba(150, 130, 255, 0.12);
+  border-radius: 20px 20px 0 0;
+  margin-top: auto;
+  animation: fadeInFooter 0.6s ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.site-footer:hover {
+  box-shadow: 0 -8px 20px rgba(150, 130, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+/* === CONTENIDO === */
+.footer-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #5a2ca0;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.footer-info {
+  font-size: 0.95rem;
+  color: #6a4a9f;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.footer-links {
+  margin-top: 10px;
+}
+
+/* === ENLACES === */
+.footer-links a {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: #7a57d1;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: rgba(200, 170, 255, 0.1);
+}
+
+.footer-links a:hover {
+  color: #fff;
+  background: linear-gradient(90deg, #b38aff, #8754ff);
+  text-decoration: none;
+  box-shadow: 0 3px 12px rgba(150, 130, 255, 0.25);
+}
+
+/* === ANIMACIÓN === */
+@keyframes fadeInFooter {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === RESPONSIVO === */
+@media (max-width: 768px) {
+  .footer-title {
+    font-size: 1.3rem;
+  }
+
+  .footer-info,
+  .footer-links a {
+    font-size: 0.85rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .site-footer {
+    padding: 25px 10px;
+  }
+}
+
+@media (max-width: 450px) {
+  .footer-title {
+    font-size: 1.1rem;
+  }
+
+  .footer-info {
+    font-size: 0.8rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    margin: 4px 0;
+    padding: 5px 10px;
+  }
+}

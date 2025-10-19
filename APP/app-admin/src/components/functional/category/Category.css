@@ -1,0 +1,364 @@
+/* ===========================
+   CONTENEDOR PRINCIPAL
+=========================== */
+.admin-container {
+  padding: 40px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  color: #4a148c;
+  background: linear-gradient(180deg, #fefcff 0%, #f6ecff 100%);
+  min-height: calc(100vh - 120px);
+}
+
+/* ===========================
+   TÍTULO PRINCIPAL
+=========================== */
+.admin-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #5e1784;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 35px;
+  text-shadow: 0 2px 4px rgba(90, 50, 150, 0.15);
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.admin-container h1::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #8e24aa, #ba68c8);
+}
+
+/* ===========================
+   TABLA DE CATEGORÍAS
+=========================== */
+.users-table {
+  width: 85%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(150, 100, 200, 0.2);
+}
+
+/* Cabecera */
+.users-table thead {
+  background: linear-gradient(90deg, #ab47bc, #ba68c8);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+.users-table th,
+.users-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0d9ff;
+  vertical-align: middle;
+}
+
+.users-table tr:nth-child(even) {
+  background: #faf5ff;
+}
+
+.users-table tr:hover {
+  background: #f3e5f5;
+  transition: 0.3s ease;
+}
+
+/* Texto y celdas */
+.users-table th {
+  font-weight: 600;
+  text-align: center;
+}
+
+.users-table td {
+  font-weight: 500;
+  color: #6a1b9a;
+  text-align: center;
+}
+
+.users-table td:nth-child(2),
+.users-table td:nth-child(3) {
+  text-align: left;
+}
+
+.users-table td:first-child {
+  color: #8e24aa;
+  font-weight: 600;
+}
+
+/* ===========================
+   ESTADO (BADGES)
+=========================== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 85px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.status-badge.active {
+  background: #c8e6c9;
+  color: #256029;
+}
+
+.status-badge.inactive {
+  background: #ffe0b2;
+  color: #a65e00;
+}
+
+/* ===========================
+   BOTONES DE ACCIÓN
+=========================== */
+.btn {
+  font-family: "Poppins", sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+/* Botón desactivar */
+.btn-outline-danger {
+  background-color: #fff0f3;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+}
+
+.btn-outline-danger:hover {
+  background-color: #f8bbd0;
+  color: #fff;
+  border-color: #c62828;
+  box-shadow: 0 3px 8px rgba(183, 28, 28, 0.3);
+}
+
+/* Botón activar */
+.btn-outline-success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #81c784;
+}
+
+.btn-outline-success:hover {
+  background-color: #66bb6a;
+  color: #fff;
+  border-color: #2e7d32;
+  box-shadow: 0 3px 8px rgba(46, 125, 50, 0.3);
+}
+
+/* ===========================
+   TARJETAS DE RESUMEN
+=========================== */
+.inventory-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background: linear-gradient(145deg, #f9f4fb, #f1e4f8);
+  border-radius: 15px;
+  padding: 20px 25px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(140, 80, 180, 0.15);
+  transition: all 0.3s ease;
+  width: 220px;
+}
+
+.summary-card h4 {
+  font-weight: 700;
+  color: #5e1784;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.summary-card p {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #4a148c;
+  margin: 0;
+}
+
+/* === Tarjeta de acción “Crear Categoría” === */
+.create-product-card {
+  background: linear-gradient(145deg, #f3e5f5, #ede7f6);
+  box-shadow: 0 4px 12px rgba(150, 100, 200, 0.15);
+  transition: all 0.3s ease;
+}
+
+.create-product-card:hover {
+  background: linear-gradient(145deg, #e1bee7, #ce93d8);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(150, 100, 200, 0.25);
+}
+
+/* === Botón crear categoría === */
+.btn-create-product {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(106, 27, 154, 0.25);
+}
+
+.btn-create-product:hover {
+  background: linear-gradient(90deg, #8e24aa, #ab47bc);
+  box-shadow: 0 6px 15px rgba(106, 27, 154, 0.35);
+  transform: scale(1.05);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  .users-table {
+    width: 95%;
+    font-size: 0.9rem;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 8px;
+  }
+
+  .admin-container h1 {
+    font-size: 1.6rem;
+  }
+
+  .summary-card {
+    width: 90%;
+  }
+}
+/* === Botones de acción === */
+.btn-action {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Desactivar */
+.btn-deactivate {
+  background: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #e57373;
+}
+
+.btn-deactivate:hover {
+  background: #ffcdd2;
+  transform: scale(1.05);
+}
+
+/* Activar */
+.btn-activate {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #81c784;
+}
+
+.btn-activate:hover {
+  background: #c8e6c9;
+  transform: scale(1.05);
+}
+
+/* === Texto de carga o sin datos === */
+.loading-text,
+.no-data {
+  color: #6a1b9a;
+  font-weight: 600;
+  text-align: center;
+  padding: 20px;
+}
+/* ===========================
+   FILTRO DE ESTADO
+=========================== */
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin: 20px auto 35px auto;
+  width: 85%;
+}
+
+.filter-container label {
+  font-weight: 600;
+  color: #5e1784;
+  font-size: 0.95rem;
+}
+
+.filter-select {
+  background: #f9f4fb;
+  border: 1px solid #ce93d8;
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: #4a148c;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(140, 80, 180, 0.1);
+}
+
+.filter-select:hover {
+  background: #f3e5f5;
+  box-shadow: 0 3px 8px rgba(140, 80, 180, 0.2);
+}
+
+.filter-select:focus {
+  border-color: #8e24aa;
+  box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.2);
+}
+.titulo-inventario {
+  font-size: 2.0rem; /* más grande y destacado */
+  font-weight: 700;
+  color: #4a148c;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase; /* da sensación de título principal */
+  background: linear-gradient(90deg, #ede7f6 0%, #7f4588 100%);
+  padding: 20px 40px;
+  border-radius: 12px;
+  width: fit-content; /* se ajusta al texto */
+  margin: 30px auto;
+  box-shadow: 0 4px 12px rgba(74, 20, 140, 0.15);
+  transition: all 0.3s ease;
+}
+
+.titulo-inventario:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(74, 20, 140, 0.25);
+  background: linear-gradient(90deg, #ede7f6 0%, #d1c4e9 100%);
+}

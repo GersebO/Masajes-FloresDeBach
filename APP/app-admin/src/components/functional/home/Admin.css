@@ -1,0 +1,265 @@
+/* ==============================
+   ESTRUCTURA PRINCIPAL
+============================== */
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(180deg, #fefcff 0%, #f6ecff 100%);
+  min-height: 100vh;
+  padding: 80px 20px 100px;
+  position: relative;
+}
+
+/* Imagen decorativa opcional (sutil flor al fondo) */
+.admin-dashboard::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  width: 300px;
+  height: 300px;
+  background: url("/img/flower-bg.svg") no-repeat center/contain;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* ==============================
+   TÍTULO PRINCIPAL
+============================== */
+.admin-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #fff;
+  background: linear-gradient(10deg, #884bc9 0%, #b14eff 100%);
+  padding: 22px 60px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(120, 70, 200, 0.25);
+  margin-bottom: 25px;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  animation: fadeSlideIn 0.9s ease forwards;
+  transform: translateY(0);
+}
+
+.admin-title::before,
+.admin-title::after {
+  content: "🌸";
+  font-size: 1.9rem;
+  margin: 0 8px;
+}
+
+/* ==============================
+   SUBTÍTULO
+============================== */
+.admin-subtitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #5a189a;
+  background: linear-gradient(90deg, #f7eaff 0%, #efe2ff 100%);
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(150, 100, 220, 0.15);
+  margin-top: 5px;
+  margin-bottom: 25px;
+  letter-spacing: 0.4px;
+  transition: all 0.3s ease;
+}
+
+.admin-subtitle:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #ecd9ff, #e1ccff);
+}
+
+/* ==============================
+   MENSAJE DE BIENVENIDA
+============================== */
+.admin-welcome {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #6a1b9a;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 12px 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(160, 120, 220, 0.15);
+  max-width: 750px;
+}
+
+/* ==============================
+   TARJETAS
+============================== */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 50px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 35px 45px;
+  box-shadow: 0 8px 25px rgba(150, 80, 180, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 220px;
+  border: 1px solid #f0d9ff;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(150, 80, 180, 0.25);
+}
+
+.card h2 {
+  font-size: 1.2rem;
+  color: #6a1b9a;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4a148c;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.card:hover p {
+  color: #7b1fa2;
+}
+
+/* ==============================
+   SECCIÓN DE RESUMEN
+============================== */
+.summary-section {
+  margin-top: 60px;
+  background: linear-gradient(145deg, #f9f3ff, #ffffff);
+  padding: 25px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(150, 100, 220, 0.1);
+  max-width: 700px;
+  text-align: left;
+  color: #4a148c;
+}
+
+.summary-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #5a189a;
+}
+
+.summary-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.summary-section li {
+  margin: 10px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ==============================
+   ANIMACIÓN
+============================== */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 60px 10px;
+  }
+
+  .admin-title {
+    font-size: 2.2rem;
+    padding: 18px 40px;
+  }
+
+  .admin-subtitle {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .summary-section {
+    text-align: center;
+  }
+
+  .card {
+    width: 80%;
+  }
+}
+.titulo-inventario {
+  font-size: 2.0rem; /* más grande y destacado */
+  font-weight: 700;
+  color: #4a148c;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase; /* da sensación de título principal */
+  background: linear-gradient(90deg, #ede7f6 0%, #7f4588 100%);
+  padding: 20px 40px;
+  border-radius: 12px;
+  width: fit-content; /* se ajusta al texto */
+  margin: 30px auto;
+  box-shadow: 0 4px 12px rgba(74, 20, 140, 0.15);
+  transition: all 0.3s ease;
+}
+
+.titulo-inventario:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(74, 20, 140, 0.25);
+  background: linear-gradient(90deg, #ede7f6 0%, #d1c4e9 100%);
+}
+
+.summary-card {
+  background: linear-gradient(135deg, #f3e5f5, #ede7f6);
+  border-radius: 12px;
+  padding: 15px 25px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(156, 39, 176, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-3px);
+}
+
+.summary-card h4 {
+  color: #6a1b9a;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.summary-card p {
+  color: #4a148c;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 5px;
+}

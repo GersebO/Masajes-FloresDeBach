@@ -1,0 +1,1 @@
+Para que el proyecto funcione correctamente el primero que se debe ejecutar es el app.admin

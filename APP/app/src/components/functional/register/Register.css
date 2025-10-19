@@ -1,0 +1,138 @@
+/* ======== CONTENEDOR GLOBAL ======== */
+body {
+  background: linear-gradient(145deg, #f4e9ff 0%, #ffffff 100%);
+  font-family: "Poppins", sans-serif;
+  color: #3c2a4d;
+}
+
+/* ======== FORMULARIO ======== */
+.container {
+  max-width: 1000px !important;
+  margin-top: 90px !important;
+  margin-bottom: 60px !important;
+  padding: 0 1rem !important;
+}
+
+/* Tarjeta principal */
+.formulario-fondo {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(248, 240, 255, 0.9)) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(190, 150, 255, 0.4) !important;
+  border-radius: 22px !important;
+  padding: 2.5rem 3rem !important;
+  box-shadow: 0 10px 25px rgba(150, 130, 255, 0.25) !important;
+  transition: all 0.35s ease !important;
+}
+
+.formulario-fondo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(140, 120, 255, 0.35);
+}
+
+/* ======== TÍTULOS ======== */
+h1, h2 {
+  font-family: "Playfair Display", serif !important;
+  font-weight: 700 !important;
+  color: #4b2e83 !important;
+  text-align: center !important;
+}
+
+h1 {
+  font-size: 2.2rem !important;
+  margin-bottom: 1.6rem !important;
+}
+
+h2 {
+  font-size: 1.3rem !important;
+  margin: 1.8rem 0 1rem !important;
+}
+
+/* ======== INPUTS ======== */
+.form-control {
+  border: 1px solid #cbb8ff !important;
+  border-radius: 10px !important;
+  background: #faf8ff !important;
+  padding: 0.7rem 0.9rem !important;
+  transition: all 0.25s ease !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.form-control:focus {
+  border-color: #b38aff !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 0 4px rgba(185, 155, 255, 0.25) !important;
+  outline: none !important;
+}
+
+/* ======== VALIDACIÓN ======== */
+.is-valid {
+  border-color: #64d96d !important;
+  box-shadow: 0 0 6px rgba(80, 200, 100, 0.3) !important;
+}
+
+.is-invalid {
+  border-color: #f77a7a !important;
+  box-shadow: 0 0 6px rgba(255, 80, 80, 0.2) !important;
+}
+
+/* ======== BOTONES ======== */
+.btn-primary,
+.btn-secondary {
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(130, 100, 255, 0.15) !important;
+}
+
+/* Botón principal */
+.btn-primary {
+  background: linear-gradient(90deg, #b38aff 0%, #8754ff 100%) !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #a67cff 0%, #7a4aff 100%) !important;
+  box-shadow: 0 6px 16px rgba(130, 90, 255, 0.3) !important;
+}
+
+/* Botón secundario */
+.btn-secondary {
+  background: rgba(230, 205, 255, 0.9) !important;
+  color: #4b2e83 !important;
+  border: 1px solid rgba(180, 150, 255, 0.3) !important;
+}
+
+.btn-secondary:hover {
+  background: rgba(210, 180, 255, 1) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(160, 130, 255, 0.25) !important;
+}
+
+/* ======== EXTRAS ======== */
+hr {
+  border-color: rgba(200, 150, 255, 0.3) !important;
+  margin: 2rem 0 !important;
+}
+
+.invalid-feedback {
+  color: #c43d3d !important;
+  font-size: 0.9rem !important;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+  .formulario-fondo {
+    padding: 2rem 1.5rem !important;
+  }
+
+  h1 {
+    font-size: 1.7rem !important;
+  }
+
+  h2 {
+    font-size: 1.1rem !important;
+  }
+}

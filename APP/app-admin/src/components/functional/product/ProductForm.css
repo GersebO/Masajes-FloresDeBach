@@ -1,0 +1,85 @@
+.product-form {
+  width: 60%;
+  margin: 40px auto;
+  padding: 25px 35px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #faf5ff, #f3e5f5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins", sans-serif;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #6a1b9a;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #7b1fa2;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  border: 1px solid #d1c4e9;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: #4a148c;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #9c27b0;
+  box-shadow: 0 0 5px rgba(156, 39, 176, 0.3);
+}
+
+.form-btn {
+  width: 100%;
+  background-color: #ba68c8;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-btn:hover {
+  background-color: #9c27b0;
+}
+.titulo-inventario {
+  font-size: 2.0rem; /* más grande y destacado */
+  font-weight: 700;
+  color: #4a148c;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase; /* da sensación de título principal */
+  background: linear-gradient(90deg, #ede7f6 0%, #7f4588 100%);
+  padding: 20px 40px;
+  border-radius: 12px;
+  width: fit-content; /* se ajusta al texto */
+  margin: 30px auto;
+  box-shadow: 0 4px 12px rgba(74, 20, 140, 0.15);
+  transition: all 0.3s ease;
+}
+
+.titulo-inventario:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(74, 20, 140, 0.25);
+  background: linear-gradient(90deg, #ede7f6 0%, #d1c4e9 100%);
+}

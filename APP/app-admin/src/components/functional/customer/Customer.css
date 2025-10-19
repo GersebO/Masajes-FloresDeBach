@@ -1,0 +1,191 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+.admin-container {
+  padding: 40px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #4a148c;
+  background: linear-gradient(180deg, #fefcff 0%, #f6ecff 100%);
+  min-height: calc(100vh - 120px);
+}
+
+/* ===========================
+   TÍTULO PRINCIPAL
+=========================== */
+.admin-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6a1b9a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.admin-container h1::before {
+  font-size: 1.8rem;
+}
+
+/* ===========================
+   TABLA DE USUARIOS
+=========================== */
+.users-table {
+  width: 85%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(186, 104, 200, 0.3);
+}
+
+.users-table thead {
+  background: linear-gradient(90deg, #ab47bc, #ba68c8);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.users-table th,
+.users-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0d9ff;
+}
+
+.users-table tr:nth-child(even) {
+  background: #faf5ff;
+}
+
+.users-table tr:hover {
+  background: #f3e5f5;
+  transition: 0.3s ease;
+}
+
+/* ===========================
+   TEXTO Y CELDAS
+=========================== */
+.users-table th {
+  font-weight: 600;
+}
+
+.users-table td {
+  font-weight: 500;
+  color: #6a1b9a;
+}
+
+.users-table td:first-child {
+  color: #8e24aa;
+  font-weight: 600;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  .users-table {
+    width: 95%;
+    font-size: 0.9rem;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 8px;
+  }
+}
+/* === Contenedor que hace la tabla responsive === */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+  -webkit-overflow-scrolling: touch; /* Scroll suave en móviles */
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+/* === Tabla base === */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Evita que se rompa si hay pocas columnas */
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  background-color: white;
+}
+
+/* Cabecera */
+.product-table th {
+  background-color: #ede7f6;
+  color: #4a148c;
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  white-space: nowrap; /* Evita que el texto se parta */
+}
+
+/* Celdas */
+.product-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+  vertical-align: middle;
+}
+
+/* Imágenes */
+.product-table img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* === Responsividad adicional === */
+@media (max-width: 768px) {
+  .product-table {
+    font-size: 0.85rem;
+  }
+
+  .product-table th,
+  .product-table td {
+    padding: 8px;
+  }
+
+  .product-table img {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* === Scroll bar sutil === */
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+.table-container::-webkit-scrollbar-thumb {
+  background: #bca9d9;
+  border-radius: 10px;
+}
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #9c7cc0;
+}
+.titulo-inventario {
+  font-size: 2.0rem; /* más grande y destacado */
+  font-weight: 700;
+  color: #4a148c;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase; /* da sensación de título principal */
+  background: linear-gradient(90deg, #ede7f6 0%, #7f4588 100%);
+  padding: 20px 40px;
+  border-radius: 12px;
+  width: fit-content; /* se ajusta al texto */
+  margin: 30px auto;
+  box-shadow: 0 4px 12px rgba(74, 20, 140, 0.15);
+  transition: all 0.3s ease;
+}
+
+.titulo-inventario:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(74, 20, 140, 0.25);
+  background: linear-gradient(90deg, #ede7f6 0%, #d1c4e9 100%);
+}

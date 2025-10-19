@@ -1,0 +1,127 @@
+/* =========================================
+   🌸 ESTILOS GLOBALES - MARAFLORESDEBACH ADMIN
+   ========================================= */
+
+/* ===== Variables de color (base de identidad) ===== */
+:root {
+  --primary: #6f42c1;
+  --primary-dark: #4a148c;
+  --accent: #a58fd0;
+  --accent-light: #ede7f6;
+  --text-main: #2b2b2b;
+  --bg-light: #faf8ff;
+  --bg-white: #ffffff;
+  --shadow: 0 4px 12px rgba(90, 70, 150, 0.1);
+  --radius: 12px;
+}
+
+/* ===== Reset y fuente base ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== Títulos globales ===== */
+h1, h2, h3, h4 {
+  font-family: "Playfair Display", serif;
+  color: var(--primary-dark);
+  letter-spacing: 0.5px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2, h3 {
+  font-weight: 600;
+}
+
+/* ===== Enlaces ===== */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* ===== Botones globales ===== */
+.btn-primary {
+  background-color: var(--primary);
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* ===== Estructura principal (sidebar + contenido) ===== */
+#root {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+}
+
+/* Área de contenido principal */
+.main-content {
+  flex: 1;
+  margin-left: 230px; /* ancho del sidebar */
+  padding: 2rem;
+  transition: margin-left 0.3s ease;
+}
+
+/* ===== Scrollbar elegante ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3e6ff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* ===== Responsivo general ===== */
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  #root {
+    flex-direction: column;
+  }
+}

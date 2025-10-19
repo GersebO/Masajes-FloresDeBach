@@ -1,0 +1,152 @@
+/* ==============================
+   🌸 NAVBAR MODERNO - CLIENTE
+============================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(250, 243, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(106, 27, 154, 0.1);
+  padding: 0.7rem 1.2rem;
+  z-index: 1050;
+  font-family: "Poppins", sans-serif;
+}
+
+/* --- Contenedor --- */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+/* --- Logo --- */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.navbar-brand img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.navbar-brand span {
+  font-family: "Playfair Display", serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #6a1b9a;
+}
+
+/* --- Enlaces --- */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: #6a1b9a;
+  font-weight: 500;
+  padding: 8px 14px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  background: linear-gradient(90deg, #e1bee7, #f3e5f5);
+  color: #4a148c;
+  transform: translateY(-2px);
+}
+
+/* --- Carrito --- */
+.cart-link {
+  position: relative;
+  background: #f8f4ff;
+  border: 1px solid #e1bee7;
+  box-shadow: 0 2px 6px rgba(156, 39, 176, 0.1);
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -6px;
+  background: #d500f9;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Botón hamburguesa --- */
+.menu-toggle {
+  display: none;
+  background: #6a1b9a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.menu-toggle:hover {
+  background: #8e24aa;
+}
+
+/* --- MODO MÓVIL --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: #fdf9ff;
+    border-top: 1px solid #e1bee7;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 15px 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .navbar-links.open {
+    max-height: 400px;
+    opacity: 1;
+  }
+
+  .nav-link {
+    width: 80%;
+    justify-content: center;
+  }
+}
+
+/* --- Espaciado debajo del navbar --- */
+.main-content {
+  padding-top: 80px;
+}
