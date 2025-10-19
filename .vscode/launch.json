@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<Product-OrderService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.Product.OrderService.Application",
+            "projectName": "Product-OrderService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-UserManagementServiceApplication<UserManagementService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.UserManagementService.UserManagementServiceApplication",
+            "projectName": "UserManagementService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

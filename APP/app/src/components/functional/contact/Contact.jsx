@@ -43,7 +43,7 @@ export default function Contact() {
 
   return (
     <div className="container mt-4">
-      <section className="hero text-center" aria-labelledby="nosTitle">
+      <section className="product-hero-box" aria-labelledby="nosTitle">
         <h1 id="nosTitle" className="hero-title">
           Contacto
         </h1>

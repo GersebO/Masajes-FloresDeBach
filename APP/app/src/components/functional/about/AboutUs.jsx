@@ -5,7 +5,7 @@ export default function AboutUs() {
   return (
     <div className="container about-page my-5">
       {/* HERO */}
-      <section className="hero text-center" aria-labelledby="nosTitle">
+      <section className="product-hero-box " aria-labelledby="nosTitle">
         <h1 id="nosTitle" className="hero-title">
           Quiénes somos
         </h1>
@@ -73,7 +73,7 @@ export default function AboutUs() {
       {/* BOTONES FINALES */}
       <div className="text-center my-5">
         <div className="d-flex justify-content-center gap-3 flex-wrap">
-          <a href="/productos" className="category-btn" role="button">
+          <a href="/productos" className="btn-cta" role="button">
             Ver servicios
           </a>
           <a href="/contacto" className="btn-cta" role="button">

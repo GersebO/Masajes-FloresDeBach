@@ -1,5 +1,6 @@
 package com.UserManagementService.controller;
 
+import com.UserManagementService.dto.request.LoginRequestDTO;
 import com.UserManagementService.dto.request.UserRequestDTO;
 import com.UserManagementService.dto.response.UserResponseDTO;
 import com.UserManagementService.service.UserService;
@@ -15,7 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:5175"
+})
 public class UserController {
 
     private final UserService userService;
@@ -106,10 +111,14 @@ public class UserController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<UserResponseDTO> authenticateUser(
-            @RequestParam String email,
-            @RequestParam String password) {
-        return ResponseEntity.ok(userService.authenticateUser(email, password));
-    }
+            @Valid @RequestBody LoginRequestDTO request) {
+
+        UserResponseDTO user = userService.authenticateUser(
+                request.getEmail(),
+                request.getPassword()
+        );
+        return ResponseEntity.ok(user);
+}
 
     @GetMapping("/exists/{email}")
     public ResponseEntity<Boolean> existsByEmail(@PathVariable String email) {

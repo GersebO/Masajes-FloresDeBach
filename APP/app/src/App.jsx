@@ -7,6 +7,8 @@ import ContactPage from "./app/contact/pages.jsx";
 import LoginPages from "./app/login/pages.jsx";
 import RegisterPages from "./app/register/pages.jsx";
 import BlogPages from "./app/blog/pages.jsx";
+import ProductPage from "./app/product/pages.jsx";
+import HomePages from "./app/home/pages.jsx";
 
 function App() {
   return (
@@ -18,10 +20,7 @@ function App() {
           <Route
             path="/"
             element={
-              <main className="container text-center mt-5">
-                <h1>🌸 Maraflores de Bach 🌸</h1>
-                <p>Bienvenido a nuestra tienda de flores de Bach.</p>
-              </main>
+              <HomePages />
             }
           />
           <Route path="/AboutUs" element={<AboutPage />} />
@@ -29,6 +28,7 @@ function App() {
           <Route path="/login" element={<LoginPages />} />
           <Route path="/register" element={<RegisterPages />} />
           <Route path="/blogs" element={<BlogPages />} />
+          <Route path="/product" element={<ProductPage />} />
         </Routes>
 
         <FooterPages />

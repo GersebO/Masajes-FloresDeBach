@@ -15,7 +15,7 @@ export function Product() {
     );
   }
 
-  // === Normalizar datos del backend ===
+  // === Normalizar datos del backend (añadimos stock) ===
   const productosNormalizados = productos.map((p) => ({
     id: p.id,
     nombre: p.name,
@@ -23,6 +23,7 @@ export function Product() {
     precio: p.price,
     activo: p.isActive === true || p.isActive === "true",
     imageUrl: p.imageUrl,
+    stock: p.stock ?? 0, // aseguramos que siempre tenga valor numérico
   }));
 
   // === Filtro dinámico ===
@@ -74,6 +75,14 @@ export function Product() {
         alert("Error al activar el producto ❌");
       }
     }
+  };
+
+  // === Determinar estado visual del stock ===
+  const getStockStatus = (stock) => {
+    if (stock === 0) return <span className="stock-badge sin-stock">Sin stock</span>;
+    if (stock <= 5)
+      return <span className="stock-badge bajo-stock">Pocas unidades ({stock})</span>;
+    return <span className="stock-badge ok-stock">En stock ({stock})</span>;
   };
 
   return (
@@ -128,6 +137,7 @@ export function Product() {
                   <th>Nombre</th>
                   <th>Descripción</th>
                   <th>Precio</th>
+                  <th>Stock</th>
                   <th>Estado</th>
                   <th>Acción</th>
                 </tr>
@@ -157,6 +167,7 @@ export function Product() {
                       <td>{prod.nombre}</td>
                       <td>{prod.descripcion}</td>
                       <td>${prod.precio.toLocaleString()}</td>
+                      <td>{getStockStatus(prod.stock)}</td>
                       <td>
                         {prod.activo ? (
                           <span className="badge badge-success">Activo</span>
@@ -185,7 +196,7 @@ export function Product() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="alert text-center">
+                    <td colSpan="8" className="alert text-center">
                       No hay productos que coincidan con el filtro seleccionado
                     </td>
                   </tr>
