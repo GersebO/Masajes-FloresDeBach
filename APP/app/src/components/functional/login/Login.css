@@ -1,149 +1,175 @@
 /* 🌸 ======== CONTENEDOR PRINCIPAL ======== */
-.login-container {
-  min-height: 100vh;
+.login-wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  background: transparent;
+
+}
+
+
+
+/* ======== PANEL IZQUIERDO ======== */
+.login-left {
+  flex: 1.1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #f3e5ff 0%, #e9d7ff 100%);
+  padding: 5rem 3rem;
+  box-shadow: inset -5px 0 10px rgba(90, 40, 150, 0.08);
+}
+
+.login-left-content {
+  max-width: 420px;
+}
+
+.login-left h1 {
+  font-family: "Playfair Display", serif;
+  color: #4b2e83;
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+.login-left p {
+  font-size: 1.1rem;
+  color: #5c239d;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+/* ======== PANEL DERECHO ======== */
+.login-right {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(145deg, #f4e9ff 0%, #ffffff 100%);
-  backdrop-filter: blur(12px);
-  padding: 2rem;
+  background: linear-gradient(135deg, #f5eaff 0%, #f1e4ff 100%);
+  padding: 5rem 2.5rem;
 }
 
-/* ======== CARD ======== */
+/* ======== CARD (Formulario principal) ======== */
 .login-card {
   width: 100%;
-  max-width: 420px;
-  background: linear-gradient(145deg, rgba(247, 240, 255, 0.95), rgba(255, 255, 255, 0.85));
-  border-radius: 20px;
-  padding: 2.8rem 2rem;
-  border: 1px solid rgba(180, 150, 255, 0.3);
-  box-shadow: 0 10px 25px rgba(140, 110, 255, 0.15), 0 4px 6px rgba(140, 110, 255, 0.05);
+  max-width: 640px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  padding: 4rem 3.5rem;
+  border: 1px solid rgba(180, 150, 255, 0.25);
+  box-shadow: 0 10px 30px rgba(90, 40, 150, 0.2);
   transition: all 0.4s ease;
+  backdrop-filter: blur(12px);
+  min-height: 450px;
 }
 
 .login-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 15px 32px rgba(130, 90, 255, 0.25);
+  box-shadow: 0 15px 40px rgba(90, 40, 150, 0.25);
 }
 
 /* ======== TÍTULO ======== */
 .login-card h2 {
   color: #4b2e83;
-  font-weight: 700;
+  font-weight: 800;
   font-family: "Playfair Display", serif;
-  font-size: 1.9rem;
+  font-size: 2.4rem;
   text-align: center;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  margin-bottom: 2.2rem;
 }
 
 /* ======== FORMULARIO ======== */
 .form-label {
   color: #4b2e83;
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 0.4rem;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
   display: block;
 }
 
 .form-control {
-  border-radius: 10px;
-  border: 1px solid #d6c4ff;
-  background: #f8f4ff;
-  padding: 0.7rem 0.8rem;
-  font-size: 0.95rem;
+  border-radius: 12px;
+  border: 2px solid #d6c4ff;
+  background: rgba(250, 247, 255, 0.85);
+  padding: 1.1rem 1.3rem;
+  font-size: 1.05rem;
   transition: all 0.25s ease;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #b38aff;
+  border-color: #8754ff;
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(185, 155, 255, 0.25);
+  box-shadow: 0 0 0 5px rgba(135, 84, 255, 0.25);
 }
 
-/* ======== BOTÓN (en caja destacada) ======== */
-.btn-box {
-  background: rgba(225, 210, 255, 0.4);
-  border-radius: 12px;
-  padding: 1rem;
-  margin-top: 1.4rem;
-  box-shadow: inset 0 2px 6px rgba(155, 125, 255, 0.1);
-}
-
+/* ======== BOTÓN ======== */
 .btn-primary {
-  display: block;
-  width: 100%;
   background: linear-gradient(90deg, #b38aff 0%, #8754ff 100%);
   border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  padding: 0.85rem;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  padding: 1.2rem;
+  font-size: 1.1rem;
   color: #fff;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 10px rgba(140, 110, 255, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(140, 110, 255, 0.4);
 }
 
-.btn-primary:hover:not(:disabled) {
+.btn-primary:hover {
   transform: translateY(-3px);
   background: linear-gradient(90deg, #a67cff 0%, #7a4aff 100%);
-  box-shadow: 0 6px 16px rgba(130, 90, 255, 0.35);
+  box-shadow: 0 10px 25px rgba(130, 90, 255, 0.45);
 }
 
 .btn-primary:disabled {
-  opacity: 0.6;
+  opacity: 0.65;
   cursor: not-allowed;
 }
 
-/* ======== ALERTA ======== */
-.alert-danger {
-  background: #ffe3ef;
-  color: #b30059;
-  border: none;
-  border-radius: 10px;
-  padding: 0.8rem;
-  text-align: center;
-  font-weight: 500;
-  box-shadow: 0 3px 8px rgba(255, 100, 150, 0.1);
-  margin-bottom: 1rem;
-}
-
-/* ======== TEXTO Y ENLACE ======== */
+/* ======== FOOTER ======== */
 .login-footer {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   text-align: center;
   color: #5a4a7f;
+  margin-top: 2rem;
 }
 
-.login-card a {
-  color: #8754ff;
-  font-weight: 600;
+.login-footer a {
+  color: #7a4aff;
+  font-weight: 700;
   text-decoration: none;
-  transition: color 0.2s ease;
 }
 
-.login-card a:hover {
+.login-footer a:hover {
   color: #4b2e83;
   text-decoration: underline;
 }
 
 /* ======== RESPONSIVE ======== */
-@media (max-width: 576px) {
+@media (max-width: 1024px) {
+  .login-wrapper {
+    flex-direction: column;
+    padding-top: 80px;
+  }
+
+  .login-left {
+    display: none;
+  }
+
+  .login-right {
+    padding: 3rem 1.5rem;
+  }
+
   .login-card {
-    padding: 2rem 1.5rem;
+    max-width: 90%;
+    padding: 3rem 2rem;
   }
 
   .login-card h2 {
-    font-size: 1.6rem;
-  }
-
-  .btn-primary {
-    font-size: 0.95rem;
+    font-size: 2rem;
   }
 }

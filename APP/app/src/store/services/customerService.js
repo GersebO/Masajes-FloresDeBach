@@ -46,23 +46,30 @@ const customerService = {
   // Autenticar cliente (login)
   authenticate: async (email, password) => {
     try {
-      const response = await fetch(
-        `${API_URL}/authenticate?email=${email}&password=${password}`,
-        {
-          method: 'POST',
-        }
-      );
+      const response = await fetch(`${API_URL}/authenticate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       if (!response.ok) {
         throw new Error('Credenciales inválidas');
       }
 
-      return await response.json();
+      const data = await response.json();
+
+      // Guarda el usuario autenticado en el localStorage
+      localStorage.setItem('customer', JSON.stringify(data));
+
+      return data;
     } catch (error) {
       console.error('Error en authenticate:', error);
       throw error;
     }
   },
+
 
   // Obtener todos los clientes
   getAllCustomers: async () => {

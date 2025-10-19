@@ -12,22 +12,18 @@ body,
 #root {
   width: 100%;
   height: 100%;
-  background-color: #fff;
   font-family: "Poppins", sans-serif;
   color: #2a1b3d;
+  background: linear-gradient(180deg, #fefcff 0%, #f6ecff 100%); 
 }
 
-/* Elimina las restricciones que achican el contenido */
+
+/* Elimina límites */
 #root {
   max-width: 100%;
   margin: 0;
   padding: 0;
   text-align: left;
-}
-
-/* Ajuste para que el contenido no quede detrás del navbar */
-main {
-  margin-top: 100px;
 }
 
 /* Links globales */
@@ -52,9 +48,4 @@ h1 {
 p {
   text-align: center;
   color: #4a4a4a;
-}
-
-/* Body principal */
-body {
-  background-color: #faf7ff;
 }

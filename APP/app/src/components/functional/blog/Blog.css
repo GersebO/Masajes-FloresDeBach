@@ -1,23 +1,32 @@
 /* ======== HERO SECTION ======== */
 .hero {
-  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
-  border-radius: 18px;
-  padding: 3rem 1rem;
-  margin-bottom: 3rem;
-  box-shadow: 0 3px 10px rgba(177, 144, 255, 0.08);
+  background: linear-gradient(180deg, #fefcff 0%, #f5e9ff 100%);
+  border-radius: 160px;
+  margin: 1.5rem auto;
+  max-width: 900px; /* 🔥 evita que se expanda demasiado */
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(150, 100, 200, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 100px;
+}
+
+.hero:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(140, 90, 200, 0.18);
 }
 
 .hero-title {
   font-family: "Playfair Display", serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #4b2e83;
-  margin-bottom: 0.5rem;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #5e3589;
 }
 
 .hero-subtitle {
-  color: #5f4b8b;
+  color: #6a1b9a;
   font-size: 1.05rem;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
 /* ======== BLOG CARDS ======== */

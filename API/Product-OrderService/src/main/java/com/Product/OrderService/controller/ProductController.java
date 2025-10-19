@@ -25,7 +25,10 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*") // Permitir peticiones desde el frontend
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "http://localhost:5174"
+})
 public class ProductController {
 
     private final ProductService productService;

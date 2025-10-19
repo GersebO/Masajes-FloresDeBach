@@ -58,14 +58,14 @@ export default function Navbar() {
             <Link to="/customer" className="nav-btn">
               👥 Clientes
             </Link>
-          </li>
+          </li> 
           <li>
             <Link to="/customer/create" className="nav-btn">
               🧩 Crear Cliente
             </Link>
           </li>
           <li className="return-link">
-            <a href="http://localhost:5173" className="nav-btn">
+            <a href="http://localhost:5174" className="nav-btn">
               🔙 Volver a la tienda
             </a>
           </li>

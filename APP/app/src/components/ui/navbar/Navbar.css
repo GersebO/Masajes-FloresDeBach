@@ -1,5 +1,5 @@
 /* ==============================
-   🌸 NAVBAR MODERNO - CLIENTE
+   🌿 NAVBAR ELEGANTE - MARAFLORES DE BACH (VERSIÓN FINAL)
 ============================== */
 
 .navbar {
@@ -7,20 +7,35 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(250, 243, 255, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(106, 27, 154, 0.1);
-  padding: 0.7rem 1.2rem;
+  /* 💜 Fondo suave, casi sólido con glass effect */
+  background: rgba(254, 250, 255, 0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(106, 27, 154, 0.08);
+  padding: 1.1rem 2rem;
   z-index: 1050;
   font-family: "Poppins", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  box-shadow: 0 2px 10px rgba(160, 100, 200, 0.08);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* --- Contenedor --- */
+/* --- Fondo uniforme detrás del efecto glass --- */
+.navbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #fefcff 0%, #f6ecff 100%);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+/* --- Contenedor principal --- */
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1150px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
@@ -28,70 +43,82 @@
 .navbar-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   text-decoration: none;
 }
 
 .navbar-brand img {
-  width: 42px;
-  height: 42px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 2px 8px rgba(106, 27, 154, 0.2);
 }
 
 .navbar-brand span {
   font-family: "Playfair Display", serif;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  color: #6a1b9a;
+  color: #5e3589;
+  letter-spacing: 0.5px;
 }
 
 /* --- Enlaces --- */
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .nav-link {
-  color: #6a1b9a;
+  color: #5e3589;
   font-weight: 500;
-  padding: 8px 14px;
+  padding: 10px 18px;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid transparent;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
 }
 
 .nav-link:hover {
-  background: linear-gradient(90deg, #e1bee7, #f3e5f5);
+  background: linear-gradient(90deg, #ede7f6, #f3e5f5);
   color: #4a148c;
+  border-color: rgba(155, 100, 200, 0.2);
   transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background: linear-gradient(90deg, #f0e2ff, #e8d6fa);
+  color: #4a148c;
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(160, 100, 200, 0.15);
 }
 
 /* --- Carrito --- */
 .cart-link {
   position: relative;
-  background: #f8f4ff;
-  border: 1px solid #e1bee7;
-  box-shadow: 0 2px 6px rgba(156, 39, 176, 0.1);
+  background: #fdf8ff;
+  border: 1px solid rgba(160, 100, 200, 0.2);
+  box-shadow: 0 2px 6px rgba(155, 100, 200, 0.08);
+  padding: 10px 16px;
+  border-radius: 10px;
 }
 
 .cart-count {
   position: absolute;
   top: -5px;
-  right: -6px;
-  background: #d500f9;
+  right: -7px;
+  background: #b388eb;
   color: white;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: bold;
   border-radius: 50%;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,17 +127,18 @@
 /* --- Botón hamburguesa --- */
 .menu-toggle {
   display: none;
-  background: #6a1b9a;
+  background: #a56de2;
   color: white;
   border: none;
   border-radius: 6px;
-  font-size: 1.5rem;
-  padding: 6px 10px;
+  font-size: 1.7rem;
+  padding: 8px 12px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .menu-toggle:hover {
-  background: #8e24aa;
+  background: #b47cdf;
 }
 
 /* --- MODO MÓVIL --- */
@@ -121,14 +149,14 @@
 
   .navbar-links {
     position: absolute;
-    top: 70px;
+    top: 80px;
     left: 0;
     right: 0;
     flex-direction: column;
-    background: #fdf9ff;
-    border-top: 1px solid #e1bee7;
+    background: #faf5ff;
+    border-top: 1px solid rgba(160, 100, 200, 0.1);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    padding: 15px 0;
+    padding: 20px 0;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -143,10 +171,11 @@
   .nav-link {
     width: 80%;
     justify-content: center;
+    font-size: 1.1rem;
   }
 }
 
 /* --- Espaciado debajo del navbar --- */
 .main-content {
-  padding-top: 80px;
+  padding-top: 100px;
 }
