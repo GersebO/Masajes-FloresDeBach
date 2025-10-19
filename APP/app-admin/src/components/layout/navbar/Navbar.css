@@ -1,0 +1,161 @@
+/* === SIDEBAR PRINCIPAL === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 230px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(247, 240, 255, 0.95));
+  backdrop-filter: blur(14px);
+  color: #3c2a4d;
+  border-right: 1px solid rgba(190, 150, 255, 0.25);
+  box-shadow: 4px 0 15px rgba(150, 130, 255, 0.1);
+  padding: 25px 15px;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.35s ease;
+  z-index: 1000;
+}
+
+/* Hover levanta un poco el panel */
+.sidebar:hover {
+  box-shadow: 6px 0 20px rgba(150, 130, 255, 0.25);
+}
+
+/* === TÍTULO DEL PANEL === */
+.sidebar-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4b2e83;
+  text-align: center;
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid rgba(190, 150, 255, 0.3);
+  padding-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* === LISTA DE MENÚ === */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  margin-bottom: 14px;
+}
+
+/* === BOTONES DEL MENÚ === */
+.nav-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(190, 150, 255, 0.25);
+  border-radius: 10px;
+  color: #4b2e83;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(160, 130, 255, 0.1);
+  transition: all 0.25s ease;
+}
+
+/* Hover - efecto flotante */
+.nav-btn:hover {
+  background: linear-gradient(90deg, #b38aff, #8754ff);
+  color: #fff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(150, 130, 255, 0.25);
+}
+
+/* Estado activo */
+.nav-btn.active {
+  background: linear-gradient(90deg, #a67cff, #7a4aff);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(130, 100, 255, 0.25);
+}
+
+/* === BOTÓN DE VOLVER A LA TIENDA === */
+.return-link .nav-btn {
+  background: rgba(255, 245, 255, 0.9);
+  color: #8d5dd1;
+  border-color: rgba(200, 170, 255, 0.4);
+  font-weight: 600;
+}
+
+.return-link .nav-btn:hover {
+  background: linear-gradient(90deg, #d5b2ff, #b38aff);
+  color: #fff;
+  transform: translateX(5px);
+  box-shadow: 0 4px 10px rgba(160, 130, 255, 0.25);
+}
+
+/* === BOTÓN DE MENÚ MÓVIL === */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: linear-gradient(135deg, #b38aff, #8754ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 1101;
+  box-shadow: 0 3px 10px rgba(140, 100, 255, 0.25);
+  transition: all 0.25s ease;
+}
+
+.menu-toggle:hover {
+  background: linear-gradient(135deg, #a67cff, #7a4aff);
+  transform: scale(1.05);
+}
+
+/* === OVERLAY PARA MÓVIL === */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(75, 46, 131, 0.3);
+  z-index: 900;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* === RESPONSIVIDAD === */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  main {
+    margin-left: 0 !important;
+  }
+}
+
+/* === PANTALLAS GRANDES === */
+@media (min-width: 769px) {
+  main {
+    margin-left: 230px;
+  }
+}

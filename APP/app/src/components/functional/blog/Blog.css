@@ -1,0 +1,92 @@
+/* ======== HERO SECTION ======== */
+.hero {
+  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+  border-radius: 18px;
+  padding: 3rem 1rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 3px 10px rgba(177, 144, 255, 0.08);
+}
+
+.hero-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4b2e83;
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  color: #5f4b8b;
+  font-size: 1.05rem;
+}
+
+/* ======== BLOG CARDS ======== */
+.card {
+  border: none;
+  border-radius: 16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background-color: #fdfaff;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(150, 120, 255, 0.15);
+}
+
+/* Imágenes del blog */
+.card-img-top {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  height: 230px;
+  object-fit: cover;
+}
+
+/* Contenido */
+.card-title {
+  color: #4b2e83;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.card-text {
+  color: #4a4a4a;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.text-muted.small {
+  font-size: 0.85rem;
+}
+
+/* Botón */
+.category-btn {
+  display: inline-block;
+  background-color: #c7a4ff;
+  color: white;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.category-btn:hover {
+  background-color: #a984f5;
+  transform: translateY(-2px);
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .hero {
+    padding: 2.5rem 1rem;
+  }
+
+  .card-img-top {
+    height: 200px;
+  }
+}

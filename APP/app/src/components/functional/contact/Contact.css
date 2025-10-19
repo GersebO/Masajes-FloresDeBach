@@ -1,0 +1,146 @@
+/* ======== SECCIÓN PRINCIPAL ======== */
+.hero-contacto {
+  background-color: #f8f4ff;
+  padding: 3rem 1rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(170, 150, 255, 0.1);
+  margin-bottom: 3rem;
+}
+
+.hero-title {
+  font-family: "Playfair Display", serif;
+  color: #4b2e83;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.hero-subtitle {
+  color: #5f4b8b;
+  font-size: 1rem;
+}
+
+/* ======== TARJETAS ======== */
+.card {
+  border: none;
+  border-radius: 14px;
+  background-color: #faf8ff;
+  box-shadow: 0 2px 8px rgba(180, 160, 255, 0.15);
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(180, 160, 255, 0.25);
+}
+
+.card h3,
+.card h4 {
+  color: #4b2e83;
+  font-weight: 600;
+}
+
+.card p,
+.card a {
+  color: #3c2a4d;
+  font-size: 0.95rem;
+}
+
+/* ======== FORMULARIO ======== */
+.formulario-fondo {
+  background-color: #f9f6ff;
+  border-left: 5px solid #c7a4ff;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #4b2e83;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #d8caff;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #b38aff;
+  box-shadow: 0 0 0 0.15rem rgba(179, 138, 255, 0.25);
+}
+
+/* ======== BOTÓN ======== */
+.btn-primary {
+  background-color: #c7a4ff;
+  border-color: #b38aff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  border-radius: 8px;
+}
+
+.btn-primary:hover {
+  background-color: #b38aff;
+  border-color: #a77ef8;
+  transform: translateY(-2px);
+}
+
+/* ======== ALERTA ======== */
+.alert-success {
+  background-color: #e9e0ff;
+  color: #4b2e83;
+  border: none;
+  font-weight: 500;
+  border-radius: 10px;
+}
+
+/* ======== MAPA ======== */
+.map-container iframe {
+  border-radius: 10px;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+  .hero-contacto {
+    padding: 2rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+}
+.hero-title {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: #4b2e83;
+  margin-bottom: 0.8rem;
+}
+.hero {
+  background: linear-gradient(145deg, #f4ebff 0%, #fdfaff 100%);
+  padding: 3rem 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(155, 125, 255, 0.15);
+  margin-bottom: 3rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(200, 180, 255, 0.2);
+  transition: all 0.4s ease;
+}
+
+.hero:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(155, 125, 255, 0.25);
+}
+
+.hero-title {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: #4b2e83;
+  margin-bottom: 0.8rem;
+}
+
+.hero-subtitle {
+  color: #5f4b8b;
+  font-size: 1.1rem;
+  margin-bottom: 1.8rem;
+}

@@ -1,0 +1,96 @@
+/* === ESTRUCTURA PRINCIPAL === */
+.admin-home {
+  text-align: center;
+  padding: 40px 20px;
+  color: #4b2d88;
+}
+
+/* === ENCABEZADO === */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(145deg, #f8f3ff, #ffffff);
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px rgba(200, 170, 255, 0.15),
+              -4px -4px 8px rgba(255, 255, 255, 0.7);
+  padding: 25px 30px;
+  margin-bottom: 40px;
+}
+
+.header-text h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  color: #5a2ca0;
+  margin-bottom: 5px;
+}
+
+.header-text p {
+  font-size: 1rem;
+  color: #7b5fc9;
+}
+
+.header-date p {
+  font-size: 0.95rem;
+  color: #8e6ed1;
+  font-weight: 500;
+}
+
+/* === TARJETAS === */
+.admin-home-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.home-card {
+  background: linear-gradient(145deg, #f5e8ff, #ffffff);
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px rgba(180, 150, 255, 0.15),
+              -4px -4px 8px rgba(255, 255, 255, 0.8);
+  width: 260px;
+  padding: 25px 20px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.home-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 6px 6px 12px rgba(160, 130, 255, 0.2),
+              -4px -4px 10px rgba(255, 255, 255, 0.8);
+}
+
+.home-card .emoji {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.home-card h3 {
+  font-size: 1.2rem;
+  color: #4b2d88;
+  margin-bottom: 8px;
+}
+
+.home-card p {
+  font-size: 0.95rem;
+  color: #6a4a9f;
+}
+
+/* === RESPONSIVO === */
+@media (max-width: 768px) {
+  .admin-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .admin-home-cards {
+    gap: 20px;
+  }
+
+  .home-card {
+    width: 90%;
+  }
+}

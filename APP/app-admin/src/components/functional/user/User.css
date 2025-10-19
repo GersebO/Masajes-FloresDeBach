@@ -1,0 +1,228 @@
+/* === Alineación y estructura general === */
+.users-table td,
+.users-table th {
+  vertical-align: middle;
+}
+
+/* Alineación izquierda en columnas de nombre y email */
+.users-table td:nth-child(2),
+.users-table td:nth-child(3) {
+  text-align: left;
+}
+
+/* Centrar columnas de rol, estado y acción */
+.users-table td:nth-child(4),
+.users-table td:nth-child(5),
+.users-table td:last-child,
+.users-table th:nth-child(4),
+.users-table th:nth-child(5),
+.users-table th:last-child {
+  text-align: center;
+}
+
+/* === Badges === */
+.role-badge,
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 85px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Colores de roles */
+.role-badge.admin {
+  background: #e1bee7;
+  color: #4a0072;
+}
+
+.role-badge.manager {
+  background: #d1c4e9;
+  color: #4527a0;
+}
+
+.role-badge.employee {
+  background: #f3e5f5;
+  color: #6a1b9a;
+}
+
+/* Colores de estado */
+.status-badge.active {
+  background: #c8e6c9;
+  color: #256029;
+}
+
+.status-badge.inactive {
+  background: #ffe0b2;
+  color: #a65e00;
+}
+
+.status-badge.suspended {
+  background: #ffcdd2;
+  color: #b71c1c;
+}
+
+/* === BOTONES DE ACCIÓN (Activar / Desactivar) === */
+.btn-activate,
+.btn-deactivate {
+  display: inline-block;
+  min-width: 100px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.btn-activate {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-color: #2e7d32;
+}
+
+.btn-activate:hover {
+  background-color: #2e7d32;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.btn-deactivate {
+  background-color: #ffebee;
+  color: #c62828;
+  border-color: #c62828;
+}
+
+.btn-deactivate:hover {
+  background-color: #c62828;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* === Tarjetas de resumen superiores === */
+.inventory-summary {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin: 30px 0 40px 0;
+}
+
+.summary-item {
+  background: linear-gradient(145deg, #f9f4fb, #f1e4f8);
+  border-radius: 15px;
+  padding: 22px 28px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(140, 80, 180, 0.15);
+  transition: all 0.3s ease;
+  width: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sombra y efecto al pasar el mouse */
+.summary-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(140, 80, 180, 0.25);
+}
+
+/* Animación de brillo sutil */
+.summary-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: skewX(-25deg);
+  transition: 0.5s;
+}
+
+.summary-item:hover::after {
+  left: 125%;
+}
+
+/* Títulos de las tarjetas */
+.summary-item h3 {
+  font-weight: 700;
+  color: #5e1784;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  letter-spacing: 0.3px;
+}
+
+/* Valores dentro de las tarjetas */
+.summary-item p {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #4a148c;
+  margin: 0;
+}
+
+/* === Tarjeta especial “Nuevo Usuario” === */
+.create-product-card {
+  background: linear-gradient(145deg, #8e24aa, #ba68c8);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(106, 27, 154, 0.3);
+  transition: all 0.3s ease;
+}
+
+.create-product-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(106, 27, 154, 0.4);
+}
+
+/* Título dentro de tarjeta “Nuevo Usuario” */
+.create-product-card h3 {
+  color: #fff;
+}
+
+/* Botón Crear Usuario */
+.btn-create-product {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #7b1fa2;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-create-product:hover {
+  background-color: #ede7f6;
+  color: #4a0072;
+  transform: scale(1.07);
+}
+.titulo-inventario {
+  font-size: 2.0rem; /* más grande y destacado */
+  font-weight: 700;
+  color: #4a148c;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase; /* da sensación de título principal */
+  background: linear-gradient(90deg, #ede7f6 0%, #7f4588 100%);
+  padding: 20px 40px;
+  border-radius: 12px;
+  width: fit-content; /* se ajusta al texto */
+  margin: 30px auto;
+  box-shadow: 0 4px 12px rgba(74, 20, 140, 0.15);
+  transition: all 0.3s ease;
+}
+
+.titulo-inventario:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(74, 20, 140, 0.25);
+  background: linear-gradient(90deg, #ede7f6 0%, #d1c4e9 100%);
+}
