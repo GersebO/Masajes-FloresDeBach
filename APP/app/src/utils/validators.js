@@ -5,7 +5,9 @@ export const validators = {
   onlyLetters: /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/,
 
   // Emails permitidos
-  emailAllowed: /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i,
+  emailAllowed: /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i,
+
+
 
   // Normalizar RUN (quitar puntos y guiones)
   normalizaRun: (value) => {
