@@ -67,47 +67,63 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.10.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
+			<version>5.11.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
 			<version>5.11.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
-	<plugins>
-		<!-- 🔹 Compilador actualizado compatible con Java 21 -->
-		<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-compiler-plugin</artifactId>
-		<version>3.13.0</version> <!-- 🔥 agregado -->
-		<configuration>
-			<release>21</release> <!-- 🔥 fuerza compatibilidad con Java 21 -->
-			<annotationProcessorPaths>
-			<path>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>1.18.32</version> <!-- asegúrate que coincida con tu dependencia -->
-			</path>
-			</annotationProcessorPaths>
-		</configuration>
-		</plugin>
+		<plugins>
 
-		<!-- 🔹 Spring Boot plugin (mantienes igual) -->
-		<plugin>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-maven-plugin</artifactId>
-		<configuration>
-			<excludes>
-			<exclude>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-			</exclude>
-			</excludes>
-		</configuration>
-		</plugin>
-	</plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<release>21</release> 
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.32</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+		</plugins>
 	</build>
+
+
 
 
 </project>
