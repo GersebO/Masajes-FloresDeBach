@@ -1,14 +1,15 @@
 /* ======== HERO SECTION ======== */
 .hero {
-  background: linear-gradient(180deg, #fefcff 0%, #f5e9ff 100%);
-  border-radius: 160px;
-  margin: 1.5rem auto;
-  max-width: 900px; /* 🔥 evita que se expanda demasiado */
+  background: linear-gradient(180deg, #f6ecff 0%, #f2e1ff 100%);
+  border-radius: 40px; /* 🔹 menos redondeado, más moderno */
+  padding: 3rem 1rem;
+  margin: 2rem auto;
+  max-width: 900px;
   text-align: center;
-  box-shadow: 0 4px 14px rgba(150, 100, 200, 0.12);
+  box-shadow: 0 6px 18px rgba(160, 100, 200, 0.12);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 100px;
 }
+
 
 .hero:hover {
   transform: translateY(-3px);

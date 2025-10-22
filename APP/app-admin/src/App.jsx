@@ -10,6 +10,7 @@ import CustomerCreate from "./app/customer-create/pages.jsx";
 import HomePages from "./app/home/pages.jsx";
 import CategoryPages from "./app/category/pages.jsx";
 import CategoryCreatePages from "./app/category-create/pages.jsx";
+import ProductEditPages from "./app/product-edit/pages.jsx";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
 
         <Route path="/user" element={<UserPages />} />
         <Route path="/user/create" element={<UserCreate />} />
-
+        <Route path="/product/edit/:id" element={<ProductEditPages />} />
 
         <Route path="/categories" element={<CategoryPages />} />
         <Route path="/categories/create" element={<CategoryCreatePages />} />

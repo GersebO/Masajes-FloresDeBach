@@ -78,7 +78,7 @@ export const validators = {
   // Validar contraseña (4-10 caracteres)
   validarPassword: (password) => {
     const trimmed = password.trim();
-    return trimmed.length >= 4 && trimmed.length <= 10;
+    return trimmed.length >= 8 && trimmed.length <= 10;
   },
 
   // Validar que las contraseñas coincidan

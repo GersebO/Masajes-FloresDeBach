@@ -1,0 +1,164 @@
+/* ===========================
+   PRODUCT EDIT - FINAL STYLE
+=========================== */
+.product-edit-container {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 60px;
+  background: linear-gradient(180deg, #f9f4ff 0%, #ffffff 100%);
+  font-family: "Poppins", sans-serif;
+}
+
+.product-edit-card {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(150, 100, 200, 0.15);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 0.4s ease;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+.product-edit-header {
+  background: linear-gradient(90deg, #7b1fa2 0%, #9c27b0 100%);
+  color: #fff;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-edit-header h6 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.product-edit-header .btn-close {
+  filter: invert(1);
+}
+
+/* ===========================
+   BODY
+=========================== */
+.product-edit-body {
+  padding: 20px 24px;
+}
+
+.product-edit-body label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6a1b9a;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.product-edit-body input,
+.product-edit-body textarea {
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #d1c4e9;
+  padding: 8px 10px;
+  transition: all 0.2s ease;
+}
+
+.product-edit-body input:focus,
+.product-edit-body textarea:focus {
+  border-color: #8e24aa;
+  box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.15);
+}
+
+.input-group-text {
+  background-color: #f3e5f5;
+  border-color: #d1c4e9;
+  color: #6a1b9a;
+  font-weight: 600;
+}
+
+/* ===========================
+   ALERTS
+=========================== */
+.alert {
+  font-size: 0.85rem;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.alert-success {
+  background: #f3e5f5;
+  color: #6a1b9a;
+  border: 1px solid #e1bee7;
+}
+
+.alert-danger {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+/* ===========================
+   ACTION BUTTONS
+=========================== */
+.product-edit-actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.product-edit-actions .btn {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.product-edit-actions .btn-primary {
+  background: linear-gradient(90deg, #7b1fa2 0%, #9c27b0 100%);
+  border: none;
+  color: #fff;
+}
+
+.product-edit-actions .btn-primary:hover {
+  background: linear-gradient(90deg, #6a1b9a 0%, #8e24aa 100%);
+  transform: translateY(-1px);
+}
+
+.product-edit-actions .btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+}
+
+.product-edit-actions .btn-secondary:hover {
+  background-color: #d6d6d6;
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 576px) {
+  .product-edit-card {
+    margin: 20px 10px;
+  }
+}

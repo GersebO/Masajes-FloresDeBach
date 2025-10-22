@@ -108,31 +108,47 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDTO updateProduct(Long id, ProductRequestDTO requestDTO) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
 
-        // Check if new SKU conflicts with existing product
-        if (!product.getSku().equalsIgnoreCase(requestDTO.getSku()) 
-            && productRepository.existsBySkuIgnoreCase(requestDTO.getSku())) {
-            throw new IllegalArgumentException("Producto con SKU '" + requestDTO.getSku() + "' ya existe");
+        // Solo actualiza los campos que vienen en el request
+        if (requestDTO.getName() != null)
+            product.setName(requestDTO.getName());
+        
+        if (requestDTO.getSku() != null && !requestDTO.getSku().isBlank()) {
+            if (!product.getSku().equalsIgnoreCase(requestDTO.getSku()) 
+                && productRepository.existsBySkuIgnoreCase(requestDTO.getSku())) {
+                throw new IllegalArgumentException("Producto con SKU '" + requestDTO.getSku() + "' ya existe");
+            }
+            product.setSku(requestDTO.getSku());
         }
 
-        // Validate if category exists
-        Category category = categoryRepository.findById(requestDTO.getCategoryId())
-                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + requestDTO.getCategoryId()));
+        if (requestDTO.getDescription() != null)
+            product.setDescription(requestDTO.getDescription());
 
-        product.setName(requestDTO.getName());
-        product.setSku(requestDTO.getSku());
-        product.setDescription(requestDTO.getDescription());
-        product.setPrice(requestDTO.getPrice());
-        product.setStock(requestDTO.getStock());
-        product.setImageUrl(requestDTO.getImageUrl());
-        product.setCategory(category);
-        product.setStatus(ProductStatus.valueOf(requestDTO.getStatus().toUpperCase()));
+        if (requestDTO.getPrice() != null)
+            product.setPrice(requestDTO.getPrice());
+
+        if (requestDTO.getStock() != null)
+            product.setStock(requestDTO.getStock());
+
+        if (requestDTO.getImageUrl() != null)
+            product.setImageUrl(requestDTO.getImageUrl());
+
+        if (requestDTO.getStatus() != null)
+            product.setStatus(ProductStatus.valueOf(requestDTO.getStatus().toUpperCase()));
+
+        if (requestDTO.getCategoryId() != null) {
+            Category category = categoryRepository.findById(requestDTO.getCategoryId())
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + requestDTO.getCategoryId()));
+            product.setCategory(category);
+        }
+
         product.setUpdatedAt(LocalDateTime.now());
 
         Product updatedProduct = productRepository.save(product);
         return mapToResponseDTO(updatedProduct);
     }
+
 
     @Override
     public ProductResponseDTO updateStock(Long id, Integer stock) {

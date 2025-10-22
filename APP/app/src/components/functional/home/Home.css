@@ -27,6 +27,7 @@
 
 .btn-main {
   margin-top: 25px;
+  display: inline-block;
   background: linear-gradient(90deg, #f0e2ff, #e8d6fa);
   color: #4a148c;
   font-weight: 600;
