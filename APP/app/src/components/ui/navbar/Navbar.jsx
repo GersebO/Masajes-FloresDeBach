@@ -10,6 +10,7 @@ const links = [
   { to: "/blogs", text: "🪷 Blogs" },
   { to: "/login", text: "🔑 Iniciar Sesión" },
   { to: "/register", text: "📝 Registrar Usuario" },
+  { to: "/cart", text: "🛒 Carrito" }
 ];
 
 export default function Navbar() {
@@ -46,18 +47,6 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-
-          {/* 🛒 Carrito */}
-          <li>
-            <Link
-              className="nav-link cart-link"
-              to="/cart"
-              onClick={() => setIsOpen(false)}
-            >
-              🛒 Carrito
-              <span className="cart-count">2</span>
-            </Link>
-          </li>
         </ul>
       </div>
     </nav>

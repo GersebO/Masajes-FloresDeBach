@@ -7,9 +7,9 @@ export default function Footer() {
         <p className="footer-title">MarafloresdeBach</p>
         <p className="footer-info">© 2025 Todos los derechos reservados</p>
         <p className="footer-links">
-          <Link to="/nosotros">Nosotros</Link> |
-          <Link to="/contacto">Contacto</Link> |
-          <Link to="/productos">Productos</Link>
+          <Link to="/aboutUs">Nosotros</Link> |
+          <Link to="/contact">Contacto</Link> |
+          <Link to="/product">Productos</Link>
         </p>
       </div>
     </footer>

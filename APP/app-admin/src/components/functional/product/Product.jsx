@@ -176,6 +176,15 @@ export function Product() {
                         )}
                       </td>
                       <td>
+                        {/* Botón de editar */}
+                        <Link
+                          to={`/product/edit/${prod.id}`}
+                          className="btn btn-sm btn-outline-primary me-2"
+                        >
+                          Editar
+                        </Link>
+
+                        {/* Activar / Desactivar */}
                         {prod.activo ? (
                           <button
                             className="btn btn-sm btn-outline-danger"

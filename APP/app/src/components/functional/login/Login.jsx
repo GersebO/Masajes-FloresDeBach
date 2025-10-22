@@ -10,9 +10,9 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const MIN_PASSWORD_LENGTH = 4;
+  const MIN_PASSWORD_LENGTH = 8
 
-  // ✅ Validación en tiempo real
+  // Validación en tiempo real
   useEffect(() => {
     const isEmailValid = validators.validarEmail(email);
     const isPasswordValid = password.length >= MIN_PASSWORD_LENGTH;
@@ -20,13 +20,13 @@ export default function Login() {
   }, [email, password]);
 
   
-  // ✅ Función principal de login
+  // Función principal de login
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage("");
 
     try {
-      // 1️⃣ Intentar login como ADMIN
+      // Intentar login como ADMIN
       const userResponse = await fetch("http://localhost:8081/api/users/authenticate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -41,7 +41,7 @@ export default function Login() {
         return;
       }
 
-      // 2️⃣ Intentar login como CUSTOMER
+      // Intentar login como CUSTOMER
       const customerResponse = await fetch("http://localhost:8081/api/customers/authenticate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

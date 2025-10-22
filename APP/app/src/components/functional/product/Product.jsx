@@ -110,7 +110,7 @@ export default function Product() {
                 <p className="fw-bold text-success">
                   Precio: ${selectedProduct.price.toLocaleString("es-CL")}
                   {/**Añade el stock */}
-                  <p className="fw-bold text-success">Stock: {selectedProduct.stock}</p>
+                <p className="fw-bold text-success">Stock: {selectedProduct.stock}</p>
                 </p>
               </div>
               <div className="modal-footer">

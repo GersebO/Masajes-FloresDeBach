@@ -9,6 +9,7 @@ import RegisterPages from "./app/register/pages.jsx";
 import BlogPages from "./app/blog/pages.jsx";
 import ProductPage from "./app/product/pages.jsx";
 import HomePages from "./app/home/pages.jsx";
+import CartPage from "./app/cart/page.jsx";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/register" element={<RegisterPages />} />
           <Route path="/blogs" element={<BlogPages />} />
           <Route path="/product" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
 
         <FooterPages />

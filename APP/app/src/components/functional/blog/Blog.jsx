@@ -3,15 +3,15 @@ import './Blog.css';
 
 export default function Blogs() {
   return (
-    <div className="container mt-4">
+    <div className="container my-5">
       {/* HERO */}
       <section className="hero text-center" aria-labelledby="blogTitle" style={{ marginTop: '25px' }}>
-        <div className="container">
+        
           <h1 id="blogTitle" className="hero-title">Nuestro Blog</h1>
           <p className="hero-subtitle">
             Artículos y consejos sobre bienestar, masoterapia y flores de Bach
           </p>
-        </div>
+        
       </section>
 
       {/* BLOG CARDS */}
