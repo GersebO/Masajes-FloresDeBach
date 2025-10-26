@@ -1,0 +1,86 @@
+/* 🌸 Base general */
+.btn-base {
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* ✨ Tamaños */
+.btn-sm {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.btn-md {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+}
+
+.btn-lg {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* 🌿 Variantes */
+.btn-primary {
+  background: linear-gradient(to right, #a87ce0, #c2a3ff);
+  color: white;
+  box-shadow: 0 4px 10px rgba(168, 124, 224, 0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, #9465d4, #b792ff);
+  box-shadow: 0 6px 15px rgba(148, 101, 212, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: white;
+  color: #6c3bb8;
+  border: 2px solid #a87ce0;
+}
+
+.btn-secondary:hover {
+  background: #f9f4ff;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #6c3bb8;
+  border: 2px solid #6c3bb8;
+}
+
+.btn-outline:hover {
+  background: #f3e9ff;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #6c3bb8;
+  border: none;
+}
+
+.btn-ghost:hover {
+  text-decoration: underline;
+}
+/* 💰 Variante especial para precios */
+.btn-price {
+  background: linear-gradient(135deg, #5e3589 0%, #7b4ba3 100%);
+  color: white;
+  border: 2px solid #5e3589;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(94, 53, 137, 0.3);
+}
+
+.btn-price:hover {
+  background: linear-gradient(135deg, #4a2870 0%, #6a3b8f 100%);
+  box-shadow: 0 6px 18px rgba(94, 53, 137, 0.4);
+  transform: translateY(-2px);
+}

@@ -1,3 +1,7 @@
+/* ===================================
+   🌸 HOME.CSS - SOLO ESTILOS ESPECÍFICOS
+   =================================== */
+
 .home-container {
   font-family: "Poppins", sans-serif;
   background-color: #fdf9ff;
@@ -5,182 +9,131 @@
   line-height: 1.6;
 }
 
-/* === HERO === */
-.hero {
-  text-align: center;
-  background: linear-gradient(180deg, #fefcff 0%, #f5e9ff 100%);
-  padding: 100px 20px 80px;
-}
-
-.hero h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: #5e3589;
-}
-
-.hero p {
-  margin-top: 15px;
-  color: #6a1b9a;
-  font-size: 1.1rem;
-}
-
-.btn-main {
-  margin-top: 25px;
-  display: inline-block;
-  background: linear-gradient(90deg, #f0e2ff, #e8d6fa);
-  color: #4a148c;
-  font-weight: 600;
-  padding: 10px 25px;
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 3px 8px rgba(150, 100, 200, 0.15);
-  transition: all 0.3s ease;
-}
-
-.btn-main:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(150, 100, 200, 0.25);
+/* === HERO SECTION (sin Content) === */
+.home-hero-section {
+  padding: 2rem 1rem 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 /* === SERVICIOS === */
-.services {
-  text-align: center;
-  padding: 100px 20px 80px;
-  background-color: #fdf9ff;
-}
-
-.services-header h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 2.5rem; /* 🔥 más grande */
-  font-weight: 800;
-  color: #5e3589;
-  margin-bottom: 15px;
-}
-
-.underline {
-  width: 120px;
-  height: 4px;
-  background: linear-gradient(90deg, #d9b3ff, #f0e0ff);
-  border-radius: 10px;
-  margin: 0 auto 50px;
-}
-
 .service-cards {
   display: flex;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
 .service-item {
-  background: #faf5ff;
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e9ff 100%);
   border-radius: 15px;
-  padding: 25px;
+  padding: 2rem 1.5rem;
   width: 280px;
   box-shadow: 0 4px 12px rgba(100, 50, 150, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(168, 124, 224, 0.1);
 }
 
 .service-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(100, 50, 150, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(100, 50, 150, 0.18);
+}
+
+.service-item h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #5e3589;
+  margin-bottom: 1rem;
+}
+
+.service-item p {
+  color: #6a1b9a;
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 /* === SOBRE NOSOTROS === */
-.about {
-  background: linear-gradient(180deg, #f8f3ff 0%, #fdfaff 100%);
-  padding: 90px 20px;
-}
-
 .about-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 50px;
+  gap: 3rem;
+  margin-top: 2rem;
 }
 
 .about-text {
-  max-width: 450px;
-}
-
-.about-text h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 1.9rem;
-  margin-bottom: 15px;
-  color: #5e3589;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
 }
 
 .about-text p {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #5b278a;
-}
-
-.btn-secondary {
-  display: inline-block;
-  margin-top: 15px;
-  background: #f1e0ff;
-  color: #4a148c;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background: #e4cbff;
-  transform: translateY(-2px);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
 }
 
 .about-img {
-  width: 340px;
+  flex: 1;
+  max-width: 400px;
+  width: 100%;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(120, 70, 160, 0.1);
+  box-shadow: 0 8px 20px rgba(120, 70, 160, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 28px rgba(120, 70, 160, 0.18);
+}
+
+.home-button-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 /* === TESTIMONIOS === */
-.testimonials {
-  text-align: center;
-  padding: 80px 20px;
-  background-color: #fefbff;
-}
-
-.testimonials h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 2rem;
-  margin-bottom: 40px;
-  color: #5e3589;
-}
-
 .testimonial-list {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .testimonial {
-  background: #faf5ff;
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e9ff 100%);
   border-radius: 15px;
-  padding: 25px;
+  padding: 2rem;
   width: 300px;
-  box-shadow: 0 4px 10px rgba(150, 100, 200, 0.1);
-  font-style: italic;
-  color: #4a148c;
-  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(150, 100, 200, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(168, 124, 224, 0.1);
 }
 
 .testimonial:hover {
-  transform: scale(1.03);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(150, 100, 200, 0.18);
+}
+
+.testimonial p {
+  font-style: italic;
+  color: #4a148c;
+  line-height: 1.6;
+  margin-bottom: 1rem;
 }
 
 .testimonial span {
   display: block;
-  margin-top: 10px;
   font-weight: 600;
   color: #6a1b9a;
+  font-style: normal;
+  text-align: right;
 }
 
 /* === RESPONSIVO === */
@@ -191,44 +144,14 @@
   }
 
   .about-img {
-    width: 80%;
+    max-width: 90%;
   }
 
   .service-item {
     width: 90%;
   }
 
-  .services-header h2 {
-    font-size: 2rem;
+  .testimonial {
+    width: 90%;
   }
-}
-.product-hero-box {
-  background: linear-gradient(180deg, #fefcff 0%, #f5e9ff 100%);
-  border-radius: 20px;
-  padding: 80px 30px 70px;
-  margin: 40px auto;
-  max-width: 900px;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(150, 100, 200, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-hero-box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(140, 90, 200, 0.25);
-}
-
-.product-hero-box h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #5e3589;
-  margin-bottom: 15px;
-}
-
-.product-hero-box p {
-  color: #6a1b9a;
-  font-size: 1.1rem;
-  max-width: 700px;
-  margin: 0 auto;
 }

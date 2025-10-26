@@ -1,40 +1,36 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NavbarPages from "./app/navbar/pages.jsx";
-import FooterPages from "./app/footer/pages.jsx";
+
+
+import Screen from "@/components/ui/screen/Screen.jsx";
+
+// 🔹 Páginas principales
+import HomePages from "./app/home/pages.jsx";
+import ProductPage from "@app/product/pages.jsx";
+import BlogPage from "./app/blog/pages.jsx";
 import AboutPage from "./app/about/pages.jsx";
 import ContactPage from "./app/contact/pages.jsx";
-import LoginPages from "./app/login/pages.jsx";
-import RegisterPages from "./app/register/pages.jsx";
-import BlogPages from "./app/blog/pages.jsx";
-import ProductPage from "./app/product/pages.jsx";
-import HomePages from "./app/home/pages.jsx";
-import CartPage from "./app/cart/page.jsx";
+import CartPage from "./app/cart/pages.jsx";
+import RegisterPage from "./app/register/pages.jsx";
+import LoginPage from "./app/login/pages.jsx";
+
 
 function App() {
   return (
     <BrowserRouter>
-      <NavbarPages />
-
-      <div style={{ marginTop: "100px" }}>
+      <Screen>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <HomePages />
-            }
-          />
-          <Route path="/AboutUs" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/login" element={<LoginPages />} />
-          <Route path="/register" element={<RegisterPages />} />
-          <Route path="/blogs" element={<BlogPages />} />
+          <Route path="/" element={<HomePages />} />
           <Route path="/product" element={<ProductPage />} />
+          <Route path="/blogs" element={<BlogPage />} />
+          <Route path="/aboutUs" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/cart" element={<CartPage />} />
-        </Routes>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
 
-        <FooterPages />
-      </div>
+        </Routes>
+      </Screen>
     </BrowserRouter>
   );
 }

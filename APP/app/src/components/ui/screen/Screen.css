@@ -1,0 +1,36 @@
+/*
+ * Layout Principal de la Pantalla: Ajustes de tipografía y fondo.
+ * Mejora: Fuente de respaldo más segura y una transición suave del fondo.
+ */
+.screen-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #faf8fc; /* Lavanda suave */
+    font-family: "Montserrat", "Inter", -apple-system, sans-serif;
+    transition: background-color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+---
+
+/*
+ * Contenido Principal: Ajuste de espaciado y manejo de la altura del NavBar.
+ * Mejora: Uso de variable CSS para el espaciado superior y centrado del contenido.
+ */
+.screen-content {
+    /* Variable CSS para la altura de la cabecera (Navbar, etc.) */
+    --navbar-height: 60px; /* Definimos un valor más estándar y manejable */
+    
+    flex: 1;
+    /* Usamos la variable para el margen superior. ¡Más limpio y fácil de ajustar! */
+    margin-top: var(--navbar-height);
+    /* Simplificamos el padding, ya que el .content-container maneja el espaciado interno */
+    padding: 0;
+    
+    /* Centramos el contenido horizontalmente (si fuera necesario para un diseño más estrecho) */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* max-width: 1400px;  Ajusta este valor si quieres un contenedor más amplio que el de content-container */
+}

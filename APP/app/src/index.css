@@ -1,6 +1,6 @@
 /* 🌸 ESTILOS BASE MARAFLORES DE BACH 🌸 */
 
-/* Reset general */
+/* ========== RESET GENERAL ========== */
 * {
   margin: 0;
   padding: 0;
@@ -10,63 +10,117 @@
 html,
 body,
 #root {
-  background: linear-gradient(180deg, #fefaff 0%, #f5e9ff 100%);
+  /* Fondo con profundidad y elegancia */
+  background: linear-gradient(
+    180deg,
+    #f9f6ff 0%,
+    #f3e8ff 35%,
+    #ede0ff 100%
+  );
+  background-attachment: fixed;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+  color: #4a4a4a;
 }
 
+/* 🌸 LUCES RADIALES DECORATIVAS (sutiles, profesionales) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(245, 229, 255, 0.5),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(235, 210, 255, 0.4),
+      transparent 60%
+    );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ========== CONTENEDOR PRINCIPAL ========== */
 .container {
-  background: rgba(255, 255, 255, 0.65);
-  border-radius: 16px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 6px 20px rgba(160, 100, 200, 0.1);
-  padding: 2rem;
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 28px rgba(160, 100, 200, 0.12);
+  padding: 2.5rem;
+  margin: 2.5rem auto;
+  max-width: 1200px;
+  transition: all 0.3s ease;
 }
 
-
-
-
-/* Elimina límites */
-#root {
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: left;
+.container:hover {
+  box-shadow: 0 12px 32px rgba(160, 100, 200, 0.18);
+  transform: translateY(-2px);
 }
 
+/* ========== ENLACES ========== */
 a {
-  color: #3c2a4d;
-  /* Elimina el subrayado por defecto */
-  text-decoration: none; 
-  /* Crea un subrayado personalizado con borde */
-  border-bottom: 2px solid rgba(60, 42, 77, 0.4); /* Línea más fina y tenue */
-  padding-bottom: 2px; /* Pequeño espaciado entre el texto y la línea */
-  
-  transition: border-color 0.3s ease; /* Para que el cambio de color sea suave */
+  color: #4b2e83;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(75, 46, 131, 0.25);
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
 }
 
 a:hover {
-  /* Al pasar el ratón, haz el subrayado más intenso */
-  border-bottom-color: #3c2a4d; 
+  border-bottom-color: #4b2e83;
+  color: #3a1f6d;
 }
 
-/* Estilo base de títulos */
-h1 {
+/* ========== TITULOS Y TEXTO ========== */
+h1,
+h2,
+h3 {
   font-family: "Playfair Display", serif;
-  color: #3c2a4d;
+  color: #4b2e83;
+}
+
+h1 {
+  font-size: 2rem;
   font-weight: 700;
   text-align: center;
   margin-bottom: 1rem;
-  /* Conversión a mayúsculas: */
   text-transform: uppercase;
-  /* Aumentamos un poco más el espaciado para compensar las mayúsculas: */
-  letter-spacing: 0.15em; 
+  letter-spacing: 0.1em;
 }
 
 p {
   text-align: center;
   color: #4a4a4a;
-  line-height: 1.6;
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 auto 1.5rem auto;
+  font-size: 1rem;
+}
 
-  /* Mejora la experiencia de lectura en pantallas grandes: */
-  max-width: 650px; /* Limita la línea de texto a un ancho cómodo */
-  margin: 0 auto 1.5rem auto; /* Centra el bloque de párrafo y añade margen inferior */
+/* ========== ANIMACIONES SUAVES ========== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+    margin: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
 }

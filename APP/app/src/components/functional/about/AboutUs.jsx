@@ -1,86 +1,150 @@
 import React from "react";
 import "./AboutUs.css";
+import Hero from "../../ui/hero/Hero";
+import Button from "../../ui/button/Button";
+import Content from "../../ui/content/Content";
 
 export default function AboutUs() {
-  return (
-    <div className="container about-page my-5">
-      {/* HERO */}
-      <section className="product-hero-box " aria-labelledby="nosTitle">
-        <h1 id="nosTitle" className="hero-title">
-          Quiénes somos
-        </h1>
-        <p className="hero-subtitle">
-          Bienestar integral: masoterapia profesional y terapia floral de Bach
-        </p>
-        <a href="/contacto" className="btn-cta">
-          Agenda una evaluación
-        </a>
-      </section>
+  const pilares = [
+    {
+      icon: "💼",
+      title: "Profesionalismo",
+      desc: "Protocolos claros, higiene y técnicas basadas en evidencia y buenas prácticas.",
+    },
+    {
+      icon: "💖",
+      title: "Calidez",
+      desc: "Un espacio amable donde puedas relajarte, confiar y ser escuchado/a.",
+    },
+    {
+      icon: "🌿",
+      title: "Enfoque integral",
+      desc: "Cuerpo y emoción: combinamos masajes y flores de Bach para resultados sostenibles.",
+    },
+  ];
 
-      {/* SECCIÓN PRINCIPAL */}
-      <div className="row g-4 align-items-center mt-5">
-        <div className="col-md-6">
-          <img
-            src="/img/hero.png"
-            alt="Nuestro espacio de atención"
-            className="img-fluid rounded-4 shadow-sm"
-          />
-        </div>
-        <div className="col-md-6">
-          <div className="about-box p-4 rounded-4 shadow-sm h-100">
-            <h2>Nuestra misión</h2>
-            <p>
-              Acompañarte a recuperar tu equilibrio físico y emocional a través
-              de masajes terapéuticos y la vibración sutil de las flores de Bach.
-              Trabajamos con un enfoque humano y profesional, priorizando tu
-              bienestar integral.
-            </p>
-            <h3 className="mt-4">Qué nos distingue</h3>
-            <ul className="list-unstyled">
-              <li>🌿 Atención personalizada según tus necesidades.</li>
-              <li>💮 Formación certificada en masoterapia y terapia floral.</li>
-              <li>☀️ Ambiente seguro, cálido y confidencial.</li>
-            </ul>
-          </div>
+  const valores = [
+    {
+      emoji: "🌿",
+      text: "Atención personalizada según tus necesidades.",
+    },
+    {
+      emoji: "💮",
+      text: "Formación certificada en masoterapia y terapia floral.",
+    },
+    {
+      emoji: "☀️",
+      text: "Ambiente seguro, cálido y confidencial.",
+    },
+  ];
+
+  return (
+    <div className="about-container">
+      {/* HERO */}
+      <div className="about-hero-section">
+        <Hero title="✨ Quiénes Somos ✨" />
+        
+        <div className="about-cta-top">
+          <Button as="a" href="/contact" variant="primary" size="lg">
+            Agenda una evaluación
+          </Button>
         </div>
       </div>
 
-      {/* PILARES */}
-      <div className="row g-4 my-5">
-        {[
-          {
-            title: "Profesionalismo",
-            desc: "Protocolos claros, higiene y técnicas basadas en evidencia y buenas prácticas.",
-          },
-          {
-            title: "Calidez",
-            desc: "Un espacio amable donde puedas relajarte, confiar y ser escuchado/a.",
-          },
-          {
-            title: "Enfoque integral",
-            desc: "Cuerpo y emoción: combinamos masajes y flores de Bach para resultados sostenibles.",
-          },
-        ].map((pilar) => (
-          <div className="col-md-4" key={pilar.title}>
-            <div className="about-pill p-4 h-100 rounded-4 text-center shadow-sm">
-              <h4>{pilar.title}</h4>
-              <p>{pilar.desc}</p>
+      {/* MISIÓN Y VALORES */}
+      <Content>
+        <div className="about-mission-section">
+          <div className="about-mission-content">
+            <div className="about-mission-text">
+              <h2 className="about-section-title">Nuestra misión</h2>
+              <p className="about-mission-description">
+                Acompañarte a recuperar tu equilibrio físico y emocional a través
+                de masajes terapéuticos y la vibración sutil de las flores de Bach.
+                Trabajamos con un enfoque humano y profesional, priorizando tu
+                bienestar integral.
+              </p>
+
+              <h3 className="about-subsection-title">Qué nos distingue</h3>
+              <div className="about-values-grid">
+                {valores.map((valor, index) => (
+                  <div key={index} className="about-value-item">
+                    <span className="about-value-emoji">{valor.emoji}</span>
+                    <p className="about-value-text">{valor.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="about-mission-image">
+              <img
+                src="/img/hero.png"
+                alt="Nuestro espacio de atención"
+                className="about-img"
+              />
+              <div className="about-img-decoration"></div>
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* BOTONES FINALES */}
-      <div className="text-center my-5">
-        <div className="d-flex justify-content-center gap-3 flex-wrap">
-          <a href="/productos" className="btn-cta" role="button">
-            Ver servicios
-          </a>
-          <a href="/contacto" className="btn-cta" role="button">
-            Reservar hora
-          </a>
         </div>
-      </div>
+      </Content>
+
+      {/* PILARES */}
+      <Content>
+        <div className="about-pillars-section">
+          <h2 className="about-section-title centered">🌸 Nuestros Pilares 🌸</h2>
+          <p className="about-section-subtitle">
+            Los valores que guían cada una de nuestras terapias
+          </p>
+          
+          <div className="about-pillars-grid">
+            {pilares.map((pilar, index) => (
+              <div key={pilar.title} className="about-pillar-card">
+                <div className="about-pillar-icon-wrapper">
+                  <span className="about-pillar-icon">{pilar.icon}</span>
+                </div>
+                <h4 className="about-pillar-title">{pilar.title}</h4>
+                <p className="about-pillar-desc">{pilar.desc}</p>
+                <div className="about-pillar-number">0{index + 1}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Content>
+
+      {/* ESTADÍSTICAS (OPCIONAL - añade impacto visual) */}
+      <Content>
+        <div className="about-stats">
+          <div className="about-stat-item">
+            <span className="about-stat-number">500+</span>
+            <span className="about-stat-label">Clientes Satisfechos</span>
+          </div>
+          <div className="about-stat-item">
+            <span className="about-stat-number">5+</span>
+            <span className="about-stat-label">Años de Experiencia</span>
+          </div>
+          <div className="about-stat-item">
+            <span className="about-stat-number">100%</span>
+            <span className="about-stat-label">Productos Naturales</span>
+          </div>
+        </div>
+      </Content>
+
+      {/* LLAMADO A LA ACCIÓN */}
+      <Content>
+        <div className="about-final-cta">
+          <h2 className="about-cta-title">¿Lista/o para comenzar tu transformación?</h2>
+          <p className="about-cta-text">
+            Agenda tu primera sesión y descubre el equilibrio que tu cuerpo y mente necesitan
+          </p>
+          <div className="about-cta-buttons">
+            <Button as="a" href="/product" variant="secondary" size="lg">
+              Ver servicios
+            </Button>
+            <Button as="a" href="/contact" variant="primary" size="lg">
+              Reservar hora
+            </Button>
+          </div>
+        </div>
+      </Content>
     </div>
   );
 }

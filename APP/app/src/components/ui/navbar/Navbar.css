@@ -204,3 +204,59 @@
 .main-content {
   padding-top: 100px;
 }
+/* ==============================
+   🌸 USUARIO Y BOTÓN CERRAR SESIÓN
+============================== */
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(155, 100, 200, 0.15);
+  border-radius: 12px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 6px rgba(155, 100, 200, 0.06);
+  color: #5e3589;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-user:hover {
+  background: rgba(245, 230, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+/* --- Botón cerrar sesión --- */
+.logout-btn {
+  background: linear-gradient(90deg, #c77dff, #b388eb);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(160, 100, 200, 0.15);
+}
+
+.logout-btn:hover {
+  background: linear-gradient(90deg, #b388eb, #a56de2);
+  box-shadow: 0 4px 10px rgba(160, 100, 200, 0.25);
+  transform: translateY(-2px);
+}
+
+/* --- Para pantallas pequeñas --- */
+@media (max-width: 768px) {
+  .nav-user {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .logout-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
