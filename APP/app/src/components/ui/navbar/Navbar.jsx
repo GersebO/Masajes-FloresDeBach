@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { useCustomerStore } from "../../../store/zustand/user.store";
 
-const links = [
-  { to: "/", text: "🏠 Home" },
-  { to: "/product", text: "🌿 Productos" },
-  { to: "/aboutUs", text: "🌸 Nosotros" },
-  { to: "/contact", text: "☀️ Contacto" },
-  { to: "/blogs", text: "🪷 Blogs" },
-  { to: "/login", text: "🔑 Iniciar Sesión" },
-  { to: "/register", text: "📝 Registrar Usuario" },
-  { to: "/cart", text: "🛒 Carrito" }
-];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { customer, isAuthenticated, logout } = useCustomerStore();
+
+  const links = [
+    { to: "/", text: "🏠 Home" },
+    { to: "/product", text: "🌿 Productos" },
+    { to: "/aboutUs", text: "🌸 Nosotros" },
+    { to: "/contact", text: "☀️ Contacto" },
+    { to: "/blogs", text: "🪷 Blogs" },
+    { to: "/cart", text: "🛒 Carrito" },
+  ];
 
   return (
     <nav className="navbar">
@@ -47,6 +48,29 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
+
+          {/* Mostrar según sesión */}
+          {!isAuthenticated ? (
+            <>
+              <li>
+                <Link to="/login" className="nav-link" onClick={() => setIsOpen(false)}>
+                  🔑 Iniciar Sesión
+                </Link>
+              </li>
+              <li>
+                <Link to="/register" className="nav-link" onClick={() => setIsOpen(false)}>
+                  📝 Registrar Usuario
+                </Link>
+              </li>
+            </>
+          ) : (
+            <li className="nav-user">
+              <span>👋 Hola, {customer?.firstName}</span>
+              <button className="logout-btn" onClick={logout}>
+                Cerrar sesión
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

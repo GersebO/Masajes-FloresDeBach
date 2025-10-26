@@ -1,52 +1,42 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./Cart.css";
 
+import { useCustomerStore } from "../../../store/zustand/user.store";
+import { useCartStore } from "../../../store/zustand/cart.store";
+
 export default function Cart() {
-  const [cartItems, setCartItems] = useState([]);
-  const [total, setTotal] = useState(0);
+  const { customer, isAuthenticated } = useCustomerStore();
+  const { items, total, fetchCart, isLoading } = useCartStore();
+  const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  // 🧩 Cargar carrito del cliente
   useEffect(() => {
-    const fetchCart = async () => {
-      if (!user || !user.id) {
-        alert("Debes iniciar sesión para ver tu carrito ❗");
-        return;
-      }
+    if (!isAuthenticated || !customer?.id) {
+      alert("Debes iniciar sesión para ver tu carrito ❗");
+      navigate("/login");
+      return;
+    }
 
-      try {
-        const response = await fetch(`http://localhost:8082/api/cart/${user.id}`);
-        if (!response.ok) throw new Error("Error al obtener el carrito");
-        const data = await response.json();
+    fetchCart(customer.id);
+  }, [isAuthenticated, customer, fetchCart, navigate]);
 
-        setCartItems(data);
-        // Calcular total
-        const totalSum = data.reduce((acc, item) => acc + item.price * item.quantity, 0);
-        setTotal(totalSum);
-      } catch (error) {
-        console.error("Error al cargar carrito:", error);
-      }
-    };
-
-    fetchCart();
-  }, []);
-
+  if (!isAuthenticated || !customer?.id) return null;
+  console.log("cartItems:", items);
   return (
     <div className="cart-container container my-5">
+      
       <h1 className="cart-title text-center mb-4">🛒 Tu Carrito</h1>
 
-      {cartItems.length === 0 ? (
+      {isLoading ? (
+        <p className="text-center text-muted">Cargando carrito...</p>
+      ) : items.length === 0 ? (
         <p className="text-center text-muted">Tu carrito está vacío 🌸</p>
       ) : (
         <div className="cart-items">
-          {cartItems.map((item) => (
+          {items.map((item) => (
             <div key={item.id} className="cart-item shadow-sm rounded-3">
-              <img
-                src={item.imageUrl || "/img/default.jpg"}
-                alt={item.name}
-                className="cart-item-img"
-              />
+              <img src={item.imageUrl || "/img/default.jpg"} alt={item.name} className="cart-item-img" />
               <div className="cart-item-info">
                 <h5>{item.name}</h5>
                 <p className="text-muted">{item.description}</p>

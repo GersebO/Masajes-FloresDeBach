@@ -1,0 +1,63 @@
+/*
+ * Contenedor Principal: Mejora el espaciado y centra mejor
+ * Añadido: box-shadow sutil para darle 'profundidad'
+ */
+.content-container {
+  width: 100%;
+  padding: clamp(40px, 8vw, 80px) clamp(20px, 4vw, 40px);
+  margin: 0 auto;
+  max-width: 1200px;
+
+  background: rgba(255, 255, 255, 0.75); /* 🔹 Fondo semitransparente */
+  border-radius: 20px; /* 🔹 Bordes suaves */
+  box-shadow: 0 8px 24px rgba(150, 100, 200, 0.1); /* 🔹 Sombra ligera */
+  backdrop-filter: blur(6px); /* 🔹 Efecto vidrio */
+}
+
+/*
+ * Encabezado: Aseguramos un espacio claro después de la cabecera
+ * Añadido: Un borde sutil como separador.
+ */
+.content-header {
+    /* Un poco más de espacio inferior para mejor separación */
+    margin-bottom: 50px;
+    /* Separador visual sutil */
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee; /* Línea de separación muy clara */
+}
+
+/*
+ * Título: Más impacto y legible
+ * Mejorado: Tamaño responsivo, color más oscuro para contraste y altura de línea.
+ */
+.content-title {
+    /* Hacemos el tamaño más responsivo para diferentes pantallas */
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; /* Un poco más de peso para destacar */
+    color: #2c3e50; /* Color más oscuro (casi negro) para mejor contraste (WCAG) */
+    line-height: 1.1; /* Ajuste para que no se vea apretado */
+    letter-spacing: -0.5px; /* Pequeño ajuste para títulos grandes */
+}
+
+/*
+ * Subtítulo: Mayor jerarquía y sutilmente diferenciado
+ * Mejorado: Más legible y con un color que complementa el título.
+ */
+.content-subtitle {
+    /* Tamaño ligeramente más grande para jerarquía */
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: #7f8c8d; /* Color gris oscuro y elegante */
+    margin-top: 15px;
+    line-height: 1.5; /* Fundamental para la legibilidad */
+}
+
+/*
+ * Cuerpo del Contenido: Mejor distribución
+ * Mejorado: Mantenemos flex, pero aseguramos la fluidez.
+ */
+.content-body {
+    display: flex;
+    flex-direction: column;
+    /* Espacio entre los bloques de contenido más generoso */
+    gap: 2.5rem;
+}

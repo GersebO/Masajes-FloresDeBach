@@ -1,128 +1,159 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./Product.css";
+import { useProductStore } from '../../../store/zustand/product.store';
+import { useCustomerStore } from "../../../store/zustand/user.store";
+import { useCartStore } from "../../../store/zustand/cart.store";
+import { useNavigate } from "react-router-dom";
+import Hero from "../../ui/hero/Hero";
+import Content from "../../ui/content/Content";
+import Button from "../../ui/button/Button";
 
 export default function Product() {
-  const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState("Todos");
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const {
+    products,
+    category,
+    selectedProduct,
+    isLoading,
+    fetchProducts,
+    selectProduct,
+    clearSelectedProduct,
+    setCategory,
+  } = useProductStore();
 
-  //  Cargar productos desde el backend
+  const { customer, isAuthenticated } = useCustomerStore();
+  const { addItem } = useCartStore();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("http://localhost:8082/api/products");
-        if (!response.ok) throw new Error("Error al obtener productos");
-        const data = await response.json();
-
-        // Mostrar solo productos activos
-        const activos = data.filter((p) => p.isActive === true);
-        setProducts(activos);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
-  // 🧮 Filtro por categoría
   const filteredProducts =
     category === "Todos"
       ? products
       : products.filter((p) => p.categoryName === category);
 
+  const handleAddToCart = async (productId) => {
+    if (!isAuthenticated || !customer?.id) {
+      alert("Debes iniciar sesión para agregar al carrito ❗");
+      navigate("/login");
+      return;
+    }
+    await addItem(customer.id, productId, 1);
+    alert("Producto añadido al carrito ✅");
+  };
+
   return (
-    <div className="container my-5">
-
-
-      {/* Encabezado estilo Hero */}
-      <section className="product-hero-box">
-        <h1>🌿 Nuestros Productos 🌿</h1>
-        <p>
-          Explora nuestras terapias para encontrar la armonía perfecta entre tu cuerpo y tu mente.
-        </p>
-      </section>
-
-      {/* Botones de categoría */}
-      <div className="text-center mb-4">
-        <button
-          className={`btn-category ${category === "Todos" ? "active" : ""}`}
-          onClick={() => setCategory("Todos")}
-        >Todos
-        </button>
-
-        <button
-          className={`btn-category ${category === "Masajes" ? "active" : ""}`}
-          onClick={() => setCategory("Masajes")}
-        >Masajes
-        </button>
-
-        <button
-          className={`btn-category ${category === "Flores de Bach" ? "active" : ""}`}
-          onClick={() => setCategory("Flores de Bach")}
-        >Flores de Bach
-        </button>
+    <div className="product-container">
+      {/* HERO */}
+      <div className="product-hero-section">
+        <Hero title="🌿 Equilibrio para tu Día a Día 🌿" />
       </div>
 
-      {/* Lista de productos */}
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-        {filteredProducts.map((p) => (
-          <div key={p.id} className="col">
-            <div
-              className="card h-100 shadow-sm"
-              style={{ cursor: "pointer" }}
-              onClick={() => setSelectedProduct(p)}
+
+        <div className="category-buttons">
+          {["Todos", "Masajes", "Flores de Bach"].map((cat) => (
+            <button
+              key={cat}
+              className={`category-btn ${category === cat ? "active" : ""}`}
+              onClick={() => setCategory(cat)}
             >
-              <img
-                src={p.imageUrl || "/img/default.jpg"}
-                className="card-img-top"
-                alt={p.name}
-              />
-              <div className="card-body text-center">
-                <h5 className="card-title">{p.name}</h5>
-                <p className="text-muted">{p.description}</p>
-                <p className="fw-bold">${p.price.toLocaleString("es-CL")}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+              {cat}
+            </button>
+          ))}
+        </div>
 
-      {/* Modal de producto */}
-      {selectedProduct && (
-        <div className="modal show d-block" tabIndex="-1">
-          <div className="modal-dialog">  
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">{selectedProduct.name}</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setSelectedProduct(null)}
-                ></button>
+      {/* PRODUCTOS */}
+      <Content>
+        {isLoading ? (
+          <p className="loading-text">Cargando productos...</p>
+        ) : (
+          <div className="product-grid">
+            {filteredProducts.map((p) => (
+              <div key={p.id} className="product-card">
+                <div className="product-image-wrapper">
+                  <img
+                    src={p.imageUrl || "/img/default.jpg"}
+                    alt={p.name}
+                    className="product-image"
+                  />
+                </div>
+                
+                <div className="product-content">
+                  <h3 className="product-title">{p.name}</h3>
+                  <p className="product-description">{p.description}</p>
+                  
+                  <div className="product-footer">
+                    <Button
+                      variant="price"
+                      size="md"
+                      onClick={() => selectProduct(p)}
+                      className="product-price-btn"
+                    >
+                      ${p.price.toLocaleString("es-CL")}
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <div className="modal-body text-center">
+            ))}
+          </div>
+        )}
+      </Content>
+
+      {/* MODAL */}
+      {selectedProduct && (
+        <>
+          <div className="modal-overlay" onClick={clearSelectedProduct}></div>
+          <div className="modal-modern">
+            <div className="modal-modern-content">
+              <button
+                className="modal-close"
+                onClick={clearSelectedProduct}
+              >
+                ✕
+              </button>
+
+              <div className="modal-image-section">
                 <img
                   src={selectedProduct.imageUrl}
                   alt={selectedProduct.name}
-                  className="img-fluid rounded mb-3"
+                  className="modal-image"
                 />
-                <p>{selectedProduct.description}</p>
-                <p className="fw-bold text-success">
-                  Precio: ${selectedProduct.price.toLocaleString("es-CL")}
-                  {/**Añade el stock */}
-                <p className="fw-bold text-success">Stock: {selectedProduct.stock}</p>
-                </p>
               </div>
-              <div className="modal-footer">
-                <button className="btn btn-success">
-                  Añadir al carrito
-                </button>
+
+              <div className="modal-info-section">
+                <h2 className="modal-title">{selectedProduct.name}</h2>
+                <p className="modal-description">{selectedProduct.description}</p>
+
+                <div className="modal-details">
+                  <div className="modal-detail-item">
+                    <span className="detail-label">Precio:</span>
+                    <span className="detail-value price">
+                      ${selectedProduct.price.toLocaleString("es-CL")}
+                    </span>
+                  </div>
+                  <div className="modal-detail-item">
+                    <span className="detail-label">Stock disponible:</span>
+                    <span className="detail-value stock">
+                      {selectedProduct.stock} unidades
+                    </span>
+                  </div>
+                </div>
+
+                <div className="modal-actions">
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    onClick={() => handleAddToCart(selectedProduct.id)}
+                  >
+                    🛒 Añadir al carrito
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
-
     </div>
   );
 }

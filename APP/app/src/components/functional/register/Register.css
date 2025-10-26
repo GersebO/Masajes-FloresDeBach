@@ -1,138 +1,271 @@
-/* ======== CONTENEDOR GLOBAL ======== */
-body {
-  background: linear-gradient(145deg, #f4e9ff 0%, #ffffff 100%);
+/* ===================================
+   ✨ REGISTER PAGE - DISEÑO ULTRA MODERNO
+   =================================== */
+
+.register-container {
   font-family: "Poppins", sans-serif;
-  color: #3c2a4d;
+  background-color: #fdf9ff;
+  color: #4a148c;
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
-/* ======== FORMULARIO ======== */
-.container {
-  max-width: 1000px !important;
-  margin-top: 90px !important;
-  margin-bottom: 60px !important;
-  padding: 0 1rem !important;
+/* === HERO === */
+.register-hero-section {
+  padding: 2rem 1rem 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-/* Tarjeta principal */
-.formulario-fondo {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(248, 240, 255, 0.9)) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(190, 150, 255, 0.4) !important;
-  border-radius: 22px !important;
-  padding: 2.5rem 3rem !important;
-  box-shadow: 0 10px 25px rgba(150, 130, 255, 0.25) !important;
-  transition: all 0.35s ease !important;
+/* ===================================
+   BENEFICIOS
+   =================================== */
+
+.register-benefits {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f3ff 0%, #f0e1ff 100%);
+  border-radius: 20px;
 }
 
-.formulario-fondo:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 32px rgba(140, 120, 255, 0.35);
+.register-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #5e3589;
+  font-weight: 500;
 }
 
-/* ======== TÍTULOS ======== */
-h1, h2 {
-  font-family: "Playfair Display", serif !important;
-  font-weight: 700 !important;
-  color: #4b2e83 !important;
-  text-align: center !important;
+.register-benefit-item i {
+  color: #28a745;
+  font-size: 1.3rem;
 }
 
-h1 {
-  font-size: 2.2rem !important;
-  margin-bottom: 1.6rem !important;
+/* ===================================
+   FORMULARIO
+   =================================== */
+
+.register-form {
+  background: white;
+  border-radius: 25px;
+  padding: 3rem;
+  box-shadow: 0 8px 25px rgba(150, 100, 200, 0.12);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-h2 {
-  font-size: 1.3rem !important;
-  margin: 1.8rem 0 1rem !important;
+/* === SECCIONES === */
+.register-section {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid rgba(168, 124, 224, 0.1);
 }
 
-/* ======== INPUTS ======== */
-.form-control {
-  border: 1px solid #cbb8ff !important;
-  border-radius: 10px !important;
-  background: #faf8ff !important;
-  padding: 0.7rem 0.9rem !important;
-  transition: all 0.25s ease !important;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+.register-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2rem;
 }
 
-.form-control:focus {
-  border-color: #b38aff !important;
-  background-color: #fff !important;
-  box-shadow: 0 0 0 4px rgba(185, 155, 255, 0.25) !important;
-  outline: none !important;
+.register-section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #5e3589;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 
-/* ======== VALIDACIÓN ======== */
-.is-valid {
-  border-color: #64d96d !important;
-  box-shadow: 0 0 6px rgba(80, 200, 100, 0.3) !important;
+.register-section-title i {
+  font-size: 1.4rem;
+  color: #a87ce0;
 }
 
-.is-invalid {
-  border-color: #f77a7a !important;
-  box-shadow: 0 0 6px rgba(255, 80, 80, 0.2) !important;
+/* === GRID === */
+.register-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-/* ======== BOTONES ======== */
-.btn-primary,
-.btn-secondary {
-  font-weight: 600 !important;
-  border-radius: 10px !important;
-  padding: 0.75rem 1.5rem !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 4px 12px rgba(130, 100, 255, 0.15) !important;
+.register-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-/* Botón principal */
-.btn-primary {
-  background: linear-gradient(90deg, #b38aff 0%, #8754ff 100%) !important;
-  border: none !important;
-  color: #fff !important;
+/* === LABELS === */
+.register-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #5e3589;
 }
 
-.btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  background: linear-gradient(90deg, #a67cff 0%, #7a4aff 100%) !important;
-  box-shadow: 0 6px 16px rgba(130, 90, 255, 0.3) !important;
+/* === INPUTS === */
+.register-input,
+.register-input select {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 2px solid #e8d6fa;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  color: #4a148c;
+  background: #faf5ff;
+  transition: all 0.3s ease;
 }
 
-/* Botón secundario */
-.btn-secondary {
-  background: rgba(230, 205, 255, 0.9) !important;
-  color: #4b2e83 !important;
-  border: 1px solid rgba(180, 150, 255, 0.3) !important;
+.register-input:focus {
+  outline: none;
+  border-color: #a87ce0;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(168, 124, 224, 0.1);
 }
 
-.btn-secondary:hover {
-  background: rgba(210, 180, 255, 1) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(160, 130, 255, 0.25) !important;
+.register-input::placeholder {
+  color: #b89ce3;
 }
 
-/* ======== EXTRAS ======== */
-hr {
-  border-color: rgba(200, 150, 255, 0.3) !important;
-  margin: 2rem 0 !important;
+.register-input:disabled {
+  background: #f0f0f0;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
-.invalid-feedback {
-  color: #c43d3d !important;
-  font-size: 0.9rem !important;
+/* === VALIDACIÓN === */
+.register-input.valid {
+  border-color: #28a745;
+  background: #f0fff4;
 }
 
-/* ======== RESPONSIVE ======== */
+.register-input.error {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+
+.register-error {
+  font-size: 0.85rem;
+  color: #dc3545;
+  margin-top: -0.3rem;
+}
+
+/* === BOTONES === */
+.register-actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+/* === MENSAJES === */
+.register-message {
+  padding: 1.2rem 1.5rem;
+  border-radius: 15px;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 500;
+  animation: slideDown 0.5s ease;
+}
+
+.register-message.success {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border: 2px solid #28a745;
+  color: #155724;
+}
+
+.register-message.error {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  border: 2px solid #dc3545;
+  color: #721c24;
+}
+
+.register-message i {
+  font-size: 1.5rem;
+}
+
+/* ===================================
+   LINK DE LOGIN
+   =================================== */
+
+.register-login-link {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f3ff 0%, #f0e1ff 100%);
+  border-radius: 20px;
+}
+
+.register-login-link p {
+  color: #6a1b9a;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.register-login-link a {
+  color: #a87ce0;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.register-login-link a:hover {
+  color: #5e3589;
+  text-decoration: underline;
+}
+
+/* ===================================
+   ANIMACIONES
+   =================================== */
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
+   RESPONSIVO
+   =================================== */
+
 @media (max-width: 768px) {
-  .formulario-fondo {
-    padding: 2rem 1.5rem !important;
+  .register-form {
+    padding: 2rem 1.5rem;
   }
 
-  h1 {
-    font-size: 1.7rem !important;
+  .register-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
-  h2 {
-    font-size: 1.1rem !important;
+  .register-section-title {
+    font-size: 1.3rem;
+  }
+
+  .register-benefits {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .register-actions {
+    flex-direction: column;
+  }
+
+  .register-actions button {
+    width: 100%;
   }
 }

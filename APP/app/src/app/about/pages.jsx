@@ -1,6 +1,13 @@
 import React from "react";
-import AboutUs from "../../components/functional/about/AboutUs.jsx";
+import Content from "../../components/ui/content/Content";
+import AboutUs from "../../components/functional/about/AboutUs";
 
-export default function AboutPage() {
-  return <AboutUs />;
+export default function AboutUsPage() {
+  return (
+
+      <Content>
+        <AboutUs />
+      </Content>
+
+  );
 }

@@ -1,275 +1,359 @@
-/* 🌸 --- ESTRUCTURA GENERAL --- 🌸 */
-.about-page {
+/* ===================================
+   🌸 ABOUT US - DISEÑO ULTRA MODERNO
+   =================================== */
+
+.about-container {
   font-family: "Poppins", sans-serif;
-  color: #3c2a4d;
-  padding-top: 2rem;
-  overflow-x: hidden;
+  background-color: #fdf9ff;
+  color: #4a148c;
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
-/* --- CONTENEDOR GENERAL --- */
-.container {
-  max-width: 1100px;
+/* === HERO SECTION === */
+.about-hero-section {
+  padding: 2rem 1rem 3rem;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 1.5rem;
 }
 
-/* 🌼 --- HERO (Encabezado principal) --- */
-.hero {
-  background: linear-gradient(145deg, #f4ebff 0%, #fdfaff 100%);
-  padding: 3rem 1.5rem;
-  border-radius: 20px;
-  box-shadow: 0 6px 18px rgba(155, 125, 255, 0.15);
-  margin-bottom: 3rem;
-  text-align: center;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(200, 180, 255, 0.2);
-  transition: all 0.4s ease;
-}
-
-.hero:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(155, 125, 255, 0.25);
-}
-
-.hero-title {
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  font-size: 2.4rem;
-  color: #4b2e83;
-  margin-bottom: 0.8rem;
-}
-
-.hero-subtitle {
-  color: #5f4b8b;
-  font-size: 1.1rem;
-  margin-bottom: 1.8rem;
-}
-
-/* 🌷 --- BOTÓN PRINCIPAL --- */
-.btn-cta {
-  background: linear-gradient(90deg, #b38aff 0%, #9a6fff 100%);
-  border: none;
-  padding: 12px 26px;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(155, 125, 255, 0.3);
-  transition: all 0.25s ease-in-out;
-   margin-top: 100px;
-}
-
-.btn-cta:hover {
-  background: linear-gradient(90deg, #a67cff 0%, #8754ff 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(135, 84, 255, 0.4);
-}
-
-/* 🌿 --- SECCIÓN PRINCIPAL (Misión y valores) --- */
-.about-section {
+.about-cta-top {
   display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* ===================================
+   SECCIÓN MISIÓN
+   =================================== */
+
+.about-mission-section {
+  margin-top: 2rem;
+}
+
+.about-mission-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #5e3589;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  /* Para centrar el texto */
+}
+
+.about-section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #a87ce0, #c2a3ff);
+  border-radius: 10px;
+}
+
+.about-section-title.centered {
+  display: block;
+  text-align: center;
+}
+
+.about-section-title.centered::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.about-section-subtitle {
+  text-align: center;
+  color: #6a1b9a;
+  font-size: 1.1rem;
+  margin-top: -0.5rem;
   margin-bottom: 3rem;
 }
 
-.about-image {
-  flex: 1 1 45%;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+.about-mission-description {
+  font-size: 1.1rem;
+  color: #5b278a;
+  line-height: 1.9;
+  margin-bottom: 2.5rem;
+}
+
+.about-subsection-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #6a1b9a;
+  margin-bottom: 1.5rem;
+}
+
+/* === VALORES EN GRID === */
+.about-values-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about-value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: white;
+  padding: 1.2rem;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(150, 100, 200, 0.08);
   transition: all 0.3s ease;
 }
 
-.about-image img {
+.about-value-item:hover {
+  transform: translateX(8px);
+  box-shadow: 0 5px 15px rgba(150, 100, 200, 0.15);
+}
+
+.about-value-emoji {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.about-value-text {
+  font-size: 1rem;
+  color: #5b278a;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* === IMAGEN CON DECORACIÓN === */
+.about-mission-image {
+  position: relative;
+}
+
+.about-img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(120, 70, 160, 0.2);
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.about-img:hover {
+  transform: scale(1.03);
+}
+
+.about-img-decoration {
+  position: absolute;
+  top: -20px;
+  right: -20px;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
+  background: linear-gradient(135deg, #f3e9ff 0%, #e8d6fa 100%);
+  border-radius: 20px;
+  z-index: 1;
 }
 
-.about-image:hover img {
-  transform: scale(1.05);
+/* ===================================
+   PILARES MODERNOS
+   =================================== */
+
+.about-pillars-section {
+  margin-top: 3rem;
 }
 
-.about-box {
-  flex: 1 1 50%;
-  background: rgba(250, 245, 255, 0.75);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 8px 20px rgba(170, 150, 255, 0.1);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(200, 180, 255, 0.25);
-  transition: all 0.3s ease;
+.about-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
 }
 
-.about-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 26px rgba(150, 120, 255, 0.25);
+.about-pillar-card {
+  background: white;
+  border-radius: 25px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(150, 100, 200, 0.12);
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
 }
 
-.about-box h2 {
-  font-size: 1.5rem;
-  color: #4b2e83;
+.about-pillar-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(150, 100, 200, 0.25);
+  border-color: #a87ce0;
+}
+
+.about-pillar-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #a87ce0, #c2a3ff, #d9b3ff);
+}
+
+.about-pillar-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, #f3e9ff 0%, #e8d6fa 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(168, 124, 224, 0.2);
+}
+
+.about-pillar-icon {
+  font-size: 2.5rem;
+}
+
+.about-pillar-title {
+  font-size: 1.4rem;
   font-weight: 700;
+  color: #5e3589;
   margin-bottom: 1rem;
 }
 
-.about-box h3 {
-  font-size: 1.1rem;
-  color: #5b3c9b;
-  margin-top: 1.3rem;
-}
-
-.about-box ul {
-  margin-top: 0.5rem;
-  padding-left: 0;
-  list-style: none;
-}
-
-.about-box li {
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
-  color: #5a4a7f;
-}
-
-.about-box li::before {
-  content: "🌸";
+.about-pillar-desc {
   font-size: 1rem;
+  color: #6a1b9a;
+  line-height: 1.7;
 }
 
-/* 🌺 --- PILARES / TARJETAS INFORMATIVAS --- */
-.pillars {
+.about-pillar-number {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
+  font-size: 4rem;
+  font-weight: 800;
+  color: rgba(168, 124, 224, 0.1);
+  font-family: "Playfair Display", serif;
+}
+
+/* ===================================
+   ESTADÍSTICAS
+   =================================== */
+
+.about-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #f8f3ff 0%, #f0e1ff 100%);
+  border-radius: 25px;
 }
 
-.about-pill {
-  background: #fff;
-  border-radius: 14px;
-  padding: 1.8rem;
-  border: 1px solid rgba(200, 180, 255, 0.3);
-  box-shadow: 0 6px 12px rgba(155, 125, 255, 0.12);
-  transition: all 0.3s ease;
+.about-stat-item {
+  text-align: center;
 }
 
-.about-pill:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(155, 125, 255, 0.25);
-}
-
-.about-pill h4 {
-  font-size: 1.15rem;
-  color: #4b2e83;
-  font-weight: 600;
+.about-stat-number {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a87ce0, #c2a3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 0.5rem;
+  font-family: "Playfair Display", serif;
 }
 
-.about-pill p {
-  font-size: 0.95rem;
-  color: #5b4b8c;
-}
-
-/* 🌼 --- BOTONES FINALES --- */
-.category-btn {
-  background: #fff;
-  border: 2px solid #c7a4ff;
-  color: #5b3c9b;
-  padding: 10px 22px;
-  border-radius: 10px;
+.about-stat-label {
+  display: block;
+  font-size: 1rem;
+  color: #6a1b9a;
   font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 8px rgba(150, 120, 255, 0.15);
 }
 
-.category-btn:hover {
-  background: linear-gradient(90deg, #c7a4ff, #a57cff);
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(150, 120, 255, 0.25);
+/* ===================================
+   CTA FINAL
+   =================================== */
+
+.about-final-cta {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #f8f3ff 0%, #f0e1ff 100%);
+  border-radius: 25px;
+  margin: 3rem 0;
 }
 
-/* 🌸 --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .hero {
-    padding: 2rem 1rem;
+.about-cta-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #5e3589;
+  margin-bottom: 1rem;
+}
+
+.about-cta-text {
+  font-size: 1.1rem;
+  color: #6a1b9a;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* ===================================
+   RESPONSIVO
+   =================================== */
+
+@media (max-width: 992px) {
+  .about-mission-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 
-  .hero-title {
-    font-size: 1.9rem;
+  .about-img-decoration {
+    display: none;
   }
 
-  .about-section {
-    flex-direction: column;
-  }
-
-  .about-box,
-  .about-image {
-    flex: 1 1 100%;
-  }
-
-  .pillars {
+  .about-pillars-grid {
     grid-template-columns: 1fr;
   }
 }
-.product-hero-box {
-  background: linear-gradient(180deg, #fefcff 0%, #f5e9ff 100%);
-  border-radius: 20px;
-  padding: 80px 30px 70px;
-  margin: 40px auto;
-  max-width: 900px;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(150, 100, 200, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.product-hero-box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(140, 90, 200, 0.25);
-}
+@media (max-width: 768px) {
+  .about-section-title {
+    font-size: 2rem;
+  }
 
-.product-hero-box h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #5e3589;
-  margin-bottom: 15px;
-}
+  .about-mission-description {
+    font-size: 1rem;
+  }
 
-.product-hero-box p {
-  color: #6a1b9a;
-  font-size: 1.1rem;
-  max-width: 700px;
-  margin: 0 auto;
-}
-/* 🌿 BOTÓN DE ACCIÓN EN HERO BOX */
-.product-hero-box .btn-cta {
-  display: inline-block;
-  margin-top: 25px; /* 🔽 Baja el botón respecto al texto */
-  background: linear-gradient(90deg, #b38aff 0%, #9a6fff 100%);
-  border: none;
-  padding: 12px 28px;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(155, 125, 255, 0.3);
-  transition: all 0.25s ease-in-out;
-}
+  .about-cta-title {
+    font-size: 1.8rem;
+  }
 
-.product-hero-box .btn-cta:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(90deg, #a67cff 0%, #7a4aff 100%);
-  box-shadow: 0 6px 18px rgba(130, 90, 255, 0.4);
+  .about-stat-number {
+    font-size: 2.5rem;
+  }
+
+  .about-cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-value-item {
+    flex-direction: column;
+    text-align: center;
+  }
 }

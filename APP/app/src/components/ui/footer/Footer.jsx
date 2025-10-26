@@ -3,7 +3,7 @@ import "./Footer.css";
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="container text-center">
+      <div >
         <p className="footer-title">MarafloresdeBach</p>
         <p className="footer-info">© 2025 Todos los derechos reservados</p>
         <p className="footer-links">
