@@ -354,3 +354,27 @@
   background: linear-gradient(135deg, #4a2870 0%, #6a3b8f 100%) !important;
   box-shadow: 0 6px 18px rgba(94, 53, 137, 0.4) !important;
 }
+
+/* Stock indicators */
+.product-stock {
+  margin-top: 0.6rem;
+  text-align: center;
+}
+.stock-available {
+  color: #2e7d32;
+  font-weight: 600;
+}
+.stock-critical {
+  color: #ff9800;
+  font-weight: 700;
+}
+.stock-out {
+  color: #d32f2f;
+  font-weight: 700;
+}
+.stock-warning {
+  margin-top: 0.75rem;
+  color: #b71c1c;
+  font-weight: 600;
+  text-align: center;
+}
