@@ -13,6 +13,7 @@ import ContactPage from "./app/contact/pages.jsx";
 import CartPage from "./app/cart/pages.jsx";
 import RegisterPage from "./app/register/pages.jsx";
 import LoginPage from "./app/login/pages.jsx";
+import AppointmentPage from "./app/appointment/pages.jsx";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/appointment" element={<AppointmentPage />} />
 
         </Routes>
       </Screen>

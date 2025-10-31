@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../../store/hooks/useFetch";
+import { activateUser, deactivateUser } from "../../../store/services/user.service";
 import "./User.css";
 
 export default function User() {
-  const users = useFetch("http://localhost:8081/api/users");
+  const { data: users, loading, error } = useFetch("http://localhost:8081/api/users");
   const [filter, setFilter] = useState("ALL");
 
-  if (!users) return <p>Cargando usuarios...</p>;
+  if (loading) return <p>Cargando usuarios...</p>;
+  if (error) return <p>Error al cargar usuarios: {error}</p>;
+  if (!users) return <p>No hay usuarios disponibles</p>;
 
   // Normalizamos los datos según tu backend real
   const usersNormalizados = users.map((u) => ({
@@ -33,11 +36,7 @@ export default function User() {
   const handleDesactivar = async (id, name) => {
     if (window.confirm(`¿Estás seguro de desactivar a "${name}"?`)) {
       try {
-        const response = await fetch(
-          `http://localhost:8081/api/users/${id}/deactivate`,
-          { method: "PATCH" }
-        );
-        if (!response.ok) throw new Error("Error al desactivar el usuario");
+        await deactivateUser(id);
         alert("Usuario desactivado exitosamente ✅");
         window.location.reload();
       } catch (error) {
@@ -51,11 +50,7 @@ export default function User() {
   const handleActivar = async (id, name) => {
     if (window.confirm(`¿Estás seguro de activar a "${name}"?`)) {
       try {
-        const response = await fetch(
-          `http://localhost:8081/api/users/${id}/activate`,
-          { method: "PATCH" }
-        );
-        if (!response.ok) throw new Error("Error al activar el usuario");
+        await activateUser(id);
         alert("Usuario activado exitosamente ✅");
         window.location.reload();
       } catch (error) {

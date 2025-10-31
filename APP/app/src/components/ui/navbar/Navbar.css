@@ -215,10 +215,8 @@
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(155, 100, 200, 0.15);
   border-radius: 12px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   box-shadow: 0 2px 6px rgba(155, 100, 200, 0.06);
-  color: #5e3589;
-  font-weight: 500;
   transition: all 0.3s ease;
 }
 
@@ -227,18 +225,39 @@
   transform: translateY(-1px);
 }
 
+.user-greeting {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5e3589;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.user-greeting i {
+  font-size: 1.3rem;
+  color: #a87ce0;
+}
+
 /* --- Botón cerrar sesión --- */
 .logout-btn {
   background: linear-gradient(90deg, #c77dff, #b388eb);
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 6px rgba(160, 100, 200, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logout-btn i {
+  font-size: 1rem;
 }
 
 .logout-btn:hover {
@@ -252,11 +271,13 @@
   .nav-user {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: 10px;
+    width: 80%;
+    margin: 0 auto;
   }
 
   .logout-btn {
     width: 100%;
-    text-align: center;
+    justify-content: center;
   }
 }

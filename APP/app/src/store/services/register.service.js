@@ -1,11 +1,12 @@
 // src/store/services/registerService.js
+import { API_CONFIG } from "./api.config";
 
-const API_BASE_URL = "http://localhost:8081/api/customers"; // cambia el puerto según tu backend
+const API_BASE_URL = `${API_CONFIG.BASE_URL_USER_SERVICE}/customers`;
 
 const registerService = {
   async createCustomer(data) {
     try {
-      const response = await fetch(`${API_BASE_URL}/customer`, {
+      const response = await fetch(API_BASE_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -14,7 +15,7 @@ const registerService = {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => ({ message: "Error en el registro" }));
         throw new Error(errorData.message || "Error en el registro");
       }
 

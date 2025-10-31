@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createUser as createUserService } from "../services/user.service";
 
 export const useUserCreate = () => {
   const [loading, setLoading] = useState(false);
@@ -9,17 +10,7 @@ export const useUserCreate = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch("http://localhost:8081/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Respuesta del servidor:", errorText);
-        throw new Error("Error al crear el usuario");
-      }
+      await createUserService(userData);
 
       alert("✅ Usuario creado exitosamente");
       window.location.href = "/user";

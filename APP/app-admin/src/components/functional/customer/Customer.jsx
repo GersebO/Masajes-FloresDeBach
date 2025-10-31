@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../../store/hooks/useFetch";
+import { activateCustomer, deactivateCustomer } from "../../../store/services/customer.service";
 import "./customer.css";
 
 export default function Customer() {
-  const customers = useFetch("http://localhost:8081/api/customers");
+  const { data: customers, loading, error } = useFetch("http://localhost:8081/api/customers");
   const [filter, setFilter] = useState("ALL");
 
-  if (!customers) {
-    return <p>Cargando clientes...</p>;
-  }
+  if (loading) return <p>Cargando clientes...</p>;
+  if (error) return <p>Error al cargar clientes: {error}</p>;
+  if (!customers) return <p>No hay clientes disponibles</p>;
 
   // === Normalizamos ===
   const customersNormalizados = customers.map((c) => ({
@@ -36,11 +37,7 @@ export default function Customer() {
   const handleDesactivar = async (id, name) => {
     if (window.confirm(`¿Estás seguro de desactivar al cliente "${name}"?`)) {
       try {
-        const response = await fetch(
-          `http://localhost:8081/api/customers/${id}/deactivate`,
-          { method: "PATCH" }
-        );
-        if (!response.ok) throw new Error("Error al desactivar el cliente");
+        await deactivateCustomer(id);
         alert("Cliente desactivado exitosamente ✅");
         window.location.reload();
       } catch (error) {
@@ -54,11 +51,7 @@ export default function Customer() {
   const handleActivar = async (id, name) => {
     if (window.confirm(`¿Estás seguro de activar al cliente "${name}"?`)) {
       try {
-        const response = await fetch(
-          `http://localhost:8081/api/customers/${id}/activate`,
-          { method: "PATCH" }
-        );
-        if (!response.ok) throw new Error("Error al activar el cliente");
+        await activateCustomer(id);
         alert("Cliente activado exitosamente ✅");
         window.location.reload();
       } catch (error) {

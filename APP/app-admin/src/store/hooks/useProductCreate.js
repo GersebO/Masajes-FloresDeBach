@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createProduct as createProductService } from "../services/product.service";
 
 export const useProductCreate = () => {
   const [loading, setLoading] = useState(false);
@@ -9,17 +10,7 @@ export const useProductCreate = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch("http://localhost:8082/api/products", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(productData),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Respuesta del servidor:", errorText);
-        throw new Error("Error al crear el producto");
-      }
+      await createProductService(productData);
 
       alert("✅ Producto creado exitosamente");
       window.location.href = "/product";

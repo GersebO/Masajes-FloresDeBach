@@ -10,7 +10,7 @@ import Button from "../../ui/button/Button";
 
 export default function Cart() {
   const { customer, isAuthenticated } = useCustomerStore();
-  const { items, total, fetchCart, isLoading, removeItem, updateQuantity } = useCartStore();
+  const { items, total, fetchCart, isLoading, removeItem, updateQuantity, clearCart } = useCartStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,19 +43,31 @@ export default function Cart() {
     console.log("💰 Total:", total);
   }, [items, total]);
 
-  const handleQuantityChange = (itemId, newQuantity) => {
+  const handleQuantityChange = (productId, newQuantity) => {
     if (newQuantity < 1) return;
-    updateQuantity(customer.id, itemId, newQuantity);
+    updateQuantity(customer.id, productId, newQuantity);
   };
 
-  const handleRemoveItem = (itemId) => {
+  const handleRemoveItem = (productId) => {
     if (window.confirm("¿Seguro que deseas eliminar este producto?")) {
-      removeItem(customer.id, itemId);
+      removeItem(customer.id, productId);
     }
   };
 
-  const handleCheckout = () => {
-    navigate("/checkout");
+  const handleCheckout = async () => {
+    try {
+      // Vaciar el carrito (local y backend)
+      await clearCart(customer.id);
+      
+      // Mostrar alerta de éxito
+      alert("✅ ¡Compra realizada con éxito! Gracias por tu preferencia 🎉");
+      
+      // Redirigir a la página principal
+      navigate("/");
+    } catch (error) {
+      console.error("Error al procesar la compra:", error);
+      alert("❌ Hubo un error al procesar tu compra. Por favor, intenta nuevamente.");
+    }
   };
 
   if (!isAuthenticated || !customer?.id) return null;
@@ -120,7 +132,7 @@ export default function Cart() {
                       <div className="cart-item-quantity">
                         <button
                           className="cart-quantity-btn"
-                          onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+                          onClick={() => handleQuantityChange(item.productId, item.quantity - 1)}
                           disabled={item.quantity <= 1}
                         >
                           -
@@ -128,7 +140,7 @@ export default function Cart() {
                         <span className="cart-quantity-value">{item.quantity}</span>
                         <button
                           className="cart-quantity-btn"
-                          onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                          onClick={() => handleQuantityChange(item.productId, item.quantity + 1)}
                         >
                           +
                         </button>
@@ -147,7 +159,7 @@ export default function Cart() {
 
                       <button
                         className="cart-item-remove"
-                        onClick={() => handleRemoveItem(item.id)}
+                        onClick={() => handleRemoveItem(item.productId)}
                         title="Eliminar producto"
                       >
                         <i className="bi bi-trash" aria-hidden="true"></i>

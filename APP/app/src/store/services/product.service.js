@@ -1,11 +1,17 @@
-const API_URL = "http://localhost:8082/api/products";
+import { API_CONFIG, getAuthHeaders } from "./api.config";
+
+const API_URL = `${API_CONFIG.BASE_URL_PRODUCT_SERVICE}/products`;
 
 /**
  * Obtiene todos los productos activos del backend.
+ * Nota: Para ver productos, podría no requerir autenticación,
+ * pero incluimos headers por si el backend lo requiere.
  */
 export const getAllProducts = async () => {
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(API_URL, {
+      headers: getAuthHeaders(),
+    });
     if (!response.ok) throw new Error("Error al obtener productos");
     const data = await response.json();
     return data.filter((p) => p.isActive === true);

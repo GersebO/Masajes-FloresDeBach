@@ -1,0 +1,387 @@
+/* ===================================
+   📅 APPOINTMENT - SISTEMA DE AGENDAMIENTO
+   =================================== */
+
+.appointment-container {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #fdf9ff 0%, #f5ecff 100%);
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+/* === HERO === */
+.appointment-hero-section {
+  padding: 2rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* === CONTENT === */
+.appointment-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ===================================
+   INFO DEL CLIENTE
+   =================================== */
+
+.appointment-customer-info {
+  margin-bottom: 2rem;
+}
+
+.customer-info-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(150, 100, 200, 0.12);
+  border: 2px solid rgba(168, 124, 224, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.customer-info-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #a87ce0 0%, #7e57c2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(168, 124, 224, 0.3);
+  flex-shrink: 0;
+}
+
+.customer-info-details {
+  flex: 1;
+}
+
+.customer-info-details h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: #5e3589;
+  margin-bottom: 1rem;
+}
+
+.customer-info-details p {
+  color: #6a1b9a;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: rgba(168, 124, 224, 0.05);
+  border-radius: 8px;
+  margin-right: 1rem;
+}
+
+.customer-info-details p strong {
+  color: #5e3589;
+  display: inline-block;
+  min-width: 80px;
+}
+
+/* ===================================
+   FORMULARIO
+   =================================== */
+
+.appointment-form {
+  background: white;
+  border-radius: 25px;
+  padding: 3rem;
+  box-shadow: 0 8px 25px rgba(150, 100, 200, 0.12);
+  border: 2px solid rgba(168, 124, 224, 0.1);
+}
+
+.appointment-form-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #5e3589;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(168, 124, 224, 0.2);
+}
+
+/* === FORM GROUPS === */
+.appointment-form-group {
+  margin-bottom: 2rem;
+}
+
+.appointment-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #5e3589;
+  margin-bottom: 0.8rem;
+}
+
+.appointment-label i {
+  font-size: 1.2rem;
+  color: #a87ce0;
+}
+
+/* === INPUTS Y SELECT === */
+.appointment-input,
+.appointment-select,
+.appointment-textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 2px solid #e8d6fa;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  color: #4a148c;
+  background: #faf5ff;
+  transition: all 0.3s ease;
+}
+
+.appointment-input:focus,
+.appointment-select:focus,
+.appointment-textarea:focus {
+  outline: none;
+  border-color: #a87ce0;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(168, 124, 224, 0.1);
+}
+
+.appointment-input:disabled,
+.appointment-select:disabled,
+.appointment-textarea:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.appointment-select {
+  cursor: pointer;
+}
+
+.appointment-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.appointment-help-text {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #a87ce0;
+  font-style: italic;
+}
+
+/* === TIME SLOTS === */
+.appointment-time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.time-slot {
+  padding: 1rem;
+  border: 2px solid #e8d6fa;
+  border-radius: 12px;
+  background: #faf5ff;
+  color: #5e3589;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.time-slot:hover:not(:disabled) {
+  background: linear-gradient(135deg, #e8d6fa 0%, #d7b8f3 100%);
+  border-color: #a87ce0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 124, 224, 0.2);
+}
+
+.time-slot.selected {
+  background: linear-gradient(135deg, #a87ce0 0%, #7e57c2 100%);
+  border-color: #7e57c2;
+  color: white;
+  box-shadow: 0 4px 12px rgba(168, 124, 224, 0.3);
+}
+
+.time-slot:disabled {
+  background: #f5f5f5;
+  border-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* ===================================
+   RESUMEN
+   =================================== */
+
+.appointment-summary {
+  background: linear-gradient(135deg, #f0e6ff 0%, #e8d6fa 100%);
+  border: 2px solid #a87ce0;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.appointment-summary h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: #5e3589;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.appointment-summary h3 i {
+  font-size: 1.8rem;
+  color: #7e57c2;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  background: white;
+  border-radius: 10px;
+  border-left: 4px solid #a87ce0;
+}
+
+.summary-label {
+  font-weight: 600;
+  color: #5e3589;
+}
+
+.summary-value {
+  color: #6a1b9a;
+  font-weight: 500;
+  text-align: right;
+}
+
+.summary-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #7e57c2;
+}
+
+/* ===================================
+   ACCIONES / BOTONES
+   =================================== */
+
+.appointment-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(168, 124, 224, 0.2);
+}
+
+.appointment-actions button {
+  flex: 1;
+}
+
+/* === SPINNER === */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 992px) {
+  .appointment-content {
+    padding: 0 1.5rem;
+  }
+
+  .customer-info-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .customer-info-details p {
+    display: block;
+    margin: 0.5rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .appointment-hero-section,
+  .appointment-content {
+    padding: 1rem;
+  }
+
+  .appointment-form {
+    padding: 2rem 1.5rem;
+  }
+
+  .appointment-form-title {
+    font-size: 1.6rem;
+  }
+
+  .appointment-time-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .time-slot {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .appointment-actions {
+    flex-direction: column;
+  }
+
+  .summary-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .summary-value {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .appointment-form {
+    padding: 1.5rem 1rem;
+  }
+
+  .customer-info-card {
+    padding: 1.5rem;
+  }
+
+  .customer-info-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+  }
+}
+
