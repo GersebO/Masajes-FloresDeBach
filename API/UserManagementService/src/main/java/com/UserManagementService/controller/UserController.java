@@ -112,13 +112,13 @@ public class UserController {
     @PostMapping("/authenticate")
     public ResponseEntity<UserResponseDTO> authenticateUser(
             @Valid @RequestBody LoginRequestDTO request) {
-
         UserResponseDTO user = userService.authenticateUser(
                 request.getEmail(),
                 request.getPassword()
         );
         return ResponseEntity.ok(user);
-}
+    }
+
 
     @GetMapping("/exists/{email}")
     public ResponseEntity<Boolean> existsByEmail(@PathVariable String email) {

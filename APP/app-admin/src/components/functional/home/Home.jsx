@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { getAllCustomers } from "../../../store/services/customer.service";
+import { getAllUsers } from "../../../store/services/user.service";
+import { getAllProducts } from "../../../store/services/product.service";
+import { getAllCategories } from "../../../store/services/category.service";
 import "./Admin.css";
 
 export default function Admin() {
@@ -8,22 +12,21 @@ export default function Admin() {
     products: 0,
     categories: 0,
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [resCustomers, resUsers, resProducts, resCategories] =
-          await Promise.all([
-            fetch("http://localhost:8081/api/customers"),
-            fetch("http://localhost:8081/api/users"),
-            fetch("http://localhost:8082/api/products"),
-            fetch("http://localhost:8082/api/categories"),
-          ]);
-
-        const customers = await resCustomers.json();
-        const users = await resUsers.json();
-        const products = await resProducts.json();
-        const categories = await resCategories.json();
+        setLoading(true);
+        
+        // Usar los servicios con autenticación
+        const [customers, users, products, categories] = await Promise.all([
+          getAllCustomers(),
+          getAllUsers(),
+          getAllProducts(),
+          getAllCategories(),
+        ]);
 
         setStats({
           customers: customers.length,
@@ -31,8 +34,13 @@ export default function Admin() {
           products: products.length,
           categories: categories.length,
         });
+        
+        setError(null);
       } catch (error) {
         console.error("Error cargando estadísticas:", error);
+        setError("Error al cargar las estadísticas");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -45,6 +53,26 @@ export default function Admin() {
     month: "long",
     day: "numeric",
   });
+
+  if (loading) {
+    return (
+      <div className="admin-dashboard">
+        <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6a1b9a" }}>
+          Cargando estadísticas...
+        </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="admin-dashboard">
+        <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#d32f2f" }}>
+          {error}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-dashboard">

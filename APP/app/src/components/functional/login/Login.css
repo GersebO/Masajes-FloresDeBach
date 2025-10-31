@@ -42,20 +42,50 @@
   border: 2px solid rgba(168, 124, 224, 0.1);
 }
 
+/* === HEADER DEL FORMULARIO === */
+.login-form-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.login-form-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, #a87ce0 0%, #7e57c2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(168, 124, 224, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 30px rgba(168, 124, 224, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(168, 124, 224, 0.4);
+  }
+}
+
 .login-form-title {
   font-family: "Playfair Display", serif;
   font-size: 2rem;
   font-weight: 700;
   color: #5e3589;
-  text-align: center;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
 }
 
 .login-form-subtitle {
-  text-align: center;
   color: #6a1b9a;
   font-size: 1rem;
-  margin-bottom: 2.5rem;
+  margin: 0;
 }
 
 /* === FORM GROUPS === */
@@ -97,6 +127,12 @@
   box-shadow: 0 0 0 4px rgba(168, 124, 224, 0.1);
 }
 
+.login-input:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .login-input::placeholder {
   color: #b89ce3;
 }
@@ -120,13 +156,18 @@
   transition: color 0.3s ease;
 }
 
-.login-password-toggle:hover {
+.login-password-toggle:hover:not(:disabled) {
   color: #5e3589;
+}
+
+.login-password-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 /* === ERROR MESSAGE === */
 .login-error-message {
-  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  background: linear-gradient(135deg, #fee 0%, #fdd 100%);
   border: 2px solid #dc3545;
   color: #721c24;
   padding: 1rem 1.2rem;
@@ -136,10 +177,16 @@
   align-items: center;
   gap: 0.8rem;
   animation: shake 0.5s ease;
+  font-weight: 500;
 }
 
 .login-error-message i {
   font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.login-error-message span {
+  flex: 1;
 }
 
 @keyframes shake {

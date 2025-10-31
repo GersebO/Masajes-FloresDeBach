@@ -1,5 +1,8 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ProtectedRoute from "./components/layout/ProtectedRoute";
+import { useAuthStore } from "./store/hooks/useAuth";
+import LoginPage from "./app/login/pages.jsx";
 import AdminHome from "./app/admin/pages.jsx";
 import ProductPages from "./app/product/pages.jsx";
 import UserPages from "./app/user/pages.jsx";
@@ -16,22 +19,31 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AdminHome />} />
-        <Route path="/home" element={<HomePages />} />
-
-        <Route path="/product" element={<ProductPages />} />
-        <Route path="/product/create" element={<ProductCreatePage />} />
-
-        <Route path="/user" element={<UserPages />} />
-        <Route path="/user/create" element={<UserCreate />} />
-        <Route path="/product/edit/:id" element={<ProductEditPages />} />
-
-        <Route path="/categories" element={<CategoryPages />} />
-        <Route path="/categories/create" element={<CategoryCreatePages />} />
+        {/* Ruta pública de login - SIEMPRE ACCESIBLE */}
+        <Route path="/login" element={<LoginPage />} />
         
-        <Route path="/customer" element={<CustomerPages />} />
-        <Route path="/customer/create" element={<CustomerCreate />} />
+        {/* Redirigir la raíz al login - PUNTO DE ENTRADA OBLIGATORIO */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        {/* Rutas protegidas */}
+        <Route path="/admin" element={<ProtectedRoute><AdminHome /></ProtectedRoute>} />
+        <Route path="/home" element={<ProtectedRoute><HomePages /></ProtectedRoute>} />
+
+        <Route path="/product" element={<ProtectedRoute><ProductPages /></ProtectedRoute>} />
+        <Route path="/product/create" element={<ProtectedRoute><ProductCreatePage /></ProtectedRoute>} />
+        <Route path="/product/edit/:id" element={<ProtectedRoute><ProductEditPages /></ProtectedRoute>} />
+
+        <Route path="/user" element={<ProtectedRoute><UserPages /></ProtectedRoute>} />
+        <Route path="/user/create" element={<ProtectedRoute><UserCreate /></ProtectedRoute>} />
+
+        <Route path="/categories" element={<ProtectedRoute><CategoryPages /></ProtectedRoute>} />
+        <Route path="/categories/create" element={<ProtectedRoute><CategoryCreatePages /></ProtectedRoute>} />
         
+        <Route path="/customer" element={<ProtectedRoute><CustomerPages /></ProtectedRoute>} />
+        <Route path="/customer/create" element={<ProtectedRoute><CustomerCreate /></ProtectedRoute>} />
+
+        {/* Ruta catch-all: cualquier ruta no definida redirige al login */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );

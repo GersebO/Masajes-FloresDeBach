@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { createCustomer } from "../../../store/services/customer.service";
 import "./CustomerCreate.css";
 
 export default function CustomerCreate() {
@@ -30,13 +31,7 @@ export default function CustomerCreate() {
     setMessage(null);
 
     try {
-      const res = await fetch("http://localhost:8081/api/customers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!res.ok) throw new Error("Error al crear el cliente");
+      await createCustomer(formData);
 
       setMessage({ type: "success", text: "Cliente creado exitosamente 💜" });
       setFormData({

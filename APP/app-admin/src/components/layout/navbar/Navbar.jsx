@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../../store/hooks/useAuth";
 import "./Navbar.css";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuthStore();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleLogout = () => {
+    if (window.confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+      logout();
+      navigate("/login");
+    }
+  };
 
   return (
     <>
@@ -16,7 +26,16 @@ export default function Navbar() {
 
       {/* Sidebar */}
       <nav className={`sidebar ${isOpen ? "open" : ""}`}>
-        <h2 className="sidebar-title">🌸 Panel Admin</h2>
+        <div className="sidebar-header">
+          <h2 className="sidebar-title">🌸 Panel Admin</h2>
+          {user && (
+            <div className="sidebar-user-info">
+              <i className="bi bi-person-circle"></i>
+              <span className="user-name">{user.firstName || user.email}</span>
+            </div>
+          )}
+        </div>
+        
         <ul className="sidebar-menu">
           <li>
             <Link to="/home" className="nav-btn">
@@ -70,6 +89,13 @@ export default function Navbar() {
             </a>
           </li>
         </ul>
+
+        <div className="sidebar-footer">
+          <button onClick={handleLogout} className="logout-btn">
+            <i className="bi bi-box-arrow-left"></i>
+            Cerrar Sesión
+          </button>
+        </div>
       </nav>
 
       {/* Overlay fuera del nav para cubrir toda la pantalla */}

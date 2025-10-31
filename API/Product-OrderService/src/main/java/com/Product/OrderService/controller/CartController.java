@@ -29,4 +29,15 @@ public class CartController {
     public ResponseEntity<List<CartResponse>> getCartByCustomer(@PathVariable Long customerId) {
         return ResponseEntity.ok(cartService.getCartByCustomer(customerId));
     }
+
+    @DeleteMapping("/remove")
+    public ResponseEntity<?> removeFromCart(@RequestBody CartRequest request) {
+        cartService.removeFromCart(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<CartResponse> updateCart(@RequestBody CartRequest request) {
+        return ResponseEntity.ok(cartService.updateCart(request));
+    }
 }

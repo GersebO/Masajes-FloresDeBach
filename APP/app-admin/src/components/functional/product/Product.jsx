@@ -1,16 +1,33 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../../store/hooks/useFetch";
+import { activateProduct, deactivateProduct } from "../../../store/services/product.service";
 import "./Product.css";
 
 export function Product() {
-  const productos = useFetch("http://localhost:8082/api/products");
+  const { data: productos, loading, error } = useFetch("http://localhost:8082/api/products");
   const [filter, setFilter] = useState("ALL");
+
+  if (loading) {
+    return (
+      <p style={{ textAlign: "center", color: "#6a1b9a" }}>
+        Cargando productos...
+      </p>
+    );
+  }
+
+  if (error) {
+    return (
+      <p style={{ textAlign: "center", color: "#d32f2f" }}>
+        Error al cargar productos: {error}
+      </p>
+    );
+  }
 
   if (!productos) {
     return (
       <p style={{ textAlign: "center", color: "#6a1b9a" }}>
-        Cargando productos...
+        No hay productos disponibles
       </p>
     );
   }
@@ -43,12 +60,7 @@ export function Product() {
   const handleDesactivar = async (id, nombre) => {
     if (window.confirm(`¿Estás seguro de desactivar el producto "${nombre}"?`)) {
       try {
-        const response = await fetch(
-          `http://localhost:8082/api/products/${id}/deactivate`,
-          { method: "PATCH" }
-        );
-        if (!response.ok) throw new Error("Error al desactivar el producto");
-
+        await deactivateProduct(id);
         alert("Producto desactivado exitosamente ✅");
         window.location.reload();
       } catch (error) {
@@ -62,12 +74,7 @@ export function Product() {
   const handleActivar = async (id, nombre) => {
     if (window.confirm(`¿Estás seguro de activar el producto "${nombre}"?`)) {
       try {
-        const response = await fetch(
-          `http://localhost:8082/api/products/${id}/activate`,
-          { method: "PATCH" }
-        );
-        if (!response.ok) throw new Error("Error al activar el producto");
-
+        await activateProduct(id);
         alert("Producto activado exitosamente ✅");
         window.location.reload();
       } catch (error) {

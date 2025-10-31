@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useCustomerStore } from "../../../store/zustand/user.store";
 
@@ -7,15 +7,25 @@ import { useCustomerStore } from "../../../store/zustand/user.store";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { customer, isAuthenticated, logout } = useCustomerStore();
+  const navigate = useNavigate();
 
   const links = [
     { to: "/", text: "🏠 Home" },
     { to: "/product", text: "🌿 Productos" },
+    { to: "/appointment", text: "📅 Agendar" },
     { to: "/aboutUs", text: "🌸 Nosotros" },
     { to: "/contact", text: "☀️ Contacto" },
     { to: "/blogs", text: "🪷 Blogs" },
     { to: "/cart", text: "🛒 Carrito" },
   ];
+
+  const handleLogout = () => {
+    if (window.confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+      logout();
+      navigate("/");
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav className="navbar">
@@ -65,8 +75,12 @@ export default function Navbar() {
             </>
           ) : (
             <li className="nav-user">
-              <span>👋 Hola, {customer?.firstName}</span>
-              <button className="logout-btn" onClick={logout}>
+              <span className="user-greeting">
+                <i className="bi bi-person-circle"></i>
+                Hola, {customer?.firstName || customer?.email}
+              </span>
+              <button className="logout-btn" onClick={handleLogout}>
+                <i className="bi bi-box-arrow-right"></i>
                 Cerrar sesión
               </button>
             </li>

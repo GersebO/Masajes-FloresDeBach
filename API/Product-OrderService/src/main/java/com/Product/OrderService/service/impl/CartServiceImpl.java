@@ -64,4 +64,65 @@ public class CartServiceImpl implements CartService {
                         .build())
                 .collect(Collectors.toList());
     }
+    @Override
+public void removeFromCart(CartRequest request) {
+    // Buscar el item del carrito
+    CartItem cartItem = cartRepository.findAll()
+            .stream()
+            .filter(c -> c.getCustomerId().equals(request.getCustomerId()) 
+                      && c.getProductId().equals(request.getProductId()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Item no encontrado en el carrito"));
+
+    // Devolver stock al producto
+    Product product = productRepository.findById(cartItem.getProductId())
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+    
+    product.setStock(product.getStock() + cartItem.getQuantity());
+    productRepository.save(product);
+
+    // Eliminar el item del carrito
+    cartRepository.delete(cartItem);
+}
+
+@Override
+public CartResponse updateCart(CartRequest request) {
+    // Buscar el item del carrito
+    CartItem cartItem = cartRepository.findAll()
+            .stream()
+            .filter(c -> c.getCustomerId().equals(request.getCustomerId()) 
+                      && c.getProductId().equals(request.getProductId()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Item no encontrado en el carrito"));
+
+    // Obtener el producto para verificar stock
+    Product product = productRepository.findById(cartItem.getProductId())
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+    // Calcular diferencia de cantidad
+    int oldQuantity = cartItem.getQuantity();
+    int newQuantity = request.getQuantity();
+    int difference = newQuantity - oldQuantity;
+
+    // Verificar stock disponible si se aumenta la cantidad
+    if (difference > 0 && product.getStock() < difference) {
+        throw new RuntimeException("Stock insuficiente");
+    }
+
+    // Actualizar stock del producto
+    product.setStock(product.getStock() - difference);
+    productRepository.save(product);
+
+    // Actualizar cantidad en el carrito
+    cartItem.setQuantity(newQuantity);
+    CartItem updated = cartRepository.save(cartItem);
+
+    return CartResponse.builder()
+            .id(updated.getId())
+            .productId(updated.getProductId())
+            .customerId(updated.getCustomerId())
+            .quantity(updated.getQuantity())
+            .message("Cantidad actualizada correctamente")
+            .build();
+}
 }

@@ -14,11 +14,20 @@
   font-family: "Poppins", sans-serif;
   transition: all 0.35s ease;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Hover levanta un poco el panel */
 .sidebar:hover {
   box-shadow: 6px 0 20px rgba(150, 130, 255, 0.25);
+}
+
+/* === HEADER DEL SIDEBAR === */
+.sidebar-header {
+  border-bottom: 1px solid rgba(190, 150, 255, 0.3);
+  padding-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 /* === TÍTULO DEL PANEL === */
@@ -28,10 +37,33 @@
   font-weight: 700;
   color: #4b2e83;
   text-align: center;
-  margin-bottom: 1.8rem;
-  border-bottom: 1px solid rgba(190, 150, 255, 0.3);
-  padding-bottom: 12px;
+  margin: 0 0 15px 0;
   letter-spacing: 0.5px;
+}
+
+/* === INFO DEL USUARIO === */
+.sidebar-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(179, 138, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(179, 138, 255, 0.2);
+}
+
+.sidebar-user-info i {
+  font-size: 24px;
+  color: #8754ff;
+}
+
+.sidebar-user-info .user-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4b2e83;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* === LISTA DE MENÚ === */
@@ -39,6 +71,8 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .sidebar-menu li {
@@ -132,6 +166,42 @@
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* === FOOTER DEL SIDEBAR === */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid rgba(190, 150, 255, 0.3);
+}
+
+.logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 100, 100, 0.1);
+  border: 1px solid rgba(255, 100, 100, 0.3);
+  border-radius: 10px;
+  color: #c53030;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(90deg, #ff6b6b, #ee5a52);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 100, 100, 0.3);
+}
+
+.logout-btn i {
+  font-size: 18px;
 }
 
 /* === RESPONSIVIDAD === */

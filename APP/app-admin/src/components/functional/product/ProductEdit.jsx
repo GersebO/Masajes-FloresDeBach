@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { getProductById, updateProduct } from "../../../store/services/product.service";
+import { getAllCategories } from "../../../store/services/category.service";
 import "./ProductEdit.css";
 
 export default function ProductEdit() {
@@ -28,13 +30,8 @@ export default function ProductEdit() {
       try {
         setLoading(true);
 
-        // --- Fetch Product
-        const productResp = await fetch(
-          `http://localhost:8082/api/products/${productId}`
-        );
-        if (!productResp.ok) throw new Error("Error loading product");
-
-        const data = await productResp.json();
+        // --- Fetch Product usando servicio
+        const data = await getProductById(productId);
         console.log("Loaded product:", data);
 
         setProduct({
@@ -49,11 +46,8 @@ export default function ProductEdit() {
           },
         });
 
-        // --- Fetch Categories
-        const categoryResp = await fetch("http://localhost:8082/api/categories");
-        if (!categoryResp.ok) throw new Error("Error loading categories");
-
-        const categoryData = await categoryResp.json();
+        // --- Fetch Categories usando servicio
+        const categoryData = await getAllCategories();
         setCategories(categoryData);
 
         setError(null);
@@ -96,7 +90,7 @@ export default function ProductEdit() {
 
     try {
       const updatedData = {
-        sku: product.sku || "", // o mantener el mismo si no lo modificas
+        sku: product.sku || "",
         name: product.name,
         description: product.description,
         price: parseFloat(product.price),
@@ -108,22 +102,8 @@ export default function ProductEdit() {
 
       console.log("Sending data:", updatedData);
 
-      const response = await fetch(
-        `http://localhost:8082/api/products/${productId}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(updatedData),
-        }
-      );
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Server response:", errorText);
-        throw new Error("Error updating product");
-      }
-
-      const updatedProduct = await response.json();
+      // Usar servicio con autenticación
+      const updatedProduct = await updateProduct(productId, updatedData);
       console.log("Product updated successfully:", updatedProduct);
       setSuccess(true);
 

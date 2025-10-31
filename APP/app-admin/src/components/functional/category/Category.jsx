@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../../store/hooks/useFetch";
+import { activateCategory, deactivateCategory } from "../../../store/services/category.service";
 import "./category.css";
 import { useState } from "react";
 
 
 export default function Category() {
-  const categories = useFetch("http://localhost:8082/api/categories");
+  const { data: categories, loading, error } = useFetch("http://localhost:8082/api/categories");
   const [filter, setFilter] = useState("ALL");
+  
   // Muestra mensaje mientras carga
-  if (!categories) {
-    return <p className="loading-text">Cargando categorías...</p>;
-  }
+  if (loading) return <p className="loading-text">Cargando categorías...</p>;
+  if (error) return <p className="loading-text">Error al cargar categorías: {error}</p>;
+  if (!categories) return <p className="loading-text">No hay categorías disponibles</p>;
 
   const categoriesNormalizados = categories.map((p) => ({
     id: p.id,
@@ -31,11 +33,7 @@ export default function Category() {
   const handleDesactivar = async (id, name) => {
     if (window.confirm(`¿Estás seguro de desactivar la categoría "${name}"?`)) {
       try {
-        const response = await fetch(
-          `http://localhost:8082/api/categories/${id}/deactivate`,
-          { method: "PATCH" }
-        );
-        if (!response.ok) throw new Error("Error al desactivar la categoría");
+        await deactivateCategory(id);
         alert("✅ Categoría desactivada exitosamente");
         window.location.reload();
       } catch (error) {
@@ -49,11 +47,7 @@ export default function Category() {
   const handleActivar = async (id, name) => {
     if (window.confirm(`¿Estás seguro de activar la categoría "${name}"?`)) {
       try {
-        const response = await fetch(
-          `http://localhost:8082/api/categories/${id}/activate`,
-          { method: "PATCH" }
-        );
-        if (!response.ok) throw new Error("Error al activar la categoría");
+        await activateCategory(id);
         alert("✅ Categoría activada exitosamente");
         window.location.reload();
       } catch (error) {

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Product.css";
 import { useProductStore } from '../../../store/zustand/product.store';
 import { useCustomerStore } from "../../../store/zustand/user.store";
@@ -21,7 +21,8 @@ export default function Product() {
   } = useProductStore();
 
   const { customer, isAuthenticated } = useCustomerStore();
-  const { addItem } = useCartStore();
+  const { addItem, fetchCart } = useCartStore(); // 👈 Añade fetchCart
+  const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,8 +40,20 @@ export default function Product() {
       navigate("/login");
       return;
     }
-    await addItem(customer.id, productId, 1);
-    alert("Producto añadido al carrito ✅");
+    try {
+      setIsAdding(true);
+      await addItem(customer.id, productId, 1);
+      // refrescar carrito y productos para obtener nuevo stock
+      await fetchCart(customer.id);
+      await fetchProducts();
+      alert("Producto añadido al carrito ✅");
+      clearSelectedProduct(); // cerrar el modal
+    } catch (error) {
+      console.error(error);
+      alert("Error al agregar producto: " + (error.message || "Error desconocido"));
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   return (
@@ -50,7 +63,8 @@ export default function Product() {
         <Hero title="🌿 Equilibrio para tu Día a Día 🌿" />
       </div>
 
-
+      {/* CATEGORÍAS */}
+      <Content>
         <div className="category-buttons">
           {["Todos", "Masajes", "Flores de Bach"].map((cat) => (
             <button
@@ -62,6 +76,7 @@ export default function Product() {
             </button>
           ))}
         </div>
+      </Content>
 
       {/* PRODUCTOS */}
       <Content>
@@ -141,13 +156,24 @@ export default function Product() {
                 </div>
 
                 <div className="modal-actions">
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    onClick={() => handleAddToCart(selectedProduct.id)}
-                  >
-                    🛒 Añadir al carrito
-                  </Button>
+                  {selectedProduct.stock <= 0 ? (
+                    <Button variant="secondary" size="lg" disabled>
+                      Agotado
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      onClick={() => handleAddToCart(selectedProduct.id)}
+                      disabled={isAdding}
+                    >
+                      {isAdding ? "Añadiendo..." : "🛒 Añadir al carrito"}
+                    </Button>
+                  )}
+
+                  {selectedProduct.stock <= 3 && selectedProduct.stock > 0 && (
+                    <p className="stock-warning">Quedan {selectedProduct.stock} unidades — Stock crítico</p>
+                  )}
                 </div>
               </div>
             </div>

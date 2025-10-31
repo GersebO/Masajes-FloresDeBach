@@ -19,6 +19,16 @@
             "projectName": "UserManagementService",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<Product-OrderService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.product.orderservice.Application",
+            "projectName": "Product-OrderService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

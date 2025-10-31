@@ -267,6 +267,15 @@
   transform: scale(1.1);
 }
 
+/* Visible label for remove button (in case icon font isn't loaded) */
+.cart-item-remove .cart-remove-label {
+  margin-left: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #dc3545;
+  vertical-align: middle;
+}
+
 /* ===================================
    SUMMARY SIDEBAR
    =================================== */
