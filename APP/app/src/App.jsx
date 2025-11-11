@@ -14,6 +14,8 @@ import CartPage from "./app/cart/pages.jsx";
 import RegisterPage from "./app/register/pages.jsx";
 import LoginPage from "./app/login/pages.jsx";
 import AppointmentPage from "./app/appointment/pages.jsx";
+import InvoicesPage from "./app/invoices/pages.jsx";
+import InvoiceDetailPage from "./app/invoices/detail/pages.jsx";
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/appointment" element={<AppointmentPage />} />
+          <Route path="/invoices" element={<InvoicesPage />} />
+          <Route path="/invoices/:id" element={<InvoiceDetailPage />} />
 
         </Routes>
       </Screen>

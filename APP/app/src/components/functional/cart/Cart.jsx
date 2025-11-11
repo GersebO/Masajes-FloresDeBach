@@ -56,14 +56,29 @@ export default function Cart() {
 
   const handleCheckout = async () => {
     try {
-      // Vaciar el carrito (local y backend)
-      await clearCart(customer.id);
-      
-      // Mostrar alerta de éxito
-      alert("✅ ¡Compra realizada con éxito! Gracias por tu preferencia 🎉");
-      
-      // Redirigir a la página principal
-      navigate("/");
+      // Crear payload de orden
+      const payload = {
+        customerId: customer.id,
+        items: items.map((it) => ({
+          productId: it.productId,
+          quantity: it.quantity,
+          unitPrice: it.price,
+          name: it.name,
+        })),
+        total,
+      };
+
+      // Llamar al servicio para crear la orden
+      const orderService = await import("../../../store/services/order.service");
+      const result = await orderService.default.createOrder(payload);
+
+      // Si se creó correctamente, limpiar carrito y redirigir al detalle de boleta
+      if (result && result.id) {
+        await clearCart(customer.id);
+        navigate(`/invoices/${result.id}`);
+      } else {
+        throw new Error("No se pudo crear la orden");
+      }
     } catch (error) {
       console.error("Error al procesar la compra:", error);
       alert("❌ Hubo un error al procesar tu compra. Por favor, intenta nuevamente.");

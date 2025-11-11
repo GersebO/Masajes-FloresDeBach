@@ -1,7 +1,8 @@
 // src/store/services/registerService.js
 import { API_CONFIG } from "./api.config";
 
-const API_BASE_URL = `${API_CONFIG.BASE_URL_USER_SERVICE}/customers`;
+// El endpoint público para registrar clientes está en /api/auth/register/customer (no requiere token)
+const API_BASE_URL = `${API_CONFIG.BASE_URL_USER_SERVICE}/auth/register/customer`;
 
 const registerService = {
   async createCustomer(data) {

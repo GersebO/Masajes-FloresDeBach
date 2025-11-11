@@ -19,6 +19,10 @@ export default function Navbar() {
     { to: "/cart", text: "🛒 Carrito" },
   ];
 
+  const authLinks = [
+    { to: "/invoices", text: "📄 Mis Boletas" },
+  ];
+
   const handleLogout = () => {
     if (window.confirm("¿Estás seguro de que deseas cerrar sesión?")) {
       logout();
@@ -48,6 +52,19 @@ export default function Navbar() {
         {/* Enlaces */}
         <ul className={`navbar-links ${isOpen ? "open" : ""}`}>
           {links.map((link) => (
+            <li key={link.to}>
+              <Link
+                className="nav-link"
+                to={link.to}
+                onClick={() => setIsOpen(false)}
+              >
+                {link.text}
+              </Link>
+            </li>
+          ))}
+
+          {/* Enlaces solo para usuarios autenticados */}
+          {isAuthenticated && authLinks.map((link) => (
             <li key={link.to}>
               <Link
                 className="nav-link"

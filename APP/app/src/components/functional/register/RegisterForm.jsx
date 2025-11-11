@@ -39,6 +39,7 @@ export default function RegisterForm() {
 
   const rules = {
     run: (v) => validators.validarRUN(v) || "RUN inválido",
+    birthDate: (v) => v !== "" || "La fecha de nacimiento es obligatoria",
     firstName: (v) => validators.validarNombre(v) || "Nombre inválido",
     lastName: (v) => validators.validarApellidos(v) || "Apellidos inválidos",
     email: (v) => validators.validarEmail(v) || "Correo inválido",
