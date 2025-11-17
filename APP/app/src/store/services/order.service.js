@@ -29,6 +29,19 @@ const orderService = {
     if (!response.ok) throw new Error("Error al obtener detalle de boleta");
     return response.json();
   },
+
+  async getOrderByIdAndCustomer(orderId, customerId) {
+    const response = await fetchWithAuth(`${BASE}/${orderId}/customer/${customerId}`);
+    
+    if (response.status === 403) {
+      throw new Error("No tienes permiso para ver esta boleta");
+    }
+    if (!response.ok) {
+      throw new Error("Error al obtener detalle de boleta");
+    }
+    
+    return response.json();
+  },
 };
 
 export default orderService;

@@ -43,4 +43,21 @@ public class OrderController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/{id}/customer/{customerId}")
+    public ResponseEntity<OrderResponse> getOrderByIdAndCustomer(@PathVariable Long id, @PathVariable Long customerId) {
+        try {
+            OrderResponse order = orderService.getOrderById(id);
+            
+            // Validar que la orden pertenece al cliente
+            if (!order.getCustomerId().equals(customerId)) {
+                System.out.println("🚫 Intento de acceso no autorizado - Order ID: " + id + ", Customer ID: " + customerId + ", Order Customer ID: " + order.getCustomerId());
+                return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+            }
+            
+            return new ResponseEntity<>(order, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
 }

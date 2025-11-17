@@ -1,21 +1,36 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import orderService from "../../../store/services/order.service";
+import { useCustomerStore } from "../../../store/zustand/user.store";
 import "./InvoiceDetail.css";
 
 export default function InvoiceDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { customer, isAuthenticated } = useCustomerStore();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isUnauthorized, setIsUnauthorized] = useState(false);
 
   useEffect(() => {
+    // Verificar autenticación
+    if (!isAuthenticated || !customer?.id) {
+      navigate("/login");
+      return;
+    }
+
     const load = async () => {
       try {
         setLoading(true);
-        const res = await orderService.getOrderById(id);
+        // Usar el endpoint seguro que valida la propiedad de la orden
+        const res = await orderService.getOrderByIdAndCustomer(id, customer.id);
         setOrder(res);
       } catch (err) {
+        console.error("❌ Error al obtener boleta:", err.message);
+        if (err.message === "No tienes permiso para ver esta boleta") {
+          setIsUnauthorized(true);
+        }
         setError(err.message || "Error al obtener boleta");
       } finally {
         setLoading(false);
@@ -23,7 +38,7 @@ export default function InvoiceDetail() {
     };
 
     if (id) load();
-  }, [id]);
+  }, [id, customer, isAuthenticated, navigate]);
 
   if (loading) {
     return (
@@ -40,9 +55,16 @@ export default function InvoiceDetail() {
     return (
       <div className="invoice-detail-container">
         <div className="error-state">
-          <div className="error-icon">⚠️</div>
-          <h3>Error al cargar</h3>
+          <div className="error-icon">
+            {isUnauthorized ? "🔒" : "⚠️"}
+          </div>
+          <h3>
+            {isUnauthorized ? "Acceso Denegado" : "Error al cargar"}
+          </h3>
           <p>{error}</p>
+          {isUnauthorized && (
+            <p className="error-note">No tienes permiso para ver esta boleta.</p>
+          )}
           <Link to="/invoices" className="btn-back">← Volver a Mis Boletas</Link>
         </div>
       </div>

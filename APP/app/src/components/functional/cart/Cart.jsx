@@ -54,6 +54,11 @@ export default function Cart() {
     }
   };
 
+  // Calcular IVA (19%)
+  const IVA_RATE = 0.19;
+  const iva = Math.round(total * IVA_RATE);
+  const totalWithIVA = total + iva;
+
   const handleCheckout = async () => {
     try {
       // Crear payload de orden
@@ -65,7 +70,7 @@ export default function Cart() {
           unitPrice: it.price,
           name: it.name,
         })),
-        total,
+        total: totalWithIVA,
       };
 
       // Llamar al servicio para crear la orden
@@ -202,12 +207,17 @@ export default function Cart() {
                   <span className="cart-summary-free">Gratis</span>
                 </div>
 
+                <div className="cart-summary-row">
+                  <span>IVA (19%)</span>
+                  <span>${iva.toLocaleString("es-CL")}</span>
+                </div>
+
                 <div className="cart-summary-divider"></div>
 
                 <div className="cart-summary-total">
                   <span>Total</span>
                   <span className="cart-summary-total-value">
-                    ${total.toLocaleString("es-CL")}
+                    ${totalWithIVA.toLocaleString("es-CL")}
                   </span>
                 </div>
               </div>
