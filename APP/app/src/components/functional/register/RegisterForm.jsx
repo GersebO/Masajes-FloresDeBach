@@ -337,9 +337,9 @@ export default function RegisterForm() {
               id="password"
               name="password"
               className={getInputClass("password")}
-              placeholder="4 a 10 caracteres"
-              minLength="4"
-              maxLength="10"
+              placeholder="8 a 14 caracteres"
+              minLength="8"
+              maxLength="14"
               value={formData.password}
               onChange={handleChange}
               autoComplete="new-password"
@@ -360,8 +360,8 @@ export default function RegisterForm() {
               name="confirmPassword"
               className={getInputClass("confirmPassword")}
               placeholder="Repite tu contraseña"
-              minLength="4"
-              maxLength="10"
+              minLength="8"
+              maxLength="14"
               value={formData.confirmPassword}
               onChange={handleChange}
               autoComplete="new-password"

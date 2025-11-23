@@ -199,40 +199,103 @@
 .item-price,
 .item-subtotal {
   text-align: right;
-}
-
-.item-subtotal {
   font-weight: 700;
   color: #5e3589;
 }
 
-/* --- Total section --- */
-.invoice-total-section {
+/* === FILAS DE RESUMEN EN LA TABLA === */
+.invoice-summary-row {
+  background: linear-gradient(135deg, #f3e5f5, #e8d6fa);
+  border-top: 2px solid rgba(155, 100, 200, 0.3);
+}
+
+.invoice-summary-row .summary-label {
+  text-align: left;
+  font-weight: 600;
+  color: #5e3589;
+  padding: 12px 16px;
+}
+
+.invoice-summary-row .summary-amount {
+  text-align: right;
+  font-weight: 700;
+  color: #4a148c;
+  padding: 12px 16px;
+}
+
+.invoice-summary-row.total-row {
+  background: linear-gradient(135deg, #d8c0e5, #b388eb);
+}
+
+.invoice-summary-row.total-row .summary-label,
+.invoice-summary-row.total-row .summary-amount {
+  color: white;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 14px 16px;
+}
+
+/* --- Total section --- */ */
+/* === TOTAL BOX === */
+.invoice-total-box {
   display: flex;
   justify-content: flex-end;
   margin: 24px 0;
 }
 
-.total-row {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 16px 24px;
-  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+.invoice-summary-table {
+  width: fit-content;
+  border-collapse: collapse;
+  background: linear-gradient(135deg, #f3e5f5, #e8d6fa);
   border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(155, 100, 200, 0.15);
   border: 2px solid rgba(155, 100, 200, 0.3);
 }
 
-.total-label {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #5e3589;
+.invoice-summary-table tbody tr {
+  border-bottom: 1px solid rgba(155, 100, 200, 0.2);
 }
 
-.total-amount {
-  font-size: 2rem;
-  font-weight: 800;
+.invoice-summary-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  padding: 12px 24px;
+  text-align: left;
+  font-weight: 600;
+  color: #5e3589;
+  font-size: 0.95rem;
+}
+
+.summary-value {
+  padding: 12px 24px;
+  text-align: right;
+  font-weight: 700;
   color: #4a148c;
+  font-size: 1.1rem;
+  min-width: 120px;
+}
+
+.summary-total-row {
+  background: linear-gradient(135deg, #d8c0e5, #b388eb);
+}
+
+.summary-total-row .summary-label,
+.summary-total-row .summary-value {
+  color: white;
+}
+
+.summary-total-row .summary-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.summary-total-row .summary-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
 }
 
 /* --- Footer --- */

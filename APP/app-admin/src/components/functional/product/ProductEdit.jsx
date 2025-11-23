@@ -32,7 +32,6 @@ export default function ProductEdit() {
 
         // --- Fetch Product usando servicio
         const data = await getProductById(productId);
-        console.log("Loaded product:", data);
 
         setProduct({
           id: data.id,
@@ -100,13 +99,9 @@ export default function ProductEdit() {
         categoryId: product.category?.id,
       };
 
-      console.log("Sending data:", updatedData);
-
       // Usar servicio con autenticación
       const updatedProduct = await updateProduct(productId, updatedData);
-      console.log("Product updated successfully:", updatedProduct);
       setSuccess(true);
-
       setTimeout(() => navigate("/product"), 1500);
     } catch (err) {
       console.error("Full error:", err);

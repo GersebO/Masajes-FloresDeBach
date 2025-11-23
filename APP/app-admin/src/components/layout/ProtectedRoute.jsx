@@ -8,13 +8,7 @@ export default function ProtectedRoute({ children }) {
   const location = useLocation();
 
   // Log para debugging (puedes removerlo en producción)
-  useEffect(() => {
-    console.log("🔒 ProtectedRoute - Autenticado:", isAuthenticated, "Usuario:", user);
-  }, [isAuthenticated, user]);
-
-  // Si no está autenticado, redirigir al login
   if (!isAuthenticated) {
-    console.log("⛔ Acceso denegado - Redirigiendo a login desde:", location.pathname);
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 

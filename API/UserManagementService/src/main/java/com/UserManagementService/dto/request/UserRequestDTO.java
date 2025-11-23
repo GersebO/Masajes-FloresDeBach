@@ -35,7 +35,7 @@ public class UserRequestDTO {
     private String email;
 
     @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 4, max = 10, message = "La contraseña debe tener entre 4 y 10 caracteres")
+    @Size(min = 8, max = 14, message = "La contraseña debe tener entre 8 y 14 caracteres")
     private String password;
 
     @Pattern(regexp = "^\\+?[0-9]{9,15}$", message = "El teléfono debe tener entre 9 y 15 dígitos")

@@ -10,6 +10,8 @@ export const useCategoryCreate = () => {
       const result = await createCategoryService(categoryData);
       alert("✅ Categoría creada exitosamente");
       console.log("Resultado:", result);
+      // Redirigir a la página de categorías después de crear
+      window.location.href = "/categories";
     } catch (error) {
       console.error("❌ Error:", error);
       alert("Error al crear categoría");

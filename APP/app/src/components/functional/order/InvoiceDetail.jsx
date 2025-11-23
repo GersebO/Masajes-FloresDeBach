@@ -23,7 +23,6 @@ export default function InvoiceDetail() {
     const load = async () => {
       try {
         setLoading(true);
-        // Usar el endpoint seguro que valida la propiedad de la orden
         const res = await orderService.getOrderByIdAndCustomer(id, customer.id);
         setOrder(res);
       } catch (err) {
@@ -129,31 +128,48 @@ export default function InvoiceDetail() {
               <tr>
                 <th>Producto</th>
                 <th>Cantidad</th>
-                <th>Precio Unit.</th>
-                <th>Subtotal</th>
+                <th>Precio Unit</th>
+                <th >IVA</th>
               </tr>
             </thead>
             <tbody>
-              {order.items && order.items.map((it, idx) => (
-                <tr key={it.id || idx}>
-                  <td className="item-name">{it.name || it.productName || `Producto #${it.productId}`}</td>
-                  <td className="item-qty">{it.quantity}</td>
-                  <td className="item-price">${Number(it.unitPrice || it.price || 0).toLocaleString("es-CL")}</td>
-                  <td className="item-subtotal">${Number((it.unitPrice || it.price || 0) * it.quantity).toLocaleString("es-CL")}</td>
-                </tr>
-              ))}
+              {order.items && order.items.map((it, idx) => {
+                const IVA_RATE = 0.19;
+                const basePrice = Number(it.unitPrice || it.price || 0);
+                const ivaAmount = Math.round(basePrice * IVA_RATE);
+                const priceWithIVA = basePrice + ivaAmount;
+                const totalItem = priceWithIVA * it.quantity;
+
+                return (
+                  <tr key={it.id || idx}>
+                    <td className="item-name">{it.name || it.productName || `Producto #${it.productId}`}</td>
+                    <td className="item-qty">{it.quantity}</td>
+                    <td className="item-price">${basePrice.toLocaleString("es-CL")}</td>
+                    <td className="item-subtotal">${ivaAmount.toLocaleString("es-CL")}</td>
+                  </tr>
+                );
+              })}
+              {(() => {
+                // Calcular total sumando todos los precios con IVA de cada item
+                const IVA_RATE = 0.19;
+                const totalWithIVA = order.items.reduce((sum, it) => {
+                  const basePrice = Number(it.unitPrice || it.price || 0);
+                  const ivaAmount = Math.round(basePrice * IVA_RATE);
+                  const priceWithIVA = basePrice + ivaAmount;
+                  return sum + (priceWithIVA * it.quantity);
+                }, 0);
+
+                return (
+                  <>
+                    <tr className="invoice-summary-row total-row">
+                      <td colSpan="3" className="summary-label">TOTAL</td>
+                      <td className="summary-amount">${totalWithIVA.toLocaleString("es-CL")}</td>
+                    </tr>
+                  </>
+                );
+              })()}
             </tbody>
           </table>
-        </div>
-
-        <div className="invoice-divider"></div>
-
-        {/* Total */}
-        <div className="invoice-total-section">
-          <div className="total-row">
-            <span className="total-label">TOTAL</span>
-            <span className="total-amount">${Number(order.total).toLocaleString("es-CL")}</span>
-          </div>
         </div>
 
         {/* Footer */}

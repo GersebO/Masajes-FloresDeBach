@@ -14,10 +14,15 @@ export default function CategoryForm({ onSubmit, mode, disabled }) {
       [name]: type === "checkbox" ? checked : value,
     });
   };
-  console.log(formData)
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
+    // Limpiar formulario después de enviar
+    setFormData({
+      name: "",
+      description: "",
+      isActive: true,
+    });
   };
 
   return (

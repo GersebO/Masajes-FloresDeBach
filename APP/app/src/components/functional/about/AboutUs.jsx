@@ -40,7 +40,7 @@ export default function AboutUs() {
 
   return (
     <div className="about-container">
-      {/* HERO */}
+
       <div className="about-hero-section">
         <Hero title="✨ Quiénes Somos ✨" />
         
@@ -51,7 +51,6 @@ export default function AboutUs() {
         </div>
       </div>
 
-      {/* MISIÓN Y VALORES */}
       <Content>
         <div className="about-mission-section">
           <div className="about-mission-content">

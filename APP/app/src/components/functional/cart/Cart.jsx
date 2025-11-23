@@ -20,8 +20,7 @@ export default function Cart() {
       return;
     }
 
-    console.log("🔍 Cargando carrito para customer:", customer.id);
-    // Ensure products are loaded so we can enrich cart items (name/description/image)
+  // Ensure products are loaded so we can enrich cart items
     const load = async () => {
       try {
         const prodState = useProductStore.getState();
@@ -37,10 +36,8 @@ export default function Cart() {
     load();
   }, [isAuthenticated, customer, fetchCart, navigate]);
 
-  // Debug: Ver qué hay en items
   useEffect(() => {
-    console.log("🛒 Cart items:", items);
-    console.log("💰 Total:", total);
+    // Cart items and total are automatically updated
   }, [items, total]);
 
   const handleQuantityChange = (productId, newQuantity) => {
@@ -54,14 +51,12 @@ export default function Cart() {
     }
   };
 
-  // Calcular IVA (19%)
   const IVA_RATE = 0.19;
   const iva = Math.round(total * IVA_RATE);
   const totalWithIVA = total + iva;
 
   const handleCheckout = async () => {
     try {
-      // Crear payload de orden
       const payload = {
         customerId: customer.id,
         items: items.map((it) => ({
@@ -73,11 +68,9 @@ export default function Cart() {
         total: totalWithIVA,
       };
 
-      // Llamar al servicio para crear la orden
       const orderService = await import("../../../store/services/order.service");
       const result = await orderService.default.createOrder(payload);
 
-      // Si se creó correctamente, limpiar carrito y redirigir al detalle de boleta
       if (result && result.id) {
         await clearCart(customer.id);
         navigate(`/invoices/${result.id}`);

@@ -21,7 +21,6 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    // CREATE - Crear nueva categoría
     @PostMapping
     public ResponseEntity<CategoryResponseDTO> createCategory(@RequestBody CategoryRequestDTO requestDTO) {
         try {
@@ -32,21 +31,21 @@ public class CategoryController {
         }
     }
 
-    // READ - Obtener todas las categorías
+
     @GetMapping
     public ResponseEntity<List<CategoryResponseDTO>> getAllCategories() {
         List<CategoryResponseDTO> categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
-    // READ - Obtener solo categorías activas
+
     @GetMapping("/active")
     public ResponseEntity<List<CategoryResponseDTO>> getActiveCategories() {
         List<CategoryResponseDTO> categories = categoryService.getActiveCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
-    // READ - Obtener categoría por ID
+
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponseDTO> getCategoryById(@PathVariable Long id) {
         try {
@@ -57,7 +56,7 @@ public class CategoryController {
         }
     }
 
-    // UPDATE - Actualizar categoría
+
     @PutMapping("/{id}")
     public ResponseEntity<CategoryResponseDTO> updateCategory(
             @PathVariable Long id,
@@ -70,7 +69,7 @@ public class CategoryController {
         }
     }
 
-    // DELETE - Eliminar categoría (lógico)
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         try {
@@ -81,7 +80,7 @@ public class CategoryController {
         }
     }
 
-    // PATCH - Activar categoría
+
     @PatchMapping("/{id}/activate")
     public ResponseEntity<CategoryResponseDTO> activateCategory(@PathVariable Long id) {
         try {
@@ -92,7 +91,6 @@ public class CategoryController {
         }
     }
 
-    // PATCH - Desactivar categoría
     @PatchMapping("/{id}/deactivate")
     public ResponseEntity<CategoryResponseDTO> deactivateCategory(@PathVariable Long id) {
         try {
@@ -103,7 +101,7 @@ public class CategoryController {
         }
     }
 
-    // CHECK - Verificar si existe categoría por nombre
+
     @GetMapping("/exists/{name}")
     public ResponseEntity<Boolean> existsByName(@PathVariable String name) {
         boolean exists = categoryService.existsByName(name);

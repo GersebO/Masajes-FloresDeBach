@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useUserCreate } from "../../../store/hooks/useUserCreate";
 import "./UserCreate.css";
 
 const UserCreate = () => {
+  const { createUser, loading } = useUserCreate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -13,7 +15,7 @@ const UserCreate = () => {
     commune: "",
     birthDate: "",
     run: "",
-    role: "USER",
+    role: "ADMIN",
     status: "ACTIVE",
   });
 
@@ -25,21 +27,9 @@ const UserCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("📤 Enviando usuario:", formData);
-
     try {
-      const response = await fetch("http://localhost:8081/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const text = await response.text();
-        throw new Error(`Error al crear usuario: ${text}`);
-      }
-
-      alert("✅ Usuario creado exitosamente");
+      await createUser(formData);
+      // Limpiar formulario después de crear exitosamente
       setFormData({
         firstName: "",
         lastName: "",
@@ -51,12 +41,12 @@ const UserCreate = () => {
         commune: "",
         birthDate: "",
         run: "",
-        role: "USER",
+        role: "ADMIN",
         status: "ACTIVE",
       });
     } catch (error) {
       console.error("❌ Error al crear usuario:", error);
-      alert(error.message);
+      // El hook ya muestra el alert, aquí solo capturamos el error
     }
   };
 

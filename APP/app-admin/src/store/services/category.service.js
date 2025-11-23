@@ -35,12 +35,12 @@ export const updateCategory = async (id, categoryData) => {
  * Activar una categoría
  */
 export const activateCategory = async (id) => {
-  return apiPatch(`${BASE_URL}/${id}/active`);
+  return apiPatch(`${BASE_URL}/${id}/activate`);
 };
 
 /**
  * Desactivar una categoría
  */
 export const deactivateCategory = async (id) => {
-  return apiPatch(`${BASE_URL}/${id}/inactive`);
+  return apiPatch(`${BASE_URL}/${id}/deactivate`);
 };

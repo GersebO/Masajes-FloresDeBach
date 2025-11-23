@@ -15,36 +15,30 @@ export default function LoginForm() {
   const { login, isLoading, error, isAuthenticated, clearError } = useCustomerStore();
   const MIN_PASSWORD_LENGTH = 8;
 
-  // Si ya está autenticado, redirigir
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/product");
     }
   }, [isAuthenticated, navigate]);
 
-  // Limpiar error cuando el usuario empieza a escribir
   useEffect(() => {
     if (error) {
       clearError();
     }
   }, [email, password]);
 
-  // Validación en tiempo real
   useEffect(() => {
     const isEmailValid = validators.validarEmail(email);
     const isPasswordValid = password.length >= MIN_PASSWORD_LENGTH;
     setIsDisabled(!(isEmailValid && isPasswordValid));
   }, [email, password]);
 
-  // Enviar login
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const customer = await login(email, password);
-      // La redirección se maneja en el useEffect de arriba
+      await login(email, password);
     } catch (err) {
-      // El error ya está en el estado del store
       console.error("Error al iniciar sesión:", err);
     }
   };
