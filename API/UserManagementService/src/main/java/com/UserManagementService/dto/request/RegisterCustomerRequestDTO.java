@@ -3,6 +3,8 @@ package com.UserManagementService.dto.request;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -33,7 +35,7 @@ public class RegisterCustomerRequestDTO {
     private String email;
 
     @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 4, max = 10, message = "La contraseña debe tener entre 4 y 10 caracteres")
+    @Size(min = 8, max = 14, message = "La contraseña debe tener entre 8 y 14 caracteres")
     private String password;
 
     @NotBlank(message = "La confirmación de la contraseña es obligatoria")
@@ -48,6 +50,7 @@ public class RegisterCustomerRequestDTO {
     @NotBlank(message = "La comuna es obligatoria")
     private String commune;
 
-    @NotBlank(message = "La fecha de nacimiento es obligatoria")
+    @NotNull(message = "La fecha de nacimiento es obligatoria")
+    @Past(message = "La fecha de nacimiento debe ser una fecha pasada")
     private LocalDate birthDate;
 }

@@ -1,0 +1,212 @@
+/* ==============================
+   📄 INVOICES LIST - DISEÑO MODERNO
+============================== */
+
+.invoices-container {
+  max-width: 1200px;
+  margin: 120px auto 60px;
+  padding: 0 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.invoices-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.invoices-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #5e3589;
+  margin-bottom: 10px;
+  font-family: "Playfair Display", serif;
+}
+
+.invoices-header .subtitle {
+  font-size: 1.1rem;
+  color: #7e57a0;
+  font-weight: 400;
+}
+
+/* --- Estados vacíos y loading --- */
+.empty-state,
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e5f5 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(106, 27, 154, 0.1);
+}
+
+.empty-icon,
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.empty-state h2,
+.error-state h3 {
+  font-size: 1.8rem;
+  color: #5e3589;
+  margin-bottom: 10px;
+}
+
+.empty-state p,
+.error-state p {
+  font-size: 1.1rem;
+  color: #7e57a0;
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #a56de2, #b388eb);
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(155, 100, 200, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #b47cdf, #c29ef0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(155, 100, 200, 0.4);
+}
+
+/* --- Spinner de carga --- */
+.spinner {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 20px;
+  border: 4px solid rgba(106, 27, 154, 0.1);
+  border-top-color: #a56de2;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-state p {
+  font-size: 1.1rem;
+  color: #7e57a0;
+}
+
+/* --- Grid de boletas --- */
+.invoices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+/* --- Card individual --- */
+.invoice-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(106, 27, 154, 0.1);
+  border: 1px solid rgba(155, 100, 200, 0.15);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.invoice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(106, 27, 154, 0.2);
+  border-color: rgba(155, 100, 200, 0.4);
+}
+
+/* --- Header de la card --- */
+.invoice-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(155, 100, 200, 0.15);
+}
+
+.invoice-number {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #5e3589;
+}
+
+.invoice-status {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #2e7d32;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+/* --- Body de la card --- */
+.invoice-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.invoice-date,
+.invoice-total,
+.invoice-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-card-body .label {
+  font-size: 0.95rem;
+  color: #7e57a0;
+  font-weight: 500;
+}
+
+.invoice-card-body .value {
+  font-size: 1.05rem;
+  color: #5e3589;
+  font-weight: 600;
+}
+
+/* --- Footer de la card --- */
+.invoice-card-footer {
+  padding-top: 12px;
+  border-top: 1px solid rgba(155, 100, 200, 0.1);
+  text-align: right;
+}
+
+.view-detail {
+  color: #a56de2;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.invoice-card:hover .view-detail {
+  color: #b47cdf;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .invoices-container {
+    margin-top: 100px;
+  }
+
+  .invoices-header h1 {
+    font-size: 2rem;
+  }
+
+  .invoices-grid {
+    grid-template-columns: 1fr;
+  }
+}

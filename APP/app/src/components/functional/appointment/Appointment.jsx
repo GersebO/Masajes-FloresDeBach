@@ -13,14 +13,12 @@ export default function Appointment() {
   const { customer, isAuthenticated } = useCustomerStore();
   const { products, fetchProducts } = useProductStore();
 
-  // Estados del formulario
   const [selectedService, setSelectedService] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Horarios disponibles
   const availableTimes = [
     "09:00", "10:00", "11:00", "12:00",
     "14:00", "15:00", "16:00", "17:00", "18:00"
@@ -35,21 +33,18 @@ export default function Appointment() {
     fetchProducts();
   }, [isAuthenticated, navigate, fetchProducts]);
 
-  // Obtener fecha mínima (hoy)
   const getMinDate = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return today.toISOString().split('T')[0];
   };
 
-  // Obtener fecha máxima (3 meses adelante)
   const getMaxDate = () => {
     const maxDate = new Date();
     maxDate.setMonth(maxDate.getMonth() + 3);
     return maxDate.toISOString().split('T')[0];
   };
 
-  // Validar que la fecha no sea pasada
   const isDateValid = (dateString) => {
     const selectedDateObj = new Date(dateString + 'T00:00:00');
     const today = new Date();
@@ -65,7 +60,6 @@ export default function Appointment() {
       return;
     }
 
-    // Validar que la fecha no sea pasada
     if (!isDateValid(selectedDate)) {
       alert("❌ No puedes agendar una cita en una fecha pasada. Por favor, selecciona una fecha actual o futura.");
       return;
@@ -74,7 +68,6 @@ export default function Appointment() {
     setIsSubmitting(true);
 
     try {
-      // Aquí irá la lógica para guardar la cita en el backend
       const appointment = {
         customerId: customer.id,
         serviceId: selectedService,
@@ -84,9 +77,6 @@ export default function Appointment() {
         status: "PENDIENTE"
       };
 
-      console.log("📅 Cita a agendar:", appointment);
-
-      // Simulación de guardado
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       alert("✅ ¡Cita agendada exitosamente! Te enviaremos una confirmación.");

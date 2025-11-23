@@ -38,9 +38,15 @@ export const loginCustomer = async (email, password) => {
       throw new Error("El servidor no devolvió un token válido");
     }
 
-    // ⚠️ VALIDACIÓN: Solo permitir clientes (sin rol)
-    if (data.role) {
-      throw new Error("Acceso denegado: Esta cuenta es administrativa. Por favor, usa el panel de administración.");
+    // ⚠️ VALIDACIÓN: Denegar solo si el servidor indica explícitamente que es una cuenta ADMIN
+    // El backend puede devolver `role` (string) o `roles` (array). Permitir otros roles o ausencia de rol
+    const role = data.role || (data.roles && data.roles[0]);
+    const rolesArray = Array.isArray(data.roles) ? data.roles : (data.role ? [data.role] : []);
+
+    const isAdmin = (role && String(role).toUpperCase() === "ADMIN") || rolesArray.some(r => String(r).toUpperCase() === "ADMIN");
+
+    if (isAdmin) {
+      throw new Error("No puedes acceder aquí con esas credenciales. Si crees que es un error, contacta a soporte.");
     }
 
     // Guardar el TOKEN en localStorage

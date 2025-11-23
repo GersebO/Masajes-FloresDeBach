@@ -29,7 +29,6 @@ export default function Contact() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log("Mensaje enviado:", { name, email, message });
       setSuccess(true);
       setForm({ name: "", email: "", message: "" });
       setTimeout(() => setSuccess(false), 5000);
@@ -225,7 +224,9 @@ export default function Contact() {
 
             {success && (
               <div className="contact-success-message">
-                ¡Mensaje enviado con éxito! Te contactaremos pronto.
+                <i className="bi bi-check-circle-fill"></i>
+                <div className="success-title">¡Se ha enviado correctamente tu mensaje!</div>
+                <div className="success-subtitle">Te escribiremos pronto</div>
               </div>
             )}
           </form>

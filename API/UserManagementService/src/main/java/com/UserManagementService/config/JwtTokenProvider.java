@@ -22,13 +22,7 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
-    /**
-     * Genera un token JWT para un usuario o cliente
-     * @param email el email del usuario/cliente
-     * @param role el rol (USER o CUSTOMER)
-     * @param id el ID del usuario/cliente
-     * @return el token JWT
-     */
+
     public String generateToken(String email, String role, Long id) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpiration);
@@ -43,30 +37,19 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    /**
-     * Extrae el email del token
-     */
     public String extractEmail(String token) {
         return extractClaims(token).getSubject();
     }
 
-    /**
-     * Extrae el rol del token
-     */
     public String extractRole(String token) {
         return extractClaims(token).get("role", String.class);
     }
 
-    /**
-     * Extrae el ID del usuario/cliente
-     */
+
     public Long extractUserId(String token) {
         return extractClaims(token).get("userId", Long.class);
     }
 
-    /**
-     * Valida el token JWT
-     */
     public boolean validateToken(String token) {
         try {
             extractClaims(token);

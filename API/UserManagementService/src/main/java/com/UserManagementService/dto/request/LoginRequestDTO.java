@@ -21,8 +21,8 @@ public class LoginRequestDTO {
     @Size(max = 100, message = "El email no puede exceder 100 caracteres")
     private String email;
 
-     @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 4, max = 10, message = "La contraseña debe tener entre 4 y 10 caracteres")
+    @NotBlank(message = "La contraseña es obligatoria")
+    @Size(min = 8, max = 14, message = "La contraseña debe tener entre 8 y 14 caracteres")
     private String password;
 }
 

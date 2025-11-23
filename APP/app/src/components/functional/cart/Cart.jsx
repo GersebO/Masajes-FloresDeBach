@@ -20,8 +20,7 @@ export default function Cart() {
       return;
     }
 
-    console.log("🔍 Cargando carrito para customer:", customer.id);
-    // Ensure products are loaded so we can enrich cart items (name/description/image)
+  // Ensure products are loaded so we can enrich cart items
     const load = async () => {
       try {
         const prodState = useProductStore.getState();
@@ -37,10 +36,8 @@ export default function Cart() {
     load();
   }, [isAuthenticated, customer, fetchCart, navigate]);
 
-  // Debug: Ver qué hay en items
   useEffect(() => {
-    console.log("🛒 Cart items:", items);
-    console.log("💰 Total:", total);
+    // Cart items and total are automatically updated
   }, [items, total]);
 
   const handleQuantityChange = (productId, newQuantity) => {
@@ -54,16 +51,32 @@ export default function Cart() {
     }
   };
 
+  const IVA_RATE = 0.19;
+  const iva = Math.round(total * IVA_RATE);
+  const totalWithIVA = total + iva;
+
   const handleCheckout = async () => {
     try {
-      // Vaciar el carrito (local y backend)
-      await clearCart(customer.id);
-      
-      // Mostrar alerta de éxito
-      alert("✅ ¡Compra realizada con éxito! Gracias por tu preferencia 🎉");
-      
-      // Redirigir a la página principal
-      navigate("/");
+      const payload = {
+        customerId: customer.id,
+        items: items.map((it) => ({
+          productId: it.productId,
+          quantity: it.quantity,
+          unitPrice: it.price,
+          name: it.name,
+        })),
+        total: totalWithIVA,
+      };
+
+      const orderService = await import("../../../store/services/order.service");
+      const result = await orderService.default.createOrder(payload);
+
+      if (result && result.id) {
+        await clearCart(customer.id);
+        navigate(`/invoices/${result.id}`);
+      } else {
+        throw new Error("No se pudo crear la orden");
+      }
     } catch (error) {
       console.error("Error al procesar la compra:", error);
       alert("❌ Hubo un error al procesar tu compra. Por favor, intenta nuevamente.");
@@ -187,12 +200,17 @@ export default function Cart() {
                   <span className="cart-summary-free">Gratis</span>
                 </div>
 
+                <div className="cart-summary-row">
+                  <span>IVA (19%)</span>
+                  <span>${iva.toLocaleString("es-CL")}</span>
+                </div>
+
                 <div className="cart-summary-divider"></div>
 
                 <div className="cart-summary-total">
                   <span>Total</span>
                   <span className="cart-summary-total-value">
-                    ${total.toLocaleString("es-CL")}
+                    ${totalWithIVA.toLocaleString("es-CL")}
                   </span>
                 </div>
               </div>

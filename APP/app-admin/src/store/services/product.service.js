@@ -35,12 +35,12 @@ export const updateProduct = async (id, productData) => {
  * Activar un producto
  */
 export const activateProduct = async (id) => {
-  return apiPatch(`${BASE_URL}/${id}/active`);
+  return apiPatch(`${BASE_URL}/${id}/activate`);
 };
 
 /**
  * Desactivar un producto
  */
 export const deactivateProduct = async (id) => {
-  return apiPatch(`${BASE_URL}/${id}/inactive`);
+  return apiPatch(`${BASE_URL}/${id}/deactivate`);
 };
