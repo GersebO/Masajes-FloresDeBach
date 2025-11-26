@@ -1,8 +1,8 @@
 # 📖 Manual de Usuario - APP Cliente
 ## Masajes FloresDeBach
 
-**Versión:** 1.0  
-**Última actualización:** 23 de Noviembre de 2025
+**Versión:** 2.0  
+**Última actualización:** 24 de Noviembre de 2025
 
 ---
 
